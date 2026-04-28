@@ -9,10 +9,10 @@ export default function EspejoMagico() {
           <span className="font-medium">Volver</span>
         </Link>
         <div className="flex gap-4">
-          <Link to="/selector-emociones" state={{ transitionType: 'push' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:text-secondary">
+          <Link to="/selector-emociones" aria-label="Ir a selector de emociones" state={{ transitionType: 'push' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:text-secondary">
             <span className="material-symbols-outlined">emoji_emotions</span>
           </Link>
-          <Link to="/evolucion-planeta" state={{ transitionType: 'push' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:text-secondary">
+          <Link to="/evolucion-planeta" aria-label="Ir a evolución de planeta" state={{ transitionType: 'push' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:text-secondary">
             <span className="material-symbols-outlined">star</span>
           </Link>
         </div>

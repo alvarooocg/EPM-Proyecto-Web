@@ -16,13 +16,13 @@ export default function ElUniverso() {
             </div>
           </div>
           <div className="flex gap-2">
-            <Link to="/dashboard" state={{ transitionType: 'none' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:bg-secondary/20 hover:text-secondary">
+            <Link to="/dashboard" aria-label="Ir al dashboard" state={{ transitionType: 'none' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:bg-secondary/20 hover:text-secondary">
               <span className="material-symbols-outlined">bar_chart</span>
             </Link>
-            <Link to="/configuracion" state={{ transitionType: 'none' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:bg-secondary/20 hover:text-secondary">
+            <Link to="/configuracion" aria-label="Ir a configuración" state={{ transitionType: 'none' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:bg-secondary/20 hover:text-secondary">
               <span className="material-symbols-outlined">settings</span>
             </Link>
-            <Link to="/logros" state={{ transitionType: 'none' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:bg-secondary/20 hover:text-secondary">
+            <Link to="/logros" aria-label="Ver logros" state={{ transitionType: 'none' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:bg-secondary/20 hover:text-secondary">
               <span className="material-symbols-outlined">emoji_events</span>
             </Link>
           </div>

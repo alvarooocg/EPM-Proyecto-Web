@@ -16,7 +16,7 @@ export default function LogrosGalacticos() {
           <span className="material-symbols-outlined text-4xl">workspace_premium</span>
           Mis Logros Galácticos
         </h1>
-        <Link to="/" state={{ transitionType: 'push_back' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface">
+        <Link to="/" aria-label="Volver al inicio" state={{ transitionType: 'push_back' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface">
           <span className="material-symbols-outlined">home</span>
         </Link>
       </header>

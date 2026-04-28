@@ -9,7 +9,7 @@ export default function EvolucionPlaneta() {
 
       <header className="w-full flex items-center justify-between mb-8 z-10 relative">
         <h1 className="font-headline font-bold text-2xl">Evolución por Planeta</h1>
-        <Link to="/" state={{ transitionType: 'none' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface">
+        <Link to="/" aria-label="Volver al inicio" state={{ transitionType: 'none' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface">
           <span className="material-symbols-outlined">close</span>
         </Link>
       </header>
@@ -72,10 +72,10 @@ export default function EvolucionPlaneta() {
                    <span className="material-symbols-outlined text-sm">pie_chart</span>
                    <span>Resumen Diario</span>
                 </Link>
-                 <Link to="/configuracion" state={{ transitionType: 'none' }} className="w-12 items-center justify-center flex bg-surface-container-highest border border-outline-variant/50 rounded-xl bouncy-hover text-on-surface">
+                 <Link to="/configuracion" aria-label="Ir a configuración" state={{ transitionType: 'none' }} className="w-12 items-center justify-center flex bg-surface-container-highest border border-outline-variant/50 rounded-xl bouncy-hover text-on-surface">
                    <span className="material-symbols-outlined">settings</span>
                 </Link>
-                 <Link to="/logros" state={{ transitionType: 'none' }} className="w-12 items-center justify-center flex bg-surface-container-highest border border-outline-variant/50 rounded-xl bouncy-hover text-on-surface text-tertiary">
+                 <Link to="/logros" aria-label="Ver logros" state={{ transitionType: 'none' }} className="w-12 items-center justify-center flex bg-surface-container-highest border border-outline-variant/50 rounded-xl bouncy-hover text-on-surface text-tertiary">
                    <span className="material-symbols-outlined">emoji_events</span>
                 </Link>
               </div>

@@ -10,7 +10,7 @@ export default function MundoTranquilo() {
           <span className="font-medium">Volver</span>
         </Link>
         <div className="flex gap-4">
-          <Link to="/evolucion-planeta" state={{ transitionType: 'push' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:text-primary">
+          <Link to="/evolucion-planeta" aria-label="Ir a evolución de planeta" state={{ transitionType: 'push' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:text-primary">
             <span className="material-symbols-outlined">star</span>
           </Link>
         </div>

@@ -5,7 +5,7 @@ export default function Dashboard() {
     <div className="min-h-screen w-full flex flex-col p-6 bg-surface">
       <header className="w-full flex items-center justify-between mb-8">
         <h1 className="font-headline font-bold text-2xl">Progreso Infantil</h1>
-        <Link to="/" state={{ transitionType: 'none' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface">
+        <Link to="/" aria-label="Volver al inicio" state={{ transitionType: 'none' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface">
           <span className="material-symbols-outlined">close</span>
         </Link>
       </header>

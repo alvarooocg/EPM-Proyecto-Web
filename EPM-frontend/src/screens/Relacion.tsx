@@ -87,7 +87,7 @@ function QueSienteMiAmigo({ onBack }: { onBack: () => void }) {
               initial={{ opacity: 0, scale: 0.8, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.8, y: 20 }}
-              className="absolute inset-0 z-20 flex items-center justify-center p-6 bg-surface/80 backdrop-blur-sm rounded-3xl"
+              aria-live="assertive" className="absolute inset-0 z-20 flex items-center justify-center p-6 bg-surface/80 backdrop-blur-sm rounded-3xl"
             >
               {isSuccess ? (
                 <div className="bg-green-100 p-8 rounded-3xl border-2 border-green-500 shadow-xl flex flex-col items-center text-center">
