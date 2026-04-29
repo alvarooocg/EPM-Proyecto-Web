@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import NavigationButton from '../components/NavigationButton';
 
 export default function EvolucionPlaneta() {
   return (
@@ -9,9 +10,7 @@ export default function EvolucionPlaneta() {
 
       <header className="w-full flex items-center justify-between mb-8 z-10 relative">
         <h1 className="font-headline font-bold text-2xl">Evolución por Planeta</h1>
-        <Link to="/" aria-label="Volver al inicio" state={{ transitionType: 'none' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface">
-          <span className="material-symbols-outlined">close</span>
-        </Link>
+        <NavigationButton to="/" label="Volver a El Universo" />
       </header>
 
       <main className="flex-1 w-full max-w-4xl mx-auto flex flex-col items-center justify-center gap-12 z-10 relative">

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import NavigationButton from '../components/NavigationButton';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function MaletaMagica() {
@@ -31,10 +32,7 @@ export default function MaletaMagica() {
   return (
     <div className="min-h-screen w-full flex flex-col p-6 bg-surface relative overflow-hidden">
       <header className="w-full flex items-center justify-between z-10 relative">
-        <Link to="/me-conozco" state={{ transitionType: 'push_back' }} className="flex items-center gap-2 text-on-surface hover:text-tertiary bouncy-hover">
-          <span className="material-symbols-outlined">arrow_back</span>
-          <span className="font-medium">Volver a Me Conozco</span>
-        </Link>
+        <NavigationButton to="/me-conozco" label="Volver a Me Conozco" />
       </header>
 
       <main className="flex-1 flex flex-col items-center justify-between pb-10 z-10 relative w-full max-w-4xl mx-auto">

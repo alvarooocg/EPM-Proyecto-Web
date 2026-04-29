@@ -1,13 +1,11 @@
 import { Link } from 'react-router-dom';
+import NavigationButton from '../components/NavigationButton';
 
 export default function EspejoMagico() {
   return (
     <div className="min-h-screen w-full flex flex-col p-6 bg-surface relative overflow-hidden">
       <header className="w-full flex items-center justify-between mb-8 z-10 relative">
-        <Link to="/relacion" state={{ transitionType: 'push_back' }} className="flex items-center gap-2 text-on-surface hover:text-secondary bouncy-hover">
-          <span className="material-symbols-outlined">arrow_back</span>
-          <span className="font-medium">Volver</span>
-        </Link>
+        <NavigationButton to="/relacion" label="Volver a Relación" />
         <div className="flex gap-4">
           <Link to="/selector-emociones" aria-label="Ir a selector de emociones" state={{ transitionType: 'push' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:text-secondary">
             <span className="material-symbols-outlined">emoji_emotions</span>

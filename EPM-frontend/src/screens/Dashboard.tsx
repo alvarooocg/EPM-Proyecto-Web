@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom';
+import NavigationButton from '../components/NavigationButton';
 
 export default function Dashboard() {
   return (
     <div className="min-h-screen w-full flex flex-col p-6 bg-surface">
       <header className="w-full flex items-center justify-between mb-8">
         <h1 className="font-headline font-bold text-2xl">Progreso Infantil</h1>
-        <Link to="/" aria-label="Volver al inicio" state={{ transitionType: 'none' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface">
-          <span className="material-symbols-outlined">close</span>
-        </Link>
+        <NavigationButton to="/" label="Volver a El Universo" />
       </header>
 
       <main className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto w-full">

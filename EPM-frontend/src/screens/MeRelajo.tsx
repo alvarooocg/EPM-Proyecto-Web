@@ -1,13 +1,11 @@
 import { Link } from 'react-router-dom';
+import NavigationButton from '../components/NavigationButton';
 
 export default function MeRelajo() {
   return (
     <div className="min-h-screen w-full flex flex-col p-6 bg-gradient-to-b from-primary-container/20 to-background">
       <header className="w-full flex items-center justify-between mb-8">
-        <Link to="/" state={{ transitionType: 'push_back' }} className="flex items-center gap-2 text-on-surface-variant hover:text-primary bouncy-hover">
-          <span className="material-symbols-outlined">arrow_back</span>
-          <span className="font-medium">Volver</span>
-        </Link>
+        <NavigationButton to="/" label="Volver a El Universo" />
         <h1 className="font-headline font-bold text-2xl text-primary">Planeta Me Relajo</h1>
         <div className="w-20" /> {/* Spacer */}
       </header>
