@@ -3,7 +3,7 @@ import AvatarGuia from '../components/AvatarGuia';
 
 export default function ElUniverso() {
   return (
-    <div className="min-h-screen w-full relative flex flex-col items-center justify-center p-6 bg-[url('https://images.unsplash.com/photo-1464802686167-b939a6910659?q=80&w=2650&auto=format&fit=crop')] bg-cover bg-center">
+    <div className="h-screen w-full relative flex flex-col items-center justify-center p-4 md:p-6 overflow-hidden bg-[url('https://images.unsplash.com/photo-1464802686167-b939a6910659?q=80&w=2650&auto=format&fit=crop')] bg-cover bg-center">
       <div className="absolute inset-0 bg-background/80" />
       <div className="z-10 w-full max-w-4xl flex flex-col items-center gap-12">
         <header className="w-full flex justify-between items-center bg-surface-container/60 glass-panel p-4 rounded-3xl border border-outline-variant/30">
@@ -29,9 +29,15 @@ export default function ElUniverso() {
           </div>
         </header>
 
-        <main className="w-full flex-1 relative flex items-center justify-center min-h-[600px] py-10 overflow-hidden lg:overflow-visible">
+        <main className="w-full flex-1 relative flex items-center justify-center h-full overflow-hidden">
           
-          <div className="relative w-full max-w-[800px] aspect-square flex items-center justify-center">
+          <div className="relative w-full max-w-[800px] max-h-full aspect-square flex items-center justify-center scale-75 md:scale-90 lg:scale-100">
+            {/* Sol Decorativo Central */}
+            <div className="absolute z-20 flex items-center justify-center pointer-events-none">
+              <div className="absolute w-[120px] h-[120px] md:w-[160px] md:h-[160px] rounded-full bg-gradient-to-tr from-yellow-300 via-orange-400 to-red-500 shadow-[0_0_60px_rgba(253,224,71,0.6)] animate-pulse-glow" />
+              <div className="absolute w-[140px] h-[140px] md:w-[180px] md:h-[180px] rounded-full bg-yellow-400/20 blur-xl animate-pulse" />
+            </div>
+
             {/* Anillos de Órbita Visibles (Líneas sólidas al estilo espacial) */}
             <div className="absolute w-[260px] h-[260px] md:w-[380px] md:h-[380px] rounded-full border-[1.5px] border-blue-200/20 pointer-events-none" />
             <div className="absolute w-[380px] h-[380px] md:w-[560px] md:h-[560px] rounded-full border-[1.5px] border-blue-200/20 pointer-events-none" />

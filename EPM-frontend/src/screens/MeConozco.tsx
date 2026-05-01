@@ -28,6 +28,12 @@ export default function MeConozco() {
            </p>
         </div>
 
+        {/* Planet Character & Description */}
+        <div className="flex flex-col items-center gap-4 mb-4 text-center max-w-lg mx-auto">
+          <img src="/meconozco-epm-removebg-preview.png" alt="Me Conozco" className="w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-xl animate-float" />
+          <p className="text-on-surface-variant font-medium text-lg">En este planeta aprenderás a conocerte mejor, descubrir tus emociones y guardar lo que te hace sentir bien en tu maleta mágica.</p>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mt-4">
           {/* Actividad 1: ¿Cómo me siento? */}
           <Link to="/selector-emociones" state={{ transitionType: 'push' }} className="bg-surface-container glass-panel rounded-3xl p-6 border border-outline-variant/30 flex flex-col items-center text-center gap-4 bouncy-hover group">

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import clsx from 'clsx';
 import NavigationButton from '../components/NavigationButton';
+import SuccessScreen from '../components/SuccessScreen';
 
 type ActivityMode = 'menu' | 'activity1' | 'activity2';
 
@@ -93,19 +94,7 @@ function QueSienteMiAmigo({ onBack }: { onBack: () => void }) {
               aria-live="assertive" className="absolute inset-0 z-20 flex items-center justify-center p-6 bg-surface/80 backdrop-blur-sm rounded-3xl"
             >
               {isSuccess ? (
-                <div className="bg-green-100 p-8 rounded-3xl border-2 border-green-500 shadow-xl flex flex-col items-center text-center">
-                  <motion.div
-                    animate={{ rotate: [0, 15, -15, 0], scale: [1, 1.2, 1] }}
-                    transition={{ duration: 0.5, delay: 0.1 }}
-                  >
-                    <img src="/personaje-epm.png" alt="Estrella" className="w-32 h-32 object-contain drop-shadow-md mb-4" />
-                  </motion.div>
-                  <h3 className="text-2xl font-bold text-green-700 mb-2">¡Lo lograste!</h3>
-                  <p className="text-green-800 font-medium">Has reconocido que tu amigo está triste. ¡Eres muy empático!</p>
-                  <button onClick={onBack} className="mt-6 px-8 py-3 bg-green-500 text-white rounded-full font-bold text-lg bouncy-hover shadow-md">
-                    Continuar
-                  </button>
-                </div>
+                <SuccessScreen mensaje="Has reconocido que tu amigo está triste. ¡Eres muy empático!" onContinue={onBack} />
               ) : (
                 <div className="bg-red-50 p-6 rounded-3xl border-2 border-red-400 shadow-xl flex flex-col items-center text-center max-w-sm">
                   <span className="text-5xl mb-3">🤔</span>
@@ -239,29 +228,25 @@ function QueHariasTu({ onBack }: { onBack: () => void }) {
 
         {/* Feedback Area */}
         <AnimatePresence>
-          {action && (
+          {action && !isPositiveAction && (
             <motion.div
-              aria-live="assertive" className={clsx(
-                "absolute bottom-8 p-6 md:p-8 rounded-3xl w-[90%] max-w-2xl text-center border-2 shadow-xl z-30",
-                isPositiveAction ? "bg-green-50 border-green-400 text-green-900" : "bg-orange-50 border-orange-400 text-orange-900"
-              )}
+              aria-live="assertive" className="absolute bottom-8 p-6 md:p-8 rounded-3xl w-[90%] max-w-2xl text-center border-2 shadow-xl z-30 bg-orange-50 border-orange-400 text-orange-900"
             >
-              <h3 className="font-bold text-2xl mb-3">
-                {isPositiveAction ? "¡Qué gran acción!" : "Piénsalo bien..."}
-              </h3>
-              <p className="font-medium text-lg leading-relaxed">
-                {action === 'ayudar' && "Ofrecer ayuda a quien lo necesita demuestra mucha empatía. ¡Hiciste que tu amigo se sintiera apoyado y muy feliz de tenerte!"}
-                {action === 'abrazar' && "Un abrazo es una forma maravillosa de consolar a alguien triste. ¡Ese calor le hizo saber a tu amigo que no está solo!"}
-                {action === 'compartir' && "Al compartir tu helado, le devolviste la sonrisa a tu amigo. ¡Qué noble eres, la amistad lo es todo!"}
-                {action === 'ignorar' && "Si ignoras a alguien que está triste, podría sentirse muy solo e inseguro. En un equipo siempre debemos tratar de ayudarnos unos a otros."}
-              </p>
-              
-              {isPositiveAction && (
-                <button onClick={onBack} className="mt-6 px-8 py-3 bg-green-500 text-white rounded-full font-bold text-lg bouncy-hover shadow-lg">
-                  Finalizar Actividad
-                </button>
-              )}
+              <h3 className="font-bold text-2xl mb-3">Piénsalo bien...</h3>
+              <p className="font-medium text-lg leading-relaxed">Si ignoras a alguien que está triste, podría sentirse muy solo e inseguro. En un equipo siempre debemos tratar de ayudarnos unos a otros.</p>
             </motion.div>
+          )}
+        </AnimatePresence>
+        <AnimatePresence>
+          {isPositiveAction && (
+             <SuccessScreen
+               mensaje={
+                 action === 'ayudar' ? "Ofrecer ayuda demuestra empatía. ¡Tu amigo se siente apoyado!" :
+                 action === 'abrazar' ? "Un abrazo es maravilloso. ¡Ese calor le hizo saber que no está solo!" :
+                 "Al compartir, le devolviste la sonrisa. ¡Qué noble eres!"
+               }
+               onContinue={onBack}
+             />
           )}
         </AnimatePresence>
 
@@ -273,7 +258,7 @@ function QueHariasTu({ onBack }: { onBack: () => void }) {
 // --- Main Menu Component ---
 export default function Relacion() {
   const [activities, setActivities] = useState([
-    { id: 'activity1', completed: true },
+    { id: 'activity1', completed: false },
     { id: 'activity2', completed: false }
   ]);
   const [mode, setMode] = useState<ActivityMode>('menu');
@@ -309,7 +294,7 @@ export default function Relacion() {
                   Para el tutor: Selecciona una de las actividades sociales para trabajar la empatía y la resolución de conflictos.
                 </p>
               </div>
-              <div className="sr-only">Aprenderemos a entender cómo se sienten nuestros amigos y cómo podemos ayudarlos.</div>
+
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto">
                 <button 
