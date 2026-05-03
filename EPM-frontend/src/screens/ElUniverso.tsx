@@ -6,7 +6,7 @@ export default function ElUniverso() {
     <div className="h-screen w-full relative flex flex-col items-center justify-center p-4 md:p-6 overflow-hidden bg-[url('https://images.unsplash.com/photo-1464802686167-b939a6910659?q=80&w=2650&auto=format&fit=crop')] bg-cover bg-center">
       <div className="absolute inset-0 bg-background/80" />
       <div className="z-10 w-full max-w-4xl flex flex-col items-center gap-12">
-        <header className="w-full flex justify-between items-center bg-surface-container/60 glass-panel p-4 rounded-3xl border border-outline-variant/30">
+        <header className="w-[calc(100%-2rem)] mx-4 mt-4 z-50 shrink-0 flex justify-between items-center bg-surface-container/80 backdrop-blur-md p-4 rounded-3xl border border-outline-variant/30">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
               <span className="material-symbols-outlined text-primary text-2xl">account_circle</span>

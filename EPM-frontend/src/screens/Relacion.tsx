@@ -296,6 +296,17 @@ export default function Relacion() {
               </div>
 
 
+              <div className="flex flex-col items-center gap-6 mb-8">
+                <div className="w-32 h-32 md:w-40 md:h-40 rounded-full relative flex items-center justify-center shadow-[inset_-12px_-12px_20px_rgba(0,0,0,0.5),_inset_4px_4px_10px_rgba(255,255,255,0.3),_0_0_30px_rgba(69,216,237,0.3)] bg-gradient-to-br from-[#45d8ed] to-[#006f7c]">
+                  <img src="/social-epm.png" alt="Personaje Relación" className="w-[85%] h-[85%] object-contain drop-shadow-2xl animate-float" />
+                </div>
+                <div className="bg-surface-container glass-panel px-6 py-4 rounded-3xl border border-outline-variant/30 max-w-lg text-center shadow-md">
+                  <p className="text-lg text-on-surface font-medium">
+                    "¡Hola! Bienvenido al Planeta Relación. Aquí aprenderemos a entender a nuestros amigos y descubrir cómo podemos ayudarnos mutuamente."
+                  </p>
+                </div>
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto">
                 <button 
                   onClick={() => setMode('activity1')}
