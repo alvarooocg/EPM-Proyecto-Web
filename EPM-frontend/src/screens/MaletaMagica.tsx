@@ -1,14 +1,15 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'motion/react';
+import React, { useState, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import NavigationButton from '../components/NavigationButton';
+import SuccessScreen from '../components/SuccessScreen';
+import { AnimatePresence } from 'motion/react';
 
 export default function MaletaMagica() {
+  const navigate = useNavigate();
   const [items, setItems] = useState([
-    { id: 1, label: 'Peluche', icon: 'toys', color: 'text-[#e91e63]' },
-    { id: 2, label: 'Parque', icon: 'park', color: 'text-primary' },
-    { id: 3, label: 'Familia', icon: 'family_restroom', color: 'text-secondary' },
-    { id: 4, label: 'Música', icon: 'music_note', color: 'text-[#9c27b0]' },
-    { id: 5, label: 'Amigos', icon: 'diversity_1', color: 'text-tertiary' },
+    { id: 1, text: 'Tristeza', emoji: '😢', color: 'bg-blue-100 border-blue-300 text-blue-800' },
+    { id: 2, text: 'Miedo', emoji: '😨', color: 'bg-purple-100 border-purple-300 text-purple-800' },
+    { id: 3, text: 'Enojo', emoji: '😠', color: 'bg-red-100 border-red-300 text-red-800' },
   ]);
   const [inSuitcase, setInSuitcase] = useState<number[]>([]);
   const [mensaje, setMensaje] = useState("Guarda aquí las cosas que te hacen sentir bien.");
@@ -124,6 +125,41 @@ export default function MaletaMagica() {
                     </motion.div>
                  ))}
               </div>
+            ))}
+            {items.length === 0 && (
+              <p className="text-on-surface-variant font-medium text-center italic opacity-60">
+                ¡Todo está guardado!
+              </p>
+            )}
+          </div>
+
+          {/* Maleta Receptora */}
+          <div
+            className={`relative w-64 h-56 md:w-80 md:h-72 rounded-[3rem] border-4 border-dashed transition-all duration-300 flex items-center justify-center ${isHoveringMaleta ? 'bg-secondary/20 border-secondary scale-110 shadow-2xl' : 'bg-surface-container-high border-outline-variant shadow-lg'}`}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+          >
+             {/* Indicador de soltar */}
+             <div className="absolute inset-0 flex flex-col items-center justify-center opacity-40 pointer-events-none">
+               <span className="material-symbols-outlined text-8xl text-on-surface-variant">work</span>
+             </div>
+
+             {/* Items guardados flotando */}
+             {items.length < 3 && (
+                <div className="absolute inset-0 overflow-hidden rounded-[2.8rem] pointer-events-none">
+                  {Array.from({ length: 3 - items.length }).map((_, i) => (
+                    <div key={i} className={`absolute text-4xl animate-float opacity-50`} style={{
+                      left: `${20 + (i * 30)}%`,
+                      top: `${30 + (i * 20)}%`,
+                      animationDelay: `${i * 0.5}s`
+                    }}>
+                      ✨
+                    </div>
+                  ))}
+                </div>
+             )}
+          </div>
 
               <div className="absolute top-0 bottom-0 left-12 w-6 bg-[#1a110a] shadow-[2px_0_0_rgba(0,0,0,0.3)]" />
               <div className="absolute top-0 bottom-0 right-12 w-6 bg-[#1a110a] shadow-[2px_0_0_rgba(0,0,0,0.3)]" />
@@ -131,7 +167,17 @@ export default function MaletaMagica() {
               <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-32 h-8 border-4 border-[#2a1d12] rounded-t-xl" />
            </div>
         </div>
+
       </main>
+
+      <AnimatePresence>
+        {showSuccess && (
+          <SuccessScreen
+            mensaje="¡Has guardado todas tus emociones! Tu maleta mágica está llena de cosas buenas."
+            onContinue={() => navigate('/me-conozco')}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

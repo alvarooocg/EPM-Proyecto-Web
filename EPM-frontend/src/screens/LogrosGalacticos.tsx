@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import NavigationButton from '../components/NavigationButton';
 
 export default function LogrosGalacticos() {
   const logros = [

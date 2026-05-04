@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import NavigationButton from '../components/NavigationButton';
 
 export default function Configuracion() {
   return (
@@ -29,17 +30,17 @@ export default function Configuracion() {
           <ul className="space-y-4">
              <li className="flex items-center justify-between">
                 <span className="font-medium">Duración máxima de sesión (minutos)</span>
-                <input type="number" defaultValue={45} className="w-20 bg-surface-container-high border border-outline-variant rounded-lg p-2 text-center text-on-surface" />
+                <input aria-label="Duración de sesión en minutos" type="number" defaultValue={45} className="w-20 bg-surface-container-high border border-outline-variant rounded-lg p-2 text-center text-on-surface" />
              </li>
              <li className="flex items-center justify-between">
                 <span className="font-medium">Sonidos de fondo guiados</span>
-                <button className="w-12 h-6 bg-primary rounded-full relative">
+                <button aria-label="Alternar sonidos de fondo guiados" aria-pressed="true" className="w-12 h-6 bg-primary rounded-full relative">
                   <div className="w-4 h-4 bg-on-primary rounded-full absolute right-1 top-1"></div>
                 </button>
              </li>
              <li className="flex items-center justify-between">
                 <span className="font-medium">Notificaciones de inactividad</span>
-                <button className="w-12 h-6 bg-surface-container-highest rounded-full relative">
+                <button aria-label="Alternar notificaciones de inactividad" aria-pressed="false" className="w-12 h-6 bg-surface-container-highest rounded-full relative">
                   <div className="w-4 h-4 bg-outline rounded-full absolute left-1 top-1"></div>
                 </button>
              </li>

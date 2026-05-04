@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import NavigationButton from '../components/NavigationButton';
+import SuccessScreen from '../components/SuccessScreen';
+import { AnimatePresence } from 'motion/react';
 
 export default function SelectorEmociones() {
   const [mensaje, setMensaje] = useState("");
@@ -71,6 +74,15 @@ export default function SelectorEmociones() {
           ))}
         </div>
       </main>
+
+      <AnimatePresence>
+        {showSuccess && (
+          <SuccessScreen
+            mensaje="¡Has identificado cómo te sientes! Conocer tus emociones es el primer paso."
+            onContinue={() => navigate('/me-conozco')}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

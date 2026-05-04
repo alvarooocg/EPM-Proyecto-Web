@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import clsx from 'clsx';
+import NavigationButton from '../components/NavigationButton';
+import SuccessScreen from '../components/SuccessScreen';
 
-// Type definitions for Activity states
 type ActivityMode = 'menu' | 'activity1' | 'activity2';
 
 // --- Activity 1 Component: ¿Qué siente mi amigo? ---
@@ -17,21 +17,24 @@ function QueSienteMiAmigo({ onBack }: { onBack: () => void }) {
   const friendFace = "😢";
   
   const options = [
-    { id: 'contento', emoji: '😀', label: 'Contento' },
+    { id: 'feliz', emoji: '😊', label: 'Feliz' },
     { id: 'triste', emoji: '😢', label: 'Triste' },
-    { id: 'enfadado', emoji: '😠', label: 'Enfadado' },
-    { id: 'sorprendido', emoji: '😲', label: 'Sorprendido' }
+    { id: 'enojado', emoji: '😠', label: 'Enojado' },
+    { id: 'asustado', emoji: '😨', label: 'Asustado' }
   ];
 
   const handleSelect = (id: string) => {
     setSelectedEmotion(id);
     setShowFeedback(true);
+
     if (id === targetEmotion) {
       setIsSuccess(true);
     } else {
       setIsSuccess(false);
-      // Automatically hide feedback after a delay if incorrect
-      setTimeout(() => setShowFeedback(false), 2500);
+      setTimeout(() => {
+        setShowFeedback(false);
+        setSelectedEmotion(null);
+      }, 2000);
     }
   };
 
@@ -45,20 +48,18 @@ function QueSienteMiAmigo({ onBack }: { onBack: () => void }) {
         <h2 className="text-2xl font-headline font-bold text-secondary">¿Qué siente mi amigo?</h2>
       </div>
 
-      <div className="bg-surface-container glass-panel rounded-3xl p-8 border border-outline-variant/30 flex flex-col items-center text-center w-full relative overflow-hidden shadow-sm">
-        
-        <p className="text-lg md:text-xl text-on-surface mb-8 font-medium">
-          Observa a nuestro amigo astronauta. ¿Cómo crees que se siente hoy?
-        </p>
-
-        {/* Character with looping animation */}
-        <motion.div 
-          className="text-8xl md:text-9xl mb-12 drop-shadow-lg"
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        >
-          {friendFace}
-        </motion.div>
+      <div className="w-full relative">
+        {/* Scenario */}
+        <div className="bg-surface-container-high rounded-3xl p-8 mb-8 text-center flex flex-col items-center justify-center border border-outline-variant/30 shadow-inner min-h-[200px]">
+          <motion.div
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="text-8xl mb-4"
+          >
+            {friendFace}
+          </motion.div>
+          <p className="text-xl text-on-surface-variant font-medium">Se le ha caído su helado favorito al suelo.</p>
+        </div>
 
         {/* Emotion Options */}
         <div className="grid grid-cols-2 gap-4 w-full">
@@ -85,31 +86,16 @@ function QueSienteMiAmigo({ onBack }: { onBack: () => void }) {
         {/* Feedback Overlay */}
         <AnimatePresence>
           {showFeedback && (
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.8, y: 20 }}
-              className="absolute inset-0 z-20 flex items-center justify-center p-6 bg-surface/80 backdrop-blur-sm rounded-3xl"
+            <motion.div
+              aria-live="assertive" className="absolute inset-0 z-20 flex items-center justify-center p-6 bg-surface/80 backdrop-blur-sm rounded-3xl"
             >
               {isSuccess ? (
-                <div className="bg-green-100 p-8 rounded-3xl border-2 border-green-500 shadow-xl flex flex-col items-center text-center">
-                  <motion.div
-                    animate={{ rotate: [0, 15, -15, 0], scale: [1, 1.2, 1] }}
-                    transition={{ duration: 0.5, delay: 0.1 }}
-                  >
-                    <img src="/personaje-epm.png" alt="Estrella" className="w-32 h-32 object-contain drop-shadow-md mb-4" />
-                  </motion.div>
-                  <h3 className="text-2xl font-bold text-green-700 mb-2">¡Lo lograste!</h3>
-                  <p className="text-green-800 font-medium">Has reconocido que tu amigo está triste. ¡Eres muy empático!</p>
-                  <button onClick={onBack} className="mt-6 px-8 py-3 bg-green-500 text-white rounded-full font-bold text-lg bouncy-hover shadow-md">
-                    Continuar
-                  </button>
-                </div>
+                <SuccessScreen mensaje="Has reconocido que tu amigo está triste. ¡Eres muy empático!" onContinue={onBack} />
               ) : (
-                <div className="bg-red-50 p-6 rounded-3xl border-2 border-red-300 shadow-xl flex flex-col items-center text-center">
-                  <span className="text-6xl mb-3">🤔</span>
-                  <h3 className="text-xl font-bold text-red-700 mb-2">Casi casi...</h3>
-                  <p className="text-red-800 font-medium">Intenta mirar bien su rostro. Parece que necesita un abrazo y consuelo.</p>
+                <div className="bg-red-50 p-6 rounded-3xl border-2 border-red-400 shadow-xl flex flex-col items-center text-center max-w-sm">
+                  <span className="text-5xl mb-3">🤔</span>
+                  <h3 className="text-xl font-bold text-red-700 mb-1">Mmm, no exactamente</h3>
+                  <p className="text-red-800">Piensa en cómo te sentirías tú si se te cayera tu helado favorito.</p>
                 </div>
               )}
             </motion.div>
@@ -120,16 +106,15 @@ function QueSienteMiAmigo({ onBack }: { onBack: () => void }) {
   );
 }
 
-// --- Activity 2 Component: Juego por Parejas ---
-function JuegoPorParejas({ onBack }: { onBack: () => void }) {
+// --- Activity 2 Component: ¿Qué harías tú? ---
+function QueHariasTu({ onBack }: { onBack: () => void }) {
   const [action, setAction] = useState<string | null>(null);
 
-  // Helper actions
   const actions = [
-    { id: 'ayudar', label: 'Ayudar', icon: '🤝', color: 'bg-blue-100 border-blue-400 text-blue-800', hover: 'hover:bg-blue-200' },
-    { id: 'abrazar', label: 'Abrazar', icon: '🤗', color: 'bg-pink-100 border-pink-400 text-pink-800', hover: 'hover:bg-pink-200' },
-    { id: 'compartir', label: 'Compartir', icon: '🎁', color: 'bg-yellow-100 border-yellow-400 text-yellow-800', hover: 'hover:bg-yellow-200' },
-    { id: 'ignorar', label: 'Ignorar', icon: '🚶', color: 'bg-gray-100 border-gray-400 text-gray-800', hover: 'hover:bg-gray-200' }
+    { id: 'ayudar', icon: 'handshake', label: 'Ayudar', color: 'text-blue-500', bg: 'bg-blue-100' },
+    { id: 'abrazar', icon: 'volunteer_activism', label: 'Abrazar', color: 'text-pink-500', bg: 'bg-pink-100' },
+    { id: 'ignorar', icon: 'directions_walk', label: 'Ignorar', color: 'text-gray-500', bg: 'bg-gray-100' },
+    { id: 'compartir', icon: 'icecream', label: 'Compartir', color: 'text-orange-500', bg: 'bg-orange-100' },
   ];
 
   const handleAction = (id: string) => {
@@ -151,47 +136,34 @@ function JuegoPorParejas({ onBack }: { onBack: () => void }) {
         <h2 className="text-2xl font-headline font-bold text-secondary">Juego por Parejas</h2>
       </div>
 
-      <div className="bg-surface-container glass-panel rounded-3xl p-8 border border-outline-variant/30 flex flex-col items-center w-full relative min-h-[500px] shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
-        
-        <p className="text-lg md:text-xl text-on-surface mb-8 text-center font-medium max-w-2xl">
-          ¡Oh no! Un amiguito ha dejado caer su helado estelar y se siente mal. ¿Tú qué harías?
-        </p>
+      <div className="flex items-center justify-center gap-4 mb-8">
+          <h2 className="text-3xl font-bold font-headline text-on-surface text-center">
+            ¿Qué harías tú?
+          </h2>
+          <button
+            onClick={() => console.log("Reproduciendo audio de instrucción")}
+            aria-label="Escuchar instrucción"
+            className="w-12 h-12 shrink-0 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary/20 transition-colors focus:ring-4 focus:ring-primary/30 outline-none"
+          >
+            <span className="material-symbols-outlined text-3xl">volume_up</span>
+          </button>
+        </div>
 
-        {/* Scene Container */}
-        <div className="flex-1 flex flex-col justify-center items-center w-full mb-10 relative">
-          <div className="flex items-end justify-center gap-12 sm:gap-24 h-52 relative w-full border-b-[3px] border-outline-variant/30 pb-4">
-            
-            {/* Player Character */}
-            <motion.div 
-              className="relative z-10 drop-shadow-lg"
-              animate={
-                action === 'abrazar' ? { x: 50, scale: 1.1 } : 
-                action === 'ayudar' ? { x: 40, y: -10 } : 
-                action === 'compartir' ? { x: 30 } : 
-                action === 'ignorar' ? { x: -30, opacity: 0.5 } : 
-                { x: 0 }
-              }
-              transition={{ type: 'spring', bounce: 0.5 }}
-            >
-              <div className="text-7xl md:text-8xl">😎</div>
-              {action === 'compartir' && (
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1, x: 50, y: -20, rotate: 180 }}
-                  transition={{ delay: 0.3 }}
-                  className="absolute top-0 right-0 text-4xl"
-                >
-                  🍦
-                </motion.div>
-              )}
-            </motion.div>
+      <div className="w-full relative flex flex-col items-center">
 
-            {/* Friend Character */}
-            <motion.div 
-              className="relative z-10 drop-shadow-lg"
+        {/* Interactive Scenario Area */}
+        <div className="w-full max-w-2xl bg-surface-container-high rounded-[3rem] p-8 mb-10 min-h-[300px] flex flex-col items-center justify-center relative overflow-hidden border border-outline-variant/30 shadow-inner">
+          <p className="text-center text-on-surface-variant font-medium text-lg mb-8 z-10 bg-surface/80 px-6 py-2 rounded-full backdrop-blur-sm">
+            Tu amigo está triste porque su helado se cayó...
+          </p>
+
+          <div className="relative flex items-center justify-center w-full h-48 z-10">
+            {/* The friend */}
+            <motion.div
+              className="absolute"
               animate={
-                action === 'abrazar' ? { x: -50, scale: 1.1 } : 
-                action === 'ayudar' ? { x: -40, y: -10 } :
+                action === 'abrazar' ? { x: 40 } :
+                action === 'compartir' ? { x: 20 } :
                 { x: 0 }
               }
               transition={{ type: 'spring', bounce: 0.5 }}
@@ -219,19 +191,15 @@ function JuegoPorParejas({ onBack }: { onBack: () => void }) {
                     initial={{ opacity: 0, scale: 0.5, y: 0 }}
                     animate={{ opacity: 1, scale: 2, y: -80, rotate: -15 }}
                     exit={{ opacity: 0 }}
-                    className="absolute top-10 left-1/2 -translate-x-[60%] text-5xl pointer-events-none z-20"
-                  >
-                    ❤️
-                  </motion.div>
+                    className="absolute text-pink-400 text-3xl"
+                  >❤️</motion.div>
                   <motion.div 
                     initial={{ opacity: 0, scale: 0.5, y: 0 }}
-                    animate={{ opacity: 1, scale: 1.5, y: -60, rotate: 25 }}
-                    exit={{ opacity: 0 }}
+                    animate={{ opacity: 1, scale: 1.5, y: -100, x: 40, rotate: 15 }}
                     transition={{ delay: 0.2 }}
-                    className="absolute top-10 left-1/2 -translate-x-[20%] text-3xl pointer-events-none z-20"
-                  >
-                    ✨
-                  </motion.div>
+                    exit={{ opacity: 0 }}
+                    className="absolute text-yellow-400 text-2xl"
+                  >✨</motion.div>
                 </>
               )}
             </AnimatePresence>
@@ -249,11 +217,8 @@ function JuegoPorParejas({ onBack }: { onBack: () => void }) {
                 aria-label={act.label}
                 aria-pressed={action === act.id}
                 className={clsx(
-                  "flex flex-col items-center justify-center gap-3 p-4 md:p-6 rounded-2xl border-2 transition-all duration-300 bouncy-hover font-bold shadow-sm",
-                  act.color,
-                  act.hover,
-                  action === act.id && "scale-95 shadow-inner opacity-80",
-                  action === 'ignorar' && action !== act.id && "opacity-50 grayscale"
+                  "flex flex-col items-center gap-3 p-4 md:p-6 rounded-3xl border-2 transition-all duration-300 bouncy-hover bg-surface",
+                  action === act.id && !isPositiveAction ? "border-outline opacity-50" : "border-outline-variant/30 hover:border-tertiary/50 hover:shadow-md"
                 )}
               >
                 <span className="text-4xl" aria-hidden="true">{act.icon}</span>
@@ -263,34 +228,27 @@ function JuegoPorParejas({ onBack }: { onBack: () => void }) {
           </div>
         )}
 
-        {/* Feedback Message */}
+        {/* Feedback Area */}
         <AnimatePresence>
-          {action && (
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className={clsx(
-                "absolute bottom-8 p-6 md:p-8 rounded-3xl w-[90%] max-w-2xl text-center border-2 shadow-xl z-30",
-                isPositiveAction ? "bg-green-50 border-green-400 text-green-900" : "bg-orange-50 border-orange-400 text-orange-900"
-              )}
+          {action && !isPositiveAction && (
+            <motion.div
+              aria-live="assertive" className="absolute bottom-8 p-6 md:p-8 rounded-3xl w-[90%] max-w-2xl text-center border-2 shadow-xl z-30 bg-orange-50 border-orange-400 text-orange-900"
             >
-              <h3 className="font-bold text-2xl mb-3">
-                {isPositiveAction ? "¡Qué gran acción!" : "Piénsalo bien..."}
-              </h3>
-              <p className="font-medium text-lg leading-relaxed">
-                {action === 'ayudar' && "Ofrecer ayuda a quien lo necesita demuestra mucha empatía. ¡Hiciste que tu amigo se sintiera apoyado y muy feliz de tenerte!"}
-                {action === 'abrazar' && "Un abrazo es una forma maravillosa de consolar a alguien triste. ¡Ese calor le hizo saber a tu amigo que no está solo!"}
-                {action === 'compartir' && "Al compartir tu helado, le devolviste la sonrisa a tu amigo. ¡Qué noble eres, la amistad lo es todo!"}
-                {action === 'ignorar' && "Si ignoras a alguien que está triste, podría sentirse muy solo e inseguro. En un equipo siempre debemos tratar de ayudarnos unos a otros."}
-              </p>
-              
-              {isPositiveAction && (
-                <button onClick={onBack} className="mt-6 px-8 py-3 bg-green-500 text-white rounded-full font-bold text-lg bouncy-hover shadow-lg">
-                  Finalizar Actividad
-                </button>
-              )}
+              <h3 className="font-bold text-2xl mb-3">Piénsalo bien...</h3>
+              <p className="font-medium text-lg leading-relaxed">Si ignoras a alguien que está triste, podría sentirse muy solo e inseguro. En un equipo siempre debemos tratar de ayudarnos unos a otros.</p>
             </motion.div>
+          )}
+        </AnimatePresence>
+        <AnimatePresence>
+          {isPositiveAction && (
+             <SuccessScreen
+               mensaje={
+                 action === 'ayudar' ? "Ofrecer ayuda demuestra empatía. ¡Tu amigo se siente apoyado!" :
+                 action === 'abrazar' ? "Un abrazo es maravilloso. ¡Ese calor le hizo saber que no está solo!" :
+                 "Al compartir, le devolviste la sonrisa. ¡Qué noble eres!"
+               }
+               onContinue={onBack}
+             />
           )}
         </AnimatePresence>
 
@@ -299,12 +257,16 @@ function JuegoPorParejas({ onBack }: { onBack: () => void }) {
   );
 }
 
-// --- Main Container for Planeta Relación ---
+// --- Main Menu Component ---
 export default function Relacion() {
+  const [activities, setActivities] = useState([
+    { id: 'activity1', completed: false },
+    { id: 'activity2', completed: false }
+  ]);
   const [mode, setMode] = useState<ActivityMode>('menu');
 
   return (
-    <div className="min-h-screen w-full flex flex-col p-6 pr-8 bg-gradient-to-b from-cyan-900/10 to-background overflow-x-hidden">
+    <div className="min-h-screen w-full flex flex-col p-6 bg-surface relative overflow-hidden">
       
       {/* Header */}
       <header className="w-full relative mb-12 max-w-5xl mx-auto flex flex-col items-center pt-4">
@@ -333,25 +295,43 @@ export default function Relacion() {
         
         {/* Menu Router State */}
         <AnimatePresence mode="wait">
+
           {mode === 'menu' && (
-            <motion.div 
+            <motion.div
               key="menu"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20 }}
-              className="w-full"
+              className="w-full flex flex-col items-center max-w-5xl mx-auto"
             >
-              <div className="text-center text-on-surface-variant max-w-2xl mx-auto text-lg mb-12">
-                <p>Bienvenido al planeta de la amistad. Aquí aprenderemos a salir de nuestro propio mundo emocional, a comprender cómo se sienten los demás y cómo nuestras decisiones los ayudan a estar mejor.</p>
+              {/* Visual Hierarchy: Tutor instructions separated */}
+              <div className="w-full max-w-xl mx-auto bg-surface-container-low/50 border border-outline-variant/30 rounded-2xl p-4 mb-8 backdrop-blur-sm">
+                <p className="text-center text-on-surface-variant text-sm flex items-center justify-center gap-2">
+                  <span className="material-symbols-outlined text-base">info</span>
+                  Para el tutor: Selecciona una de las actividades sociales para trabajar la empatía y la resolución de conflictos.
+                </p>
+              </div>
+
+
+              <div className="flex flex-col items-center gap-6 mb-8">
+                <div className="w-32 h-32 md:w-40 md:h-40 rounded-full relative flex items-center justify-center shadow-[inset_-12px_-12px_20px_rgba(0,0,0,0.5),_inset_4px_4px_10px_rgba(255,255,255,0.3),_0_0_30px_rgba(69,216,237,0.3)] bg-gradient-to-br from-[#45d8ed] to-[#006f7c]">
+                  <img src="/social-epm.png" alt="Personaje Relación" className="w-[85%] h-[85%] object-contain drop-shadow-2xl animate-float" />
+                </div>
+                <div className="bg-surface-container glass-panel px-6 py-4 rounded-3xl border border-outline-variant/30 max-w-lg text-center shadow-md">
+                  <p className="text-lg text-on-surface font-medium">
+                    "¡Hola! Bienvenido al Planeta Relación. Aquí aprenderemos a entender a nuestros amigos y descubrir cómo podemos ayudarnos mutuamente."
+                  </p>
+                </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto">
                 <button 
                   onClick={() => setMode('activity1')}
-                  className="bg-surface-container glass-panel rounded-3xl p-8 border border-outline-variant/40 flex flex-col items-center text-center gap-5 bouncy-hover group shadow-md hover:shadow-xl hover:border-blue-400 transition-all"
+                  className={`relative bg-surface-container glass-panel rounded-3xl p-8 flex flex-col items-center text-center gap-5 bouncy-hover group shadow-md hover:shadow-xl transition-all ${activities[0].completed ? 'border border-green-500 ring-4 ring-green-500/50 opacity-90' : 'border border-outline-variant/40 hover:border-blue-400'}`}
                 >
-                  <div className="w-28 h-28 rounded-full bg-blue-100 flex items-center justify-center group-hover:bg-blue-200 transition-colors shadow-inner">
-                    <span className="text-6xl group-hover:scale-110 transition-transform">🥺</span>
+                  {activities[0].completed && <div className="absolute -top-3 -right-3 bg-white rounded-full p-1 shadow-md z-10 text-3xl">✅</div>}
+                  <div className="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 group-hover:scale-110 transition-transform shadow-inner">
+                    <span className="material-symbols-outlined text-5xl">psychology</span>
                   </div>
                   <div>
                     <h3 className="font-bold text-2xl text-on-surface group-hover:text-blue-600 transition-colors mb-2">¿Qué siente mi amigo?</h3>
@@ -365,10 +345,11 @@ export default function Relacion() {
 
                 <button 
                   onClick={() => setMode('activity2')}
-                  className="bg-surface-container glass-panel rounded-3xl p-8 border border-outline-variant/40 flex flex-col items-center text-center gap-5 bouncy-hover group shadow-md hover:shadow-xl hover:border-pink-400 transition-all"
+                  className={`relative bg-surface-container glass-panel rounded-3xl p-8 flex flex-col items-center text-center gap-5 bouncy-hover group shadow-md hover:shadow-xl transition-all ${activities[1].completed ? 'border border-green-500 ring-4 ring-green-500/50 opacity-90' : 'border border-outline-variant/40 hover:border-pink-400'}`}
                 >
-                  <div className="w-28 h-28 rounded-full bg-pink-100 flex items-center justify-center group-hover:bg-pink-200 transition-colors shadow-inner">
-                    <span className="text-6xl group-hover:scale-110 transition-transform">🫂</span>
+                  {activities[1].completed && <div className="absolute -top-3 -right-3 bg-white rounded-full p-1 shadow-md z-10 text-3xl">✅</div>}
+                  <div className="w-24 h-24 rounded-full bg-pink-100 flex items-center justify-center text-pink-500 group-hover:scale-110 transition-transform shadow-inner">
+                    <span className="material-symbols-outlined text-5xl">volunteer_activism</span>
                   </div>
                   <div>
                     <h3 className="font-bold text-2xl text-on-surface group-hover:text-pink-600 transition-colors mb-2">Juego por Parejas</h3>
@@ -380,39 +361,51 @@ export default function Relacion() {
                   </div>
                 </button>
               </div>
-              
-              {/* Back Link replacement for Espejo Magico since it's asked down the road or moved */}
+
+              {/* Decorative Planet Image */}
               <div className="mt-12 text-center text-on-surface-variant/60 font-medium">
-                Completa estas dos misiones para desbloquear la evolución en tu Dashboard.
+                <p>Planeta de la Empatía</p>
               </div>
             </motion.div>
           )}
 
           {mode === 'activity1' && (
-            <motion.div 
+            <motion.div
               key="activity1"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 20 }}
-              className="w-full"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="w-full flex justify-center"
             >
-              <QueSienteMiAmigo onBack={() => setMode('menu')} />
+              <QueSienteMiAmigo onBack={() => {
+                setActivities([
+                  { id: 'activity1', completed: true },
+                  activities[1]
+                ]);
+                setMode('menu');
+              }} />
             </motion.div>
           )}
 
           {mode === 'activity2' && (
-            <motion.div 
+            <motion.div
               key="activity2"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 20 }}
-              className="w-full"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="w-full flex justify-center"
             >
-              <JuegoPorParejas onBack={() => setMode('menu')} />
+              <QueHariasTu onBack={() => {
+                 setActivities([
+                  activities[0],
+                  { id: 'activity2', completed: true }
+                ]);
+                setMode('menu');
+              }} />
             </motion.div>
           )}
-        </AnimatePresence>
 
+        </AnimatePresence>
       </main>
     </div>
   );

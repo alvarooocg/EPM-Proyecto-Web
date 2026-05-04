@@ -4,7 +4,10 @@
  */
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { AudioProvider } from './context/AudioContext';
+import AudioToggle from './components/AudioToggle';
 import PasswordScreen from './components/PasswordScreen';
 
 // Screens
@@ -106,6 +109,7 @@ export default function App() {
       </a>
       <AnimatedRoutes />
     </BrowserRouter>
+    </AudioProvider>
   );
 }
 

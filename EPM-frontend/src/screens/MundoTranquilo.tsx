@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import NavigationButton from '../components/NavigationButton';
+import SuccessScreen from '../components/SuccessScreen';
+import { AnimatePresence } from 'motion/react';
 
 const PHASES = [
   { label: 'Inhala...', duration: 4000, scale: 'scale-150' },

@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
+import AvatarGuia from '../components/AvatarGuia';
 
 export default function ElUniverso() {
   return (
-    <div className="min-h-screen w-full relative flex flex-col items-center justify-center p-6 bg-[url('https://images.unsplash.com/photo-1464802686167-b939a6910659?q=80&w=2650&auto=format&fit=crop')] bg-cover bg-center">
+    <div className="h-screen w-full relative flex flex-col items-center justify-center p-4 md:p-6 overflow-hidden bg-[url('https://images.unsplash.com/photo-1464802686167-b939a6910659?q=80&w=2650&auto=format&fit=crop')] bg-cover bg-center">
       <div className="absolute inset-0 bg-background/80" />
       <div className="z-10 w-full max-w-4xl flex flex-col items-center gap-12">
-        <header className="w-full flex justify-between items-center bg-surface-container/60 glass-panel p-4 rounded-3xl border border-outline-variant/30">
+        <header className="w-[calc(100%-2rem)] mx-4 mt-4 z-50 shrink-0 flex justify-between items-center bg-surface-container/80 backdrop-blur-md p-4 rounded-3xl border border-outline-variant/30">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
               <span className="material-symbols-outlined text-primary text-2xl" aria-hidden="true">account_circle</span>
@@ -30,25 +31,11 @@ export default function ElUniverso() {
 
         <main id="main-content" className="w-full flex-1 relative flex items-center justify-center min-h-[600px] py-10 overflow-hidden lg:overflow-visible">
           
-          <div className="relative w-full max-w-[800px] aspect-square flex items-center justify-center">
-            {/* El Sol / Personaje Principal */}
-            <div className="absolute z-30 flex flex-col items-center justify-center pointer-events-none">
-              <div className="absolute bottom-[90%] mb-4 animate-float-slow pointer-events-none">
-                <div className="bg-surface-container-highest py-3 px-6 rounded-3xl border border-tertiary/30 text-on-surface shadow-xl ambient-glow-tertiary backdrop-blur-sm whitespace-nowrap">
-                  <p className="font-headline font-bold text-lg text-center">¡Hola, Explorador!</p>
-                  <p className="text-sm text-center">¿A qué planeta viajaremos hoy?</p>
-                </div>
-                <span className="absolute -bottom-3 left-1/2 -translate-x-1/2 border-8 border-transparent border-t-surface-container-highest"></span>
-              </div>
-              <div className="relative flex items-center justify-center">
-                {/* Silueta circular de fondo para contraste */}
-                <div className="absolute w-[80%] h-[80%] rounded-full bg-gradient-to-tr from-yellow-400 via-orange-500 to-tertiary/20 shadow-[0_0_80px_rgba(243,192,26,0.5)] animate-pulse-glow" />
-                <img 
-                  src="/personaje-epm.png" 
-                  alt="Estrella Principal" 
-                  className="w-48 h-48 md:w-64 md:h-64 object-contain relative z-10 drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)] animate-float"
-                />
-              </div>
+          <div className="relative w-full max-w-[800px] max-h-full aspect-square flex items-center justify-center scale-75 md:scale-90 lg:scale-100">
+            {/* Sol Decorativo Central */}
+            <div className="absolute z-20 flex items-center justify-center pointer-events-none">
+              <div className="absolute w-[120px] h-[120px] md:w-[160px] md:h-[160px] rounded-full bg-gradient-to-tr from-yellow-300 via-orange-400 to-red-500 shadow-[0_0_60px_rgba(253,224,71,0.6)] animate-pulse-glow" />
+              <div className="absolute w-[140px] h-[140px] md:w-[180px] md:h-[180px] rounded-full bg-yellow-400/20 blur-xl animate-pulse" />
             </div>
 
             {/* Anillos de Órbita Visibles (Líneas sólidas al estilo espacial) */}
@@ -143,6 +130,7 @@ export default function ElUniverso() {
             </div>
           </div>
 
+          <AvatarGuia mensaje="¡Hola, Explorador!" subtitulo="¿A qué planeta viajaremos hoy?" />
         </main>
       </div>
     </div>

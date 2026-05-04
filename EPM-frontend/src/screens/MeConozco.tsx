@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import NavigationButton from '../components/NavigationButton';
 
 export default function MeConozco() {
   return (
@@ -28,6 +29,12 @@ export default function MeConozco() {
              {/* Speech bubble tail */}
              <span className="absolute -top-3 left-1/2 -translate-x-1/2 border-8 border-transparent border-b-surface-container"></span>
            </p>
+        </div>
+
+        {/* Planet Character & Description */}
+        <div className="flex flex-col items-center gap-4 mb-4 text-center max-w-lg mx-auto">
+          <img src="/meconozco-epm-removebg-preview.png" alt="Me Conozco" className="w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-xl animate-float" />
+          <p className="text-on-surface-variant font-medium text-lg">En este planeta aprenderás a conocerte mejor, descubrir tus emociones y guardar lo que te hace sentir bien en tu maleta mágica.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mt-4">
