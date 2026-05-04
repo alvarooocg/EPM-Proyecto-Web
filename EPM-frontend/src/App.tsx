@@ -4,6 +4,8 @@
  */
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { AudioProvider } from './context/AudioContext';
+import AudioToggle from './components/AudioToggle';
 import { AnimatePresence, motion } from 'motion/react';
 import PasswordScreen from './components/PasswordScreen';
 
@@ -90,9 +92,12 @@ export default function App() {
   }
 
   return (
-    <BrowserRouter>
+    <AudioProvider>
+      <AudioToggle />
+      <BrowserRouter>
       <AnimatedRoutes />
     </BrowserRouter>
+    </AudioProvider>
   );
 }
 
