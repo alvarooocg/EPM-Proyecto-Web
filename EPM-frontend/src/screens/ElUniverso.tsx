@@ -8,7 +8,7 @@ export default function ElUniverso() {
         <header className="w-full flex justify-between items-center bg-surface-container/60 glass-panel p-4 rounded-3xl border border-outline-variant/30">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-              <span className="material-symbols-outlined text-primary text-2xl">account_circle</span>
+              <span className="material-symbols-outlined text-primary text-2xl" aria-hidden="true">account_circle</span>
             </div>
             <div>
               <h2 className="font-headline font-bold text-lg">Hola, Explorador</h2>
@@ -16,19 +16,19 @@ export default function ElUniverso() {
             </div>
           </div>
           <div className="flex gap-2">
-            <Link to="/dashboard" state={{ transitionType: 'none' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:bg-secondary/20 hover:text-secondary">
-              <span className="material-symbols-outlined">bar_chart</span>
+            <Link to="/dashboard" state={{ transitionType: 'none' }} aria-label="Ver progreso" className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:bg-secondary/20 hover:text-secondary">
+              <span className="material-symbols-outlined" aria-hidden="true">bar_chart</span>
             </Link>
-            <Link to="/configuracion" state={{ transitionType: 'none' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:bg-secondary/20 hover:text-secondary">
-              <span className="material-symbols-outlined">settings</span>
+            <Link to="/configuracion" state={{ transitionType: 'none' }} aria-label="Configuración" className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:bg-secondary/20 hover:text-secondary">
+              <span className="material-symbols-outlined" aria-hidden="true">settings</span>
             </Link>
-            <Link to="/logros" state={{ transitionType: 'none' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:bg-secondary/20 hover:text-secondary">
-              <span className="material-symbols-outlined">emoji_events</span>
+            <Link to="/logros" state={{ transitionType: 'none' }} aria-label="Mis logros" className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:bg-secondary/20 hover:text-secondary">
+              <span className="material-symbols-outlined" aria-hidden="true">emoji_events</span>
             </Link>
           </div>
         </header>
 
-        <main className="w-full flex-1 relative flex items-center justify-center min-h-[600px] py-10 overflow-hidden lg:overflow-visible">
+        <main id="main-content" className="w-full flex-1 relative flex items-center justify-center min-h-[600px] py-10 overflow-hidden lg:overflow-visible">
           
           <div className="relative w-full max-w-[800px] aspect-square flex items-center justify-center">
             {/* El Sol / Personaje Principal */}

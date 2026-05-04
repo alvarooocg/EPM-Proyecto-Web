@@ -5,17 +5,17 @@ export default function Configuracion() {
     <div className="min-h-screen w-full flex flex-col p-6 bg-surface">
       <header className="w-full flex items-center justify-between mb-8 max-w-3xl mx-auto">
         <h1 className="font-headline font-bold text-2xl">Configuración</h1>
-        <Link to="/" state={{ transitionType: 'none' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface">
-          <span className="material-symbols-outlined">close</span>
+        <Link to="/" state={{ transitionType: 'none' }} aria-label="Cerrar y volver al inicio" className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface">
+          <span className="material-symbols-outlined" aria-hidden="true">close</span>
         </Link>
       </header>
 
-      <main className="flex-1 w-full max-w-3xl mx-auto space-y-6">
+      <main id="main-content" className="flex-1 w-full max-w-3xl mx-auto space-y-6">
         <section className="bg-surface-container rounded-3xl p-6 border border-outline-variant/30">
           <h2 className="font-bold text-lg text-primary mb-4">Perfil del Especialista</h2>
           <div className="flex items-center gap-4">
              <div className="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant">
-               <span className="material-symbols-outlined text-3xl">psychology</span>
+               <span className="material-symbols-outlined text-3xl" aria-hidden="true">psychology</span>
              </div>
              <div>
                <h3 className="font-medium text-lg">Dra. Clara Martínez</h3>
@@ -48,7 +48,7 @@ export default function Configuracion() {
 
         <section className="bg-surface-container rounded-3xl p-6 border border-outline-variant/30">
            <button className="w-full py-4 text-error font-medium flex items-center justify-center gap-2 hover:bg-error-container/20 rounded-xl transition-colors">
-              <span className="material-symbols-outlined">logout</span>
+              <span className="material-symbols-outlined" aria-hidden="true">logout</span>
               Cerrar Sesión
            </button>
         </section>

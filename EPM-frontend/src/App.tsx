@@ -4,7 +4,7 @@
  */
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import PasswordScreen from './components/PasswordScreen';
 
 // Screens
@@ -24,24 +24,31 @@ import MeConozco from './screens/MeConozco';
 function AnimatedRoutes() {
   const location = useLocation();
   const transitionType = location.state?.transitionType || 'none';
+  const shouldReduce = useReducedMotion();
 
-  const variants = {
-    push: {
-      initial: { opacity: 0, x: 50 },
-      animate: { opacity: 1, x: 0 },
-      exit: { opacity: 0, x: -50 }
-    },
-    push_back: {
-      initial: { opacity: 0, x: -50 },
-      animate: { opacity: 1, x: 0 },
-      exit: { opacity: 0, x: 50 }
-    },
-    none: {
-      initial: { opacity: 1 },
-      animate: { opacity: 1 },
-      exit: { opacity: 1 }
-    }
-  };
+  const variants = shouldReduce
+    ? {
+        push:      { initial: {}, animate: {}, exit: {} },
+        push_back: { initial: {}, animate: {}, exit: {} },
+        none:      { initial: {}, animate: {}, exit: {} },
+      }
+    : {
+        push: {
+          initial: { opacity: 0, x: 50 },
+          animate: { opacity: 1, x: 0 },
+          exit: { opacity: 0, x: -50 }
+        },
+        push_back: {
+          initial: { opacity: 0, x: -50 },
+          animate: { opacity: 1, x: 0 },
+          exit: { opacity: 0, x: 50 }
+        },
+        none: {
+          initial: { opacity: 1 },
+          animate: { opacity: 1 },
+          exit: { opacity: 1 }
+        }
+      };
 
   const currentVariant = variants[transitionType as keyof typeof variants] || variants.none;
 
@@ -91,6 +98,12 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-white focus:text-primary focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg focus:font-bold focus:text-lg"
+      >
+        Saltar al contenido principal
+      </a>
       <AnimatedRoutes />
     </BrowserRouter>
   );

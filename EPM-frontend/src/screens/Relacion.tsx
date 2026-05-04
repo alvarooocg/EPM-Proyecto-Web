@@ -39,7 +39,7 @@ function QueSienteMiAmigo({ onBack }: { onBack: () => void }) {
     <div className="flex flex-col items-center w-full max-w-2xl mx-auto">
       <div className="w-full flex justify-between items-center mb-6">
         <button onClick={onBack} className="flex items-center gap-2 text-on-surface-variant hover:text-secondary drop-shadow-sm font-medium">
-          <span className="material-symbols-outlined">arrow_back</span>
+          <span className="material-symbols-outlined" aria-hidden="true">arrow_back</span>
           Volver al Menú
         </button>
         <h2 className="text-2xl font-headline font-bold text-secondary">¿Qué siente mi amigo?</h2>
@@ -67,6 +67,8 @@ function QueSienteMiAmigo({ onBack }: { onBack: () => void }) {
               key={opt.id}
               onClick={() => !isSuccess && handleSelect(opt.id)}
               disabled={showFeedback && isSuccess}
+              aria-label={opt.label}
+              aria-pressed={selectedEmotion === opt.id}
               className={clsx(
                 "flex flex-col items-center gap-3 p-6 rounded-2xl border-2 transition-all duration-300 bouncy-hover bg-background",
                 selectedEmotion === opt.id && showFeedback
@@ -74,7 +76,7 @@ function QueSienteMiAmigo({ onBack }: { onBack: () => void }) {
                   : "border-outline-variant/50 hover:border-secondary/50 hover:bg-secondary/10 shadow-sm"
               )}
             >
-              <span className="text-5xl">{opt.emoji}</span>
+              <span className="text-5xl" aria-hidden="true">{opt.emoji}</span>
               <span className="font-bold text-lg text-on-surface">{opt.label}</span>
             </button>
           ))}
@@ -143,7 +145,7 @@ function JuegoPorParejas({ onBack }: { onBack: () => void }) {
     <div className="flex flex-col items-center w-full max-w-4xl mx-auto">
       <div className="w-full flex justify-between items-center mb-6">
         <button onClick={onBack} className="flex items-center gap-2 text-on-surface-variant hover:text-secondary drop-shadow-sm font-medium">
-          <span className="material-symbols-outlined">arrow_back</span>
+          <span className="material-symbols-outlined" aria-hidden="true">arrow_back</span>
           Volver al Menú
         </button>
         <h2 className="text-2xl font-headline font-bold text-secondary">Juego por Parejas</h2>
@@ -244,6 +246,8 @@ function JuegoPorParejas({ onBack }: { onBack: () => void }) {
                 key={act.id}
                 onClick={() => handleAction(act.id)}
                 disabled={action === 'ignorar'}
+                aria-label={act.label}
+                aria-pressed={action === act.id}
                 className={clsx(
                   "flex flex-col items-center justify-center gap-3 p-4 md:p-6 rounded-2xl border-2 transition-all duration-300 bouncy-hover font-bold shadow-sm",
                   act.color,
@@ -252,7 +256,7 @@ function JuegoPorParejas({ onBack }: { onBack: () => void }) {
                   action === 'ignorar' && action !== act.id && "opacity-50 grayscale"
                 )}
               >
-                <span className="text-4xl">{act.icon}</span>
+                <span className="text-4xl" aria-hidden="true">{act.icon}</span>
                 <span className="text-lg">{act.label}</span>
               </button>
             ))}
@@ -307,7 +311,7 @@ export default function Relacion() {
         {/* Back Button positioned absolutely on the left */}
         <Link to="/" state={{ transitionType: 'push_back' }} className="absolute left-0 top-4 flex items-center gap-2 text-on-surface-variant hover:text-cyan-600 bouncy-hover z-10">
           <div className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center shadow-sm">
-             <span className="material-symbols-outlined text-2xl">arrow_back</span>
+             <span className="material-symbols-outlined text-2xl" aria-hidden="true">arrow_back</span>
           </div>
           <span className="font-medium hidden sm:block">El Universo</span>
         </Link>
@@ -325,7 +329,7 @@ export default function Relacion() {
         <h1 className="font-headline font-extrabold text-4xl md:text-5xl text-cyan-700 text-center">Planeta Relación</h1>
       </header>
       
-      <main className="flex-1 flex flex-col items-center lg:justify-center max-w-5xl mx-auto w-full gap-8">
+      <main id="main-content" className="flex-1 flex flex-col items-center lg:justify-center max-w-5xl mx-auto w-full gap-8">
         
         {/* Menu Router State */}
         <AnimatePresence mode="wait">
@@ -354,7 +358,7 @@ export default function Relacion() {
                     <p className="text-base text-on-surface-variant font-medium">Reconoce emociones básicas observando atentamente las expresiones de otros.</p>
                   </div>
                   <div className="mt-4 px-6 py-3 bg-blue-500 text-white rounded-full font-bold text-lg w-full flex items-center justify-center gap-2 group-hover:bg-blue-600">
-                    <span className="material-symbols-outlined">play_arrow</span>
+                    <span className="material-symbols-outlined" aria-hidden="true">play_arrow</span>
                     Jugar Misión
                   </div>
                 </button>
@@ -371,7 +375,7 @@ export default function Relacion() {
                     <p className="text-base text-on-surface-variant font-medium">Toma decisiones sobre cómo reaccionar ante las necesidades de tu compañero.</p>
                   </div>
                   <div className="mt-4 px-6 py-3 bg-pink-500 text-white rounded-full font-bold text-lg w-full flex items-center justify-center gap-2 group-hover:bg-pink-600">
-                    <span className="material-symbols-outlined">play_arrow</span>
+                    <span className="material-symbols-outlined" aria-hidden="true">play_arrow</span>
                     Jugar Misión
                   </div>
                 </button>

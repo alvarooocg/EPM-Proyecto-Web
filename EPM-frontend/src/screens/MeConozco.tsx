@@ -5,14 +5,14 @@ export default function MeConozco() {
     <div className="min-h-screen w-full flex flex-col p-6 bg-gradient-to-b from-tertiary-container/20 to-background">
       <header className="w-full flex items-center justify-between mb-8">
         <Link to="/" state={{ transitionType: 'push_back' }} className="flex items-center gap-2 text-on-surface-variant hover:text-tertiary bouncy-hover">
-          <span className="material-symbols-outlined">arrow_back</span>
+          <span className="material-symbols-outlined" aria-hidden="true">arrow_back</span>
           <span className="font-medium">Volver</span>
         </Link>
         <h1 className="font-headline font-bold text-2xl text-tertiary">Planeta Me Conozco</h1>
         <div className="w-20" /> {/* Spacer */}
       </header>
       
-      <main className="flex-1 flex flex-col items-center justify-center max-w-4xl mx-auto w-full gap-8">
+      <main id="main-content" className="flex-1 flex flex-col items-center justify-center max-w-4xl mx-auto w-full gap-8">
         <div className="flex flex-col items-center gap-4 mb-4">
            {/* Mascota / Estrella animada */}
            <div className="w-24 h-24 rounded-full overflow-hidden bg-tertiary/10 border-4 border-tertiary/30 animate-float">
@@ -32,9 +32,9 @@ export default function MeConozco() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mt-4">
           {/* Actividad 1: ¿Cómo me siento? */}
-          <Link to="/selector-emociones" state={{ transitionType: 'push' }} className="bg-surface-container glass-panel rounded-3xl p-6 border border-outline-variant/30 flex flex-col items-center text-center gap-4 bouncy-hover group">
+          <Link to="/selector-emociones" state={{ transitionType: 'push' }} aria-label="Ir a ¿Cómo me siento?: conectando y nombrando nuestras emociones" className="bg-surface-container glass-panel rounded-3xl p-6 border border-outline-variant/30 flex flex-col items-center text-center gap-4 bouncy-hover group">
             <div className="w-24 h-24 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary group-hover:bg-tertiary/20 transition-colors">
-              <span className="material-symbols-outlined text-4xl">emoji_emotions</span>
+              <span className="material-symbols-outlined text-4xl" aria-hidden="true">emoji_emotions</span>
             </div>
             <div>
               <h3 className="font-bold text-xl text-on-surface group-hover:text-tertiary transition-colors mb-2">¿Cómo me siento?</h3>
@@ -43,9 +43,9 @@ export default function MeConozco() {
           </Link>
 
           {/* Actividad 2: La Maleta de las Emociones */}
-          <Link to="/maleta-magica" state={{ transitionType: 'push' }} className="bg-surface-container glass-panel rounded-3xl p-6 border border-outline-variant/30 flex flex-col items-center text-center gap-4 bouncy-hover group">
+          <Link to="/maleta-magica" state={{ transitionType: 'push' }} aria-label="Ir a La Maleta de las Emociones: guarda lo que te hace sentir bien" className="bg-surface-container glass-panel rounded-3xl p-6 border border-outline-variant/30 flex flex-col items-center text-center gap-4 bouncy-hover group">
             <div className="w-24 h-24 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary group-hover:bg-tertiary/20 transition-colors">
-              <span className="material-symbols-outlined text-4xl">luggage</span>
+              <span className="material-symbols-outlined text-4xl" aria-hidden="true">luggage</span>
             </div>
             <div>
               <h3 className="font-bold text-xl text-on-surface group-hover:text-tertiary transition-colors mb-2">La Maleta de las Emociones</h3>
