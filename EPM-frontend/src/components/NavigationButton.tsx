@@ -15,7 +15,7 @@ export default function NavigationButton({ to, icon = "arrow_back_ios", label = 
     </>
   );
 
-  const className = "fixed top-4 left-4 z-50 w-12 h-12 rounded-full bg-surface-container-highest border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface shadow-md hover:bg-secondary/20 hover:text-secondary focus:ring-4 focus:ring-secondary/50 outline-none";
+  const className = "fixed top-5 left-5 z-50 w-12 h-12 rounded-full bg-surface-container-highest border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface shadow-md hover:bg-secondary/20 hover:text-secondary focus:ring-4 focus:ring-secondary/50 outline-none";
 
   if (onClick) {
     return (

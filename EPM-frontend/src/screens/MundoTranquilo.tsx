@@ -34,11 +34,11 @@ export default function MundoTranquilo() {
 
   return (
     <div className="min-h-screen w-full flex flex-col p-6 bg-surface overflow-hidden">
-      <header className="w-full flex items-center justify-between mb-8 z-10">
+      <header className="w-full flex items-center justify-between mb-8 z-10 pt-2" role="banner">
         <NavigationButton to="/me-relajo" label="Volver a Me Relajo" />
       </header>
 
-      <main className="flex-1 flex flex-col items-center justify-center w-full relative">
+      <main className="flex-1 flex flex-col items-center justify-center w-full relative" aria-label="Ejercicio de respiración guiada">
         <div className="w-full max-w-xl mx-auto bg-surface-container-low/50 border border-outline-variant/30 rounded-2xl p-4 mt-4 absolute top-0 z-20 backdrop-blur-sm">
           <p className="text-center text-on-surface-variant text-sm flex items-center justify-center gap-2">
             <span className="material-symbols-outlined text-base">info</span>
@@ -95,8 +95,8 @@ export default function MundoTranquilo() {
       </main>
 
       {/* Decorative stars */}
-      <div className="absolute top-1/4 left-1/4 text-primary/30 animate-pulse text-2xl">✨</div>
-      <div className="absolute bottom-1/3 right-1/4 text-secondary/30 animate-pulse delay-700 text-3xl">✨</div>
+      <div className="absolute top-1/4 left-1/4 text-primary/30 animate-pulse text-2xl" aria-hidden="true">✨</div>
+      <div className="absolute bottom-1/3 right-1/4 text-secondary/30 animate-pulse delay-700 text-3xl" aria-hidden="true">✨</div>
 
       <AnimatePresence>
         {showSuccess && (

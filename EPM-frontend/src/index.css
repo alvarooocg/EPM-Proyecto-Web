@@ -25,8 +25,8 @@
   --color-surface-container-highest: #323347;
   --color-on-background: #e0e0fa;
   --color-on-surface: #e0e0fa;
-  --color-on-surface-variant: #c7c4dc;
-  --color-outline: #918ea5;
+  --color-on-surface-variant: #d1cfe8;
+  --color-outline: #a8a5bd;
   --color-outline-variant: #464559;
   --color-inverse-surface: #e0e0fa;
   --color-inverse-on-surface: #2d2f42;
@@ -38,11 +38,52 @@
   --font-label: "Plus Jakarta Sans", sans-serif;
 }
 
+/* ===== Global Resets & Accessibility ===== */
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Skip-to-content link for keyboard users */
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  border-radius: 0 0 1rem 1rem;
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+.skip-to-content:focus {
+  top: 0;
+}
+
+/* Global focus indicator – high-contrast visible ring */
+*:focus-visible {
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 body {
   background-color: var(--color-background);
   color: var(--color-on-background);
   font-family: var(--font-body);
   overflow-x: hidden;
+  /* Prevent iOS text size adjustment */
+  -webkit-text-size-adjust: 100%;
 }
 
 .material-symbols-outlined {
@@ -119,4 +160,17 @@ body {
   fill: none;
   stroke-width: 2.8;
   stroke-linecap: round;
+}
+
+/* Visually hidden but accessible to screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }

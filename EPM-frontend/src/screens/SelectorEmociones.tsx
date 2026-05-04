@@ -24,11 +24,11 @@ export default function SelectorEmociones() {
 
   return (
     <div className="min-h-screen w-full flex flex-col p-6 bg-surface">
-      <header className="w-full flex items-center justify-between mb-2">
+      <header className="w-full flex items-center justify-between mb-2 pt-2" role="banner">
         <NavigationButton to="/me-conozco" label="Volver a Me Conozco" />
       </header>
 
-      <main className="flex-1 flex flex-col items-center justify-center max-w-4xl mx-auto w-full gap-8">
+      <main className="flex-1 flex flex-col items-center justify-center max-w-4xl mx-auto w-full gap-8" aria-label="Selector de emociones">
         <div className="w-full max-w-xl mx-auto bg-surface-container-low/50 border border-outline-variant/30 rounded-2xl p-4 mt-4 backdrop-blur-sm">
           <p className="text-center text-on-surface-variant text-sm flex items-center justify-center gap-2">
             <span className="material-symbols-outlined text-base">info</span>

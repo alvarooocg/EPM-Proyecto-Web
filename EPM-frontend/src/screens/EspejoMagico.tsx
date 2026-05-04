@@ -23,19 +23,19 @@ export default function EspejoMagico() {
 
   return (
     <div className="min-h-screen w-full flex flex-col p-6 bg-surface">
-      <header className="w-full flex items-center justify-between mb-8 max-w-4xl mx-auto">
+      <header className="w-full flex items-center justify-between mb-8 max-w-4xl mx-auto pt-2" role="banner">
         <NavigationButton to="/relacion" label="Volver a Relación" />
-        <div className="flex gap-2">
-          <Link to="/selector-emociones" aria-label="Ir a selector de emociones" state={{ transitionType: 'push' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:text-secondary">
-            <span className="material-symbols-outlined">mood</span>
+        <nav className="flex gap-2" aria-label="Navegación secundaria">
+          <Link to="/selector-emociones" aria-label="Ir a selector de emociones" state={{ transitionType: 'push' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:text-secondary focus:ring-4 focus:ring-secondary/50 outline-none">
+            <span className="material-symbols-outlined" aria-hidden="true">mood</span>
           </Link>
-          <Link to="/evolucion-planeta" aria-label="Ir a evolución de planeta" state={{ transitionType: 'push' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:text-secondary">
-            <span className="material-symbols-outlined">public</span>
+          <Link to="/evolucion-planeta" aria-label="Ir a evolución de planeta" state={{ transitionType: 'push' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:text-secondary focus:ring-4 focus:ring-secondary/50 outline-none">
+            <span className="material-symbols-outlined" aria-hidden="true">public</span>
           </Link>
-        </div>
+        </nav>
       </header>
 
-      <main className="flex-1 w-full max-w-4xl mx-auto flex flex-col items-center justify-center">
+      <main className="flex-1 w-full max-w-4xl mx-auto flex flex-col items-center justify-center" aria-label="Espejo mágico de emociones">
         
         {/* Espejo central */}
         <div className="relative w-64 h-80 md:w-80 md:h-[400px] mb-12">
