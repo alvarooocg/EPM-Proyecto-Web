@@ -144,8 +144,9 @@ function Topbar({ title, onBack, onHome, progress = null, accent = "#F5C44A" }: 
           width: 64,
           height: 64,
           borderRadius: 32,
-          background: "white",
-          boxShadow: "0 4px 14px rgba(120, 80, 160, 0.15)",
+          background: "rgba(20, 10, 40, 0.75)",
+          backdropFilter: "blur(8px)",
+          boxShadow: "0 4px 14px rgba(0, 0, 0, 0.35)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -158,7 +159,7 @@ function Topbar({ title, onBack, onHome, progress = null, accent = "#F5C44A" }: 
           onMouseUp={(e: any) => e.currentTarget.style.transform = "scale(1)"}
           onMouseLeave={(e: any) => e.currentTarget.style.transform = "scale(1)"}
         >
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4A3A55" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="15 18 9 12 15 6" />
           </svg>
         </button>
@@ -166,11 +167,12 @@ function Topbar({ title, onBack, onHome, progress = null, accent = "#F5C44A" }: 
       {title && (
         <div className="display-h" style={{
           fontSize: 26,
-          color: "var(--ink)",
-          background: "white",
+          color: "white",
+          background: "rgba(20, 10, 40, 0.75)",
+          backdropFilter: "blur(8px)",
           padding: "12px 24px",
           borderRadius: 32,
-          boxShadow: "0 4px 14px rgba(120, 80, 160, 0.10)",
+          boxShadow: "0 4px 14px rgba(0, 0, 0, 0.25)",
           display: "flex",
           alignItems: "center",
           gap: 12,

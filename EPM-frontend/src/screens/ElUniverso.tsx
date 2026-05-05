@@ -55,16 +55,22 @@ export default function ElUniverso() {
                   className="flex flex-col items-center gap-2 bouncy-hover group relative z-40 focus:ring-4 focus:ring-tertiary/50 rounded-full outline-none"
                   aria-label="Ir al Planeta Me Conozco – Autoconocimiento emocional"
                 >
-                  <div 
-                    className="w-18 h-18 md:w-22 md:h-22 rounded-full relative flex items-center justify-center shadow-[inset_-12px_-12px_20px_rgba(0,0,0,0.7),_inset_4px_4px_10px_rgba(255,255,255,0.3),_0_0_25px_rgba(243,192,26,0.4)]"
+                  <div
+                    className="w-18 h-18 md:w-22 md:h-22 rounded-full relative flex items-center justify-center"
                     style={{
                       width: 'clamp(72px, 8vw, 96px)',
                       height: 'clamp(72px, 8vw, 96px)',
                       background: `radial-gradient(circle at 30% 30%, #FFD89E 0%, #F5A26A 55%, #E88A6C 100%)`,
-                      boxShadow: `inset -20px -25px 40px rgba(0,0,0,0.12), 0 16px 40px rgba(120, 80, 160, 0.25)`
+                      boxShadow: `inset -20px -25px 40px rgba(0,0,0,0.12), 0 16px 40px rgba(120, 80, 160, 0.25)`,
+                      overflow: 'hidden',
                     }}
                   >
-                    <img src="/meconozco-epm-removebg-preview.png" alt="" className="w-[80%] h-[80%] object-contain drop-shadow-xl group-hover:scale-110 transition-transform bouncy-spring relative z-10" />
+                    <div style={{
+                      position: 'absolute', inset: 0,
+                      background: `radial-gradient(circle at 60% 35%, rgba(255,255,255,0.25) 0 8%, transparent 9%),
+                                   radial-gradient(circle at 25% 65%, rgba(255,255,255,0.18) 0 6%, transparent 7%),
+                                   radial-gradient(circle at 70% 75%, rgba(0,0,0,0.06) 0 5%, transparent 6%)`,
+                    }} />
                   </div>
                   <div className="absolute top-full mt-2 text-center bg-surface-container/90 px-3 py-1 rounded-full backdrop-blur-md border border-outline-variant/30 group-hover:bg-tertiary/20 group-hover:border-tertiary/50 transition-colors whitespace-nowrap">
                     <h3 className="font-bold text-xs md:text-sm text-on-surface">Me Conozco</h3>
@@ -82,16 +88,22 @@ export default function ElUniverso() {
                   className="flex flex-col items-center gap-2 bouncy-hover group relative z-40 focus:ring-4 focus:ring-secondary/50 rounded-full outline-none"
                   aria-label="Ir al Planeta Relación – Habilidades sociales y empatía"
                 >
-                  <div 
-                    className="rounded-full relative flex items-center justify-center shadow-[inset_-12px_-12px_20px_rgba(0,0,0,0.7),_inset_4px_4px_10px_rgba(255,255,255,0.3),_0_0_25px_rgba(69,216,237,0.4)]"
+                  <div
+                    className="rounded-full relative flex items-center justify-center"
                     style={{
                       width: 'clamp(88px, 10vw, 112px)',
                       height: 'clamp(88px, 10vw, 112px)',
                       background: `radial-gradient(circle at 30% 30%, #FBD5DC 0%, #F5A6B5 55%, #D879A0 100%)`,
-                      boxShadow: `inset -20px -25px 40px rgba(0,0,0,0.12), 0 16px 40px rgba(120, 80, 160, 0.25)`
+                      boxShadow: `inset -20px -25px 40px rgba(0,0,0,0.12), 0 16px 40px rgba(120, 80, 160, 0.25)`,
+                      overflow: 'hidden',
                     }}
                   >
-                    <img src="/social-epm.png" alt="" className="w-[80%] h-[80%] object-contain drop-shadow-xl group-hover:scale-110 transition-transform bouncy-spring relative z-10" />
+                    <div style={{
+                      position: 'absolute', inset: 0,
+                      background: `radial-gradient(circle at 60% 35%, rgba(255,255,255,0.25) 0 8%, transparent 9%),
+                                   radial-gradient(circle at 25% 65%, rgba(255,255,255,0.18) 0 6%, transparent 7%),
+                                   radial-gradient(circle at 70% 75%, rgba(0,0,0,0.06) 0 5%, transparent 6%)`,
+                    }} />
                   </div>
                   <div className="absolute top-full mt-2 text-center bg-surface-container/90 px-3 py-1 rounded-full backdrop-blur-md border border-outline-variant/30 group-hover:bg-secondary/20 group-hover:border-secondary/50 transition-colors whitespace-nowrap">
                     <h3 className="font-bold text-xs md:text-sm text-on-surface">Relación</h3>
@@ -109,16 +121,22 @@ export default function ElUniverso() {
                   className="flex flex-col items-center gap-2 bouncy-hover group relative z-40 focus:ring-4 focus:ring-primary/50 rounded-full outline-none"
                   aria-label="Ir al Planeta Me Relajo – Relajación y respiración"
                 >
-                  <div 
-                    className="rounded-full relative flex items-center justify-center shadow-[inset_-12px_-12px_20px_rgba(0,0,0,0.7),_inset_4px_4px_10px_rgba(255,255,255,0.3),_0_0_25px_rgba(186,195,255,0.4)]"
+                  <div
+                    className="rounded-full relative flex items-center justify-center"
                     style={{
                       width: 'clamp(72px, 8vw, 96px)',
                       height: 'clamp(72px, 8vw, 96px)',
                       background: `radial-gradient(circle at 30% 30%, #D6EAF8 0%, #A6CDE8 55%, #7DA8C9 100%)`,
-                      boxShadow: `inset -20px -25px 40px rgba(0,0,0,0.12), 0 16px 40px rgba(120, 80, 160, 0.25)`
+                      boxShadow: `inset -20px -25px 40px rgba(0,0,0,0.12), 0 16px 40px rgba(120, 80, 160, 0.25)`,
+                      overflow: 'hidden',
                     }}
                   >
-                    <img src="/relax-epm.png" alt="" className="w-[80%] h-[80%] object-contain drop-shadow-xl group-hover:scale-110 transition-transform bouncy-spring relative z-10" />
+                    <div style={{
+                      position: 'absolute', inset: 0,
+                      background: `radial-gradient(circle at 60% 35%, rgba(255,255,255,0.25) 0 8%, transparent 9%),
+                                   radial-gradient(circle at 25% 65%, rgba(255,255,255,0.18) 0 6%, transparent 7%),
+                                   radial-gradient(circle at 70% 75%, rgba(0,0,0,0.06) 0 5%, transparent 6%)`,
+                    }} />
                   </div>
                   <div className="absolute top-full mt-2 text-center bg-surface-container/90 px-3 py-1 rounded-full backdrop-blur-md border border-outline-variant/30 group-hover:bg-primary/20 group-hover:border-primary/50 transition-colors whitespace-nowrap">
                     <h3 className="font-bold text-xs md:text-sm text-on-surface">Me Relajo</h3>
