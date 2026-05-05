@@ -24,6 +24,11 @@ import EvolucionPlaneta from './screens/EvolucionPlaneta';
 import LogrosGalacticos from './screens/LogrosGalacticos';
 import MeConozco from './screens/MeConozco';
 
+// New Planet Screens
+import Planet1Screen from './screens/Planet1Screen';
+import Planet2Screen from './screens/Planet2Screen';
+import Planet3Screen from './screens/Planet3Screen';
+
 function AnimatedRoutes() {
   const location = useLocation();
   const transitionType = location.state?.transitionType || 'none';
@@ -68,6 +73,9 @@ function AnimatedRoutes() {
       >
         <Routes location={location}>
           <Route path="/" element={<ElUniverso />} />
+          <Route path="/planeta/1" element={<Planet1Screen />} />
+          <Route path="/planeta/2" element={<Planet2Screen />} />
+          <Route path="/planeta/3" element={<Planet3Screen />} />
           <Route path="/me-conozco" element={<MeConozco />} />
           <Route path="/relacion" element={<Relacion />} />
           <Route path="/me-relajo" element={<MeRelajo />} />

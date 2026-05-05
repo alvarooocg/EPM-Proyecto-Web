@@ -50,7 +50,7 @@ export default function ElUniverso() {
             <div className="absolute w-[240px] h-[240px] md:w-[360px] md:h-[360px] pointer-events-none" style={{ transform: 'rotate(-60deg)' }} aria-hidden="true">
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto" style={{ transform: 'rotate(60deg)' }}>
                 <Link
-                  to="/me-conozco"
+                  to="/planeta/1"
                   state={{ transitionType: 'push' }}
                   className="flex flex-col items-center gap-2 bouncy-hover group relative z-40 focus:ring-4 focus:ring-tertiary/50 rounded-full outline-none"
                   aria-label="Ir al Planeta Me Conozco – Autoconocimiento emocional"
@@ -83,7 +83,7 @@ export default function ElUniverso() {
             <div className="absolute w-[360px] h-[360px] md:w-[540px] md:h-[540px] pointer-events-none" style={{ transform: 'rotate(150deg)' }} aria-hidden="true">
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto" style={{ transform: 'rotate(-150deg)' }}>
                 <Link
-                  to="/relacion"
+                  to="/planeta/3"
                   state={{ transitionType: 'push' }}
                   className="flex flex-col items-center gap-2 bouncy-hover group relative z-40 focus:ring-4 focus:ring-secondary/50 rounded-full outline-none"
                   aria-label="Ir al Planeta Relación – Habilidades sociales y empatía"
@@ -113,7 +113,7 @@ export default function ElUniverso() {
             <div className="absolute w-[480px] h-[480px] md:w-[720px] md:h-[720px] pointer-events-none" style={{ transform: 'rotate(60deg)' }} aria-hidden="true">
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto" style={{ transform: 'rotate(-60deg)' }}>
                 <Link
-                  to="/me-relajo"
+                  to="/planeta/2"
                   state={{ transitionType: 'push' }}
                   className="flex flex-col items-center gap-2 bouncy-hover group relative z-40 focus:ring-4 focus:ring-primary/50 rounded-full outline-none"
                   aria-label="Ir al Planeta Me Relajo – Relajación y respiración"
