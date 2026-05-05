@@ -9,6 +9,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { AudioProvider } from './context/AudioContext';
 import AudioToggle from './components/AudioToggle';
 import PasswordScreen from './components/PasswordScreen';
+import './components/Shared';
 
 // Screens
 import ElUniverso from './screens/ElUniverso';
