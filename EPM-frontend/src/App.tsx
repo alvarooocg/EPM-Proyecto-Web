@@ -9,6 +9,8 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { AudioProvider } from './context/AudioContext';
 import AudioToggle from './components/AudioToggle';
 import PasswordScreen from './components/PasswordScreen';
+import './components/Shared';
+import { useT } from './i18n';
 
 // Screens
 import ElUniverso from './screens/ElUniverso';
@@ -24,10 +26,16 @@ import EvolucionPlaneta from './screens/EvolucionPlaneta';
 import LogrosGalacticos from './screens/LogrosGalacticos';
 import MeConozco from './screens/MeConozco';
 
+// New Planet Screens
+import Planet1Screen from './screens/Planet1Screen';
+import Planet2Screen from './screens/Planet2Screen';
+import Planet3Screen from './screens/Planet3Screen';
+
 function AnimatedRoutes() {
   const location = useLocation();
   const transitionType = location.state?.transitionType || 'none';
   const shouldReduce = useReducedMotion();
+  const t = useT('es');
 
   const variants = shouldReduce
     ? {
@@ -68,6 +76,9 @@ function AnimatedRoutes() {
       >
         <Routes location={location}>
           <Route path="/" element={<ElUniverso />} />
+          <Route path="/planeta/1" element={<Planet1Screen t={t} onBack={() => window.history.back()} onActivityComplete={() => {}} completed={[]} />} />
+          <Route path="/planeta/2" element={<Planet2Screen t={t} onBack={() => window.history.back()} onActivityComplete={() => {}} completed={[]} />} />
+          <Route path="/planeta/3" element={<Planet3Screen t={t} onBack={() => window.history.back()} onActivityComplete={() => {}} completed={[]} />} />
           <Route path="/me-conozco" element={<MeConozco />} />
           <Route path="/relacion" element={<Relacion />} />
           <Route path="/me-relajo" element={<MeRelajo />} />
