@@ -60,14 +60,8 @@ export default function ElUniverso() {
                     style={{
                       width: 'clamp(72px, 8vw, 96px)',
                       height: 'clamp(72px, 8vw, 96px)',
-                      backgroundImage: `
-                        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3) 0%, transparent 40%, rgba(0,0,0,0.8) 100%),
-                        radial-gradient(circle at 25% 45%, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.3) 10%, transparent 12%),
-                        radial-gradient(circle at 70% 35%, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.25) 15%, transparent 18%),
-                        radial-gradient(circle at 60% 75%, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.35) 12%, transparent 15%),
-                        radial-gradient(circle at 40% 80%, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.2) 8%, transparent 10%),
-                        radial-gradient(circle at center, #f3c01a 0%, #b38811 100%)
-                      `
+                      background: `radial-gradient(circle at 30% 30%, #FFD89E 0%, #F5A26A 55%, #E88A6C 100%)`,
+                      boxShadow: `inset -20px -25px 40px rgba(0,0,0,0.12), 0 16px 40px rgba(120, 80, 160, 0.25)`
                     }}
                   >
                     <img src="/meconozco-epm-removebg-preview.png" alt="" className="w-[80%] h-[80%] object-contain drop-shadow-xl group-hover:scale-110 transition-transform bouncy-spring relative z-10" />
@@ -83,7 +77,7 @@ export default function ElUniverso() {
             <div className="absolute w-[360px] h-[360px] md:w-[540px] md:h-[540px] pointer-events-none" style={{ transform: 'rotate(150deg)' }} aria-hidden="true">
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto" style={{ transform: 'rotate(-150deg)' }}>
                 <Link
-                  to="/planeta/3"
+                  to="/planeta/2"
                   state={{ transitionType: 'push' }}
                   className="flex flex-col items-center gap-2 bouncy-hover group relative z-40 focus:ring-4 focus:ring-secondary/50 rounded-full outline-none"
                   aria-label="Ir al Planeta Relación – Habilidades sociales y empatía"
@@ -93,11 +87,8 @@ export default function ElUniverso() {
                     style={{
                       width: 'clamp(88px, 10vw, 112px)',
                       height: 'clamp(88px, 10vw, 112px)',
-                      backgroundImage: `
-                        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4) 0%, transparent 50%, rgba(0,0,0,0.85) 100%),
-                        repeating-linear-gradient(15deg, transparent 0%, transparent 10%, rgba(255,255,255,0.15) 10%, rgba(255,255,255,0.15) 15%, transparent 15%, transparent 20%, rgba(0,0,0,0.1) 20%, rgba(0,0,0,0.1) 25%),
-                        radial-gradient(circle at center, #45d8ed 0%, #006f7c 100%)
-                      `
+                      background: `radial-gradient(circle at 30% 30%, #FBD5DC 0%, #F5A6B5 55%, #D879A0 100%)`,
+                      boxShadow: `inset -20px -25px 40px rgba(0,0,0,0.12), 0 16px 40px rgba(120, 80, 160, 0.25)`
                     }}
                   >
                     <img src="/social-epm.png" alt="" className="w-[80%] h-[80%] object-contain drop-shadow-xl group-hover:scale-110 transition-transform bouncy-spring relative z-10" />
@@ -113,7 +104,7 @@ export default function ElUniverso() {
             <div className="absolute w-[480px] h-[480px] md:w-[720px] md:h-[720px] pointer-events-none" style={{ transform: 'rotate(60deg)' }} aria-hidden="true">
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto" style={{ transform: 'rotate(-60deg)' }}>
                 <Link
-                  to="/planeta/2"
+                  to="/planeta/3"
                   state={{ transitionType: 'push' }}
                   className="flex flex-col items-center gap-2 bouncy-hover group relative z-40 focus:ring-4 focus:ring-primary/50 rounded-full outline-none"
                   aria-label="Ir al Planeta Me Relajo – Relajación y respiración"
@@ -123,13 +114,8 @@ export default function ElUniverso() {
                     style={{
                       width: 'clamp(72px, 8vw, 96px)',
                       height: 'clamp(72px, 8vw, 96px)',
-                      backgroundImage: `
-                        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.5) 0%, transparent 50%, rgba(0,0,0,0.9) 100%),
-                        radial-gradient(circle at 40% 60%, rgba(255,255,255,0.2) 0%, transparent 30%),
-                        radial-gradient(circle at 75% 25%, rgba(0,0,0,0.2) 0%, transparent 20%),
-                        repeating-radial-gradient(circle at 50% 50%, transparent 0px, transparent 5px, rgba(0,0,0,0.05) 6px, rgba(0,0,0,0.05) 8px),
-                        radial-gradient(circle at center, #bac3ff 0%, #687ee6 50%, #2b397a 100%)
-                      `
+                      background: `radial-gradient(circle at 30% 30%, #D6EAF8 0%, #A6CDE8 55%, #7DA8C9 100%)`,
+                      boxShadow: `inset -20px -25px 40px rgba(0,0,0,0.12), 0 16px 40px rgba(120, 80, 160, 0.25)`
                     }}
                   >
                     <img src="/relax-epm.png" alt="" className="w-[80%] h-[80%] object-contain drop-shadow-xl group-hover:scale-110 transition-transform bouncy-spring relative z-10" />

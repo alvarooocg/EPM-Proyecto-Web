@@ -326,12 +326,13 @@ function Planet3Screen({ t, onBack, onActivityComplete, completed }: any) {
           return (
             <button key={a.key} onClick={() => { if (window.SoundFX) window.SoundFX.pop(); setActivity(a.key); }}
               style={{
-                background: "white", borderRadius: 32, padding: "28px 24px",
+                background: "#3D2B5F", borderRadius: 32, padding: "28px 24px",
                 display: "flex", flexDirection: "column", alignItems: "center", gap: 12,
                 boxShadow: "0 10px 24px rgba(120, 80, 160, 0.12)",
                 cursor: "pointer", minHeight: 280, position: "relative",
                 transition: "transform 0.2s",
-                border: 'none'
+                border: 'none',
+                color: "white"
               }}
               onMouseEnter={(e: any) => e.currentTarget.style.transform = "translateY(-6px)"}
               onMouseLeave={(e: any) => e.currentTarget.style.transform = "translateY(0)"}
