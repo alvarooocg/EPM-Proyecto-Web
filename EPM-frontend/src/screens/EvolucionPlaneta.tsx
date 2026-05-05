@@ -5,17 +5,17 @@ export default function EvolucionPlaneta() {
   return (
     <div className="min-h-screen w-full flex flex-col p-6 bg-surface relative overflow-hidden">
        {/* Background decoration */}
-      <div className="absolute top-[-10%] right-[-10%] w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-secondary/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-[-10%] right-[-10%] w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
+      <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-secondary/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
 
-      <header className="w-full flex items-center justify-between mb-8 z-10 relative">
+      <header className="w-full flex items-center justify-between mb-8 z-10 relative pt-2" role="banner">
         <h1 className="font-headline font-bold text-2xl">Evolución por Planeta</h1>
         <Link to="/" state={{ transitionType: 'none' }} aria-label="Cerrar y volver al inicio" className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface">
           <span className="material-symbols-outlined" aria-hidden="true">close</span>
         </Link>
       </header>
 
-      <main id="main-content" className="flex-1 w-full max-w-4xl mx-auto flex flex-col items-center justify-center gap-12 z-10 relative">
+      <main className="flex-1 w-full max-w-4xl mx-auto flex flex-col items-center justify-center gap-12 z-10 relative" aria-label="Progreso del Planeta Relación">
         <div className="w-full flex flex-col lg:flex-row items-center gap-12">
             
             {/* Visual Planet Status */}

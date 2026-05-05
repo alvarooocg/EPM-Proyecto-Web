@@ -24,27 +24,18 @@ export default function MundoTranquilo() {
   }, [phaseIndex, currentPhase.duration]);
 
   return (
-    <div className="min-h-screen w-full flex flex-col p-6 bg-[#0b1b36] relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent pointer-events-none" />
-      <header className="w-full flex items-center justify-between mb-8 z-10 relative">
-        <Link to="/me-relajo" state={{ transitionType: 'push_back' }} className="flex items-center gap-2 text-on-surface hover:text-primary bouncy-hover">
-          <span className="material-symbols-outlined" aria-hidden="true">arrow_back</span>
-          <span className="font-medium">Volver</span>
-        </Link>
-        <div className="flex gap-4">
-          <Link
-            to="/evolucion-planeta"
-            state={{ transitionType: 'push' }}
-            aria-label="Ver evolución del planeta"
-            className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:text-primary"
-          >
-            <span className="material-symbols-outlined" aria-hidden="true">star</span>
-          </Link>
-        </div>
+    <div className="min-h-screen w-full flex flex-col p-6 bg-surface overflow-hidden">
+      <header className="w-full flex items-center justify-between mb-8 z-10 pt-2" role="banner">
+        <NavigationButton to="/me-relajo" label="Volver a Me Relajo" />
       </header>
 
-      <main id="main-content" className="flex-1 flex flex-col items-center justify-center z-10 relative">
-        <h1 className="font-headline font-bold text-4xl text-center mb-12 text-primary">Respira Conmigo</h1>
+      <main className="flex-1 flex flex-col items-center justify-center w-full relative" aria-label="Ejercicio de respiración guiada">
+        <div className="w-full max-w-xl mx-auto bg-surface-container-low/50 border border-outline-variant/30 rounded-2xl p-4 mt-4 absolute top-0 z-20 backdrop-blur-sm">
+          <p className="text-center text-on-surface-variant text-sm flex items-center justify-center gap-2">
+            <span className="material-symbols-outlined text-base">info</span>
+            Para el tutor: Acompaña al niño a seguir el ritmo de la animación para realizar respiraciones profundas.
+          </p>
+        </div>
 
         {/* Círculo animado sincronizado con la fase de respiración */}
         <div
@@ -66,15 +57,18 @@ export default function MundoTranquilo() {
         </p>
       </main>
 
-      <Link
-        to="/me-relajo"
-        state={{ transitionType: 'push_back' }}
-        aria-label="Volver al inicio de la actividad"
-        className="absolute bottom-8 left-8 flex flex-col items-center gap-1 opacity-50 hover:opacity-100 transition-opacity"
-      >
-        <span className="material-symbols-outlined text-3xl" aria-hidden="true">home</span>
-        <span className="text-xs">Inicio Actividad</span>
-      </Link>
+      {/* Decorative stars */}
+      <div className="absolute top-1/4 left-1/4 text-primary/30 animate-pulse text-2xl" aria-hidden="true">✨</div>
+      <div className="absolute bottom-1/3 right-1/4 text-secondary/30 animate-pulse delay-700 text-3xl" aria-hidden="true">✨</div>
+
+      <AnimatePresence>
+        {showSuccess && (
+          <SuccessScreen
+            mensaje="¡Lo lograste! Ahora tu cuerpo y tu mente están mucho más tranquilos."
+            onContinue={() => navigate('/me-relajo')}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

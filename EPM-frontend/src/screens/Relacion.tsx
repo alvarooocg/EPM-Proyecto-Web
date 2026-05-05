@@ -40,17 +40,23 @@ function QueSienteMiAmigo({ onBack }: { onBack: () => void }) {
 
   return (
     <div className="flex flex-col items-center w-full max-w-2xl mx-auto">
-      <div className="w-full flex justify-between items-center mb-6">
-        <button onClick={onBack} className="flex items-center gap-2 text-on-surface-variant hover:text-secondary drop-shadow-sm font-medium">
-          <span className="material-symbols-outlined" aria-hidden="true">arrow_back</span>
-          Volver al Menú
-        </button>
-        <h2 className="text-2xl font-headline font-bold text-secondary">¿Qué siente mi amigo?</h2>
-      </div>
+      <NavigationButton to="#" onClick={onBack} label="Volver" />
+      <div className="flex items-center justify-center gap-4 mb-8">
+          <h2 className="text-3xl font-bold font-headline text-on-surface text-center">
+            ¿Qué siente tu amigo?
+          </h2>
+          <button
+            onClick={() => console.log("Reproduciendo audio de instrucción")}
+            aria-label="Escuchar instrucción"
+            className="w-12 h-12 shrink-0 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary/20 transition-colors focus:ring-4 focus:ring-primary/30 outline-none"
+          >
+            <span className="material-symbols-outlined text-3xl" aria-hidden="true">volume_up</span>
+          </button>
+        </div>
 
       <div className="w-full relative">
         {/* Scenario */}
-        <div className="bg-surface-container-high rounded-3xl p-8 mb-8 text-center flex flex-col items-center justify-center border border-outline-variant/30 shadow-inner min-h-[200px]">
+        <div className="bg-surface-container-high rounded-3xl p-8 mb-8 text-center flex flex-col items-center justify-center border border-outline-variant/30 shadow-inner min-h-[200px]" role="img" aria-label="Tu amigo está llorando porque se le ha caído su helado favorito">
           <motion.div
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
@@ -68,10 +74,9 @@ function QueSienteMiAmigo({ onBack }: { onBack: () => void }) {
               key={opt.id}
               onClick={() => !isSuccess && handleSelect(opt.id)}
               disabled={showFeedback && isSuccess}
-              aria-label={opt.label}
-              aria-pressed={selectedEmotion === opt.id}
+              aria-label={`Seleccionar emoción: ${opt.label}`}
               className={clsx(
-                "flex flex-col items-center gap-3 p-6 rounded-2xl border-2 transition-all duration-300 bouncy-hover bg-background",
+                "flex flex-col items-center gap-3 p-6 rounded-2xl border-2 transition-all duration-300 bouncy-hover bg-background focus:ring-4 focus:ring-secondary/50 outline-none",
                 selectedEmotion === opt.id && showFeedback
                   ? (isSuccess ? "border-green-500 bg-green-50 shadow-[0_0_15px_rgba(34,197,94,0.3)]" : "border-red-400 bg-red-50")
                   : "border-outline-variant/50 hover:border-secondary/50 hover:bg-secondary/10 shadow-sm"
@@ -145,7 +150,7 @@ function QueHariasTu({ onBack }: { onBack: () => void }) {
             aria-label="Escuchar instrucción"
             className="w-12 h-12 shrink-0 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary/20 transition-colors focus:ring-4 focus:ring-primary/30 outline-none"
           >
-            <span className="material-symbols-outlined text-3xl">volume_up</span>
+            <span className="material-symbols-outlined text-3xl" aria-hidden="true">volume_up</span>
           </button>
         </div>
 
@@ -214,15 +219,16 @@ function QueHariasTu({ onBack }: { onBack: () => void }) {
                 key={act.id}
                 onClick={() => handleAction(act.id)}
                 disabled={action === 'ignorar'}
-                aria-label={act.label}
-                aria-pressed={action === act.id}
+                aria-label={`Acción: ${act.label}`}
                 className={clsx(
-                  "flex flex-col items-center gap-3 p-4 md:p-6 rounded-3xl border-2 transition-all duration-300 bouncy-hover bg-surface",
+                  "flex flex-col items-center gap-3 p-4 md:p-6 rounded-3xl border-2 transition-all duration-300 bouncy-hover bg-surface focus:ring-4 focus:ring-tertiary/50 outline-none",
                   action === act.id && !isPositiveAction ? "border-outline opacity-50" : "border-outline-variant/30 hover:border-tertiary/50 hover:shadow-md"
                 )}
               >
-                <span className="text-4xl" aria-hidden="true">{act.icon}</span>
-                <span className="text-lg">{act.label}</span>
+                <div className={clsx("w-14 h-14 rounded-full flex items-center justify-center", act.bg, act.color)} aria-hidden="true">
+                  <span className="material-symbols-outlined text-3xl">{act.icon}</span>
+                </div>
+                <span className="font-bold text-on-surface">{act.label}</span>
               </button>
             ))}
           </div>
@@ -268,32 +274,17 @@ export default function Relacion() {
   return (
     <div className="min-h-screen w-full flex flex-col p-6 bg-surface relative overflow-hidden">
       
-      {/* Header */}
-      <header className="w-full relative mb-12 max-w-5xl mx-auto flex flex-col items-center pt-4">
-        {/* Back Button positioned absolutely on the left */}
-        <Link to="/" state={{ transitionType: 'push_back' }} className="absolute left-0 top-4 flex items-center gap-2 text-on-surface-variant hover:text-cyan-600 bouncy-hover z-10">
-          <div className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center shadow-sm">
-             <span className="material-symbols-outlined text-2xl" aria-hidden="true">arrow_back</span>
-          </div>
-          <span className="font-medium hidden sm:block">El Universo</span>
-        </Link>
-        
-        {/* Large Planet Hero Image */}
-        <motion.div
-           initial={{ scale: 0, rotate: -20 }}
-           animate={{ scale: 1, rotate: 0 }}
-           transition={{ type: "spring", bounce: 0.5, duration: 0.8 }}
-           className="w-40 h-40 md:w-56 md:h-56 rounded-full overflow-hidden border-[4px] border-cyan-400/40 shadow-2xl bg-[radial-gradient(circle_at_30%_30%,#45d8ed,#006f7c)] p-2 mb-6 relative"
-        >
-          <img src="/social-epm.png" alt="Planeta Relación" className="w-[85%] h-[85%] object-contain filter drop-shadow-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-float" />
-        </motion.div>
+      {/* Decorative Background Elements */}
+      <div className="absolute -top-40 -left-40 w-96 h-96 bg-secondary/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+      <div className="absolute top-1/2 -right-20 w-80 h-80 bg-tertiary/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
 
-        <h1 className="font-headline font-extrabold text-4xl md:text-5xl text-cyan-700 text-center">Planeta Relación</h1>
+      <header className="w-full flex items-center justify-between mb-2 relative z-10 pt-2" role="banner">
+        {mode === 'menu' ? (
+          <NavigationButton to="/" label="Volver a El Universo" />
+        ) : null}
       </header>
-      
-      <main id="main-content" className="flex-1 flex flex-col items-center lg:justify-center max-w-5xl mx-auto w-full gap-8">
-        
-        {/* Menu Router State */}
+
+      <main className="flex-1 flex flex-col items-center justify-center w-full relative z-10" aria-label="Actividades del Planeta Relación">
         <AnimatePresence mode="wait">
 
           {mode === 'menu' && (
@@ -327,10 +318,11 @@ export default function Relacion() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto">
                 <button 
                   onClick={() => setMode('activity1')}
-                  className={`relative bg-surface-container glass-panel rounded-3xl p-8 flex flex-col items-center text-center gap-5 bouncy-hover group shadow-md hover:shadow-xl transition-all ${activities[0].completed ? 'border border-green-500 ring-4 ring-green-500/50 opacity-90' : 'border border-outline-variant/40 hover:border-blue-400'}`}
+                  aria-label={`Actividad: ¿Qué siente mi amigo? – Aprenderemos a entender las emociones de los demás${activities[0].completed ? ' (completada)' : ''}`}
+                  className={`relative bg-surface-container glass-panel rounded-3xl p-8 flex flex-col items-center text-center gap-5 bouncy-hover group shadow-md hover:shadow-xl transition-all focus:ring-4 focus:ring-blue-400/50 outline-none ${activities[0].completed ? 'border border-green-500 ring-4 ring-green-500/50 opacity-90' : 'border border-outline-variant/40 hover:border-blue-400'}`}
                 >
-                  {activities[0].completed && <div className="absolute -top-3 -right-3 bg-white rounded-full p-1 shadow-md z-10 text-3xl">✅</div>}
-                  <div className="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 group-hover:scale-110 transition-transform shadow-inner">
+                  {activities[0].completed && <div className="absolute -top-3 -right-3 bg-white rounded-full p-1 shadow-md z-10 text-3xl" aria-hidden="true">✅</div>}
+                  <div className="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 group-hover:scale-110 transition-transform shadow-inner" aria-hidden="true">
                     <span className="material-symbols-outlined text-5xl">psychology</span>
                   </div>
                   <div>
@@ -345,10 +337,11 @@ export default function Relacion() {
 
                 <button 
                   onClick={() => setMode('activity2')}
-                  className={`relative bg-surface-container glass-panel rounded-3xl p-8 flex flex-col items-center text-center gap-5 bouncy-hover group shadow-md hover:shadow-xl transition-all ${activities[1].completed ? 'border border-green-500 ring-4 ring-green-500/50 opacity-90' : 'border border-outline-variant/40 hover:border-pink-400'}`}
+                  aria-label={`Actividad: ¿Qué harías tú? – Aprenderemos cómo ayudar a un amigo${activities[1].completed ? ' (completada)' : ''}`}
+                  className={`relative bg-surface-container glass-panel rounded-3xl p-8 flex flex-col items-center text-center gap-5 bouncy-hover group shadow-md hover:shadow-xl transition-all focus:ring-4 focus:ring-pink-400/50 outline-none ${activities[1].completed ? 'border border-green-500 ring-4 ring-green-500/50 opacity-90' : 'border border-outline-variant/40 hover:border-pink-400'}`}
                 >
-                  {activities[1].completed && <div className="absolute -top-3 -right-3 bg-white rounded-full p-1 shadow-md z-10 text-3xl">✅</div>}
-                  <div className="w-24 h-24 rounded-full bg-pink-100 flex items-center justify-center text-pink-500 group-hover:scale-110 transition-transform shadow-inner">
+                  {activities[1].completed && <div className="absolute -top-3 -right-3 bg-white rounded-full p-1 shadow-md z-10 text-3xl" aria-hidden="true">✅</div>}
+                  <div className="w-24 h-24 rounded-full bg-pink-100 flex items-center justify-center text-pink-500 group-hover:scale-110 transition-transform shadow-inner" aria-hidden="true">
                     <span className="material-symbols-outlined text-5xl">volunteer_activism</span>
                   </div>
                   <div>

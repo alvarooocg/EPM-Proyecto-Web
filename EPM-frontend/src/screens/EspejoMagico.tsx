@@ -22,34 +22,27 @@ export default function EspejoMagico() {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col p-6 bg-surface relative overflow-hidden">
-      <header className="w-full flex items-center justify-between mb-8 z-10 relative">
-        <Link to="/relacion" state={{ transitionType: 'push_back' }} className="flex items-center gap-2 text-on-surface hover:text-secondary bouncy-hover">
-          <span className="material-symbols-outlined" aria-hidden="true">arrow_back</span>
-          <span className="font-medium">Volver</span>
-        </Link>
-        <div className="flex gap-4">
-          <Link
-            to="/selector-emociones"
-            state={{ transitionType: 'push' }}
-            aria-label="Ir al selector de emociones"
-            className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:text-secondary"
-          >
-            <span className="material-symbols-outlined" aria-hidden="true">emoji_emotions</span>
+    <div className="min-h-screen w-full flex flex-col p-6 bg-surface">
+      <header className="w-full flex items-center justify-between mb-8 max-w-4xl mx-auto pt-2" role="banner">
+        <NavigationButton to="/relacion" label="Volver a Relación" />
+        <nav className="flex gap-2" aria-label="Navegación secundaria">
+          <Link to="/selector-emociones" aria-label="Ir a selector de emociones" state={{ transitionType: 'push' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:text-secondary focus:ring-4 focus:ring-secondary/50 outline-none">
+            <span className="material-symbols-outlined" aria-hidden="true">mood</span>
           </Link>
-          <Link
-            to="/evolucion-planeta"
-            state={{ transitionType: 'push' }}
-            aria-label="Ver evolución del planeta"
-            className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:text-secondary"
-          >
-            <span className="material-symbols-outlined" aria-hidden="true">star</span>
+          <Link to="/evolucion-planeta" aria-label="Ir a evolución de planeta" state={{ transitionType: 'push' }} className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface hover:text-secondary focus:ring-4 focus:ring-secondary/50 outline-none">
+            <span className="material-symbols-outlined" aria-hidden="true">public</span>
           </Link>
-        </div>
+        </nav>
       </header>
 
-      <main id="main-content" className="flex-1 flex flex-col items-center justify-center z-10 relative">
-        <h1 className="font-headline font-bold text-4xl text-center mb-12 text-secondary">El Espejo Mágico</h1>
+      <main className="flex-1 w-full max-w-4xl mx-auto flex flex-col items-center justify-center" aria-label="Espejo mágico de emociones">
+        
+        {/* Espejo central */}
+        <div className="relative w-64 h-80 md:w-80 md:h-[400px] mb-12">
+          {/* Marco del espejo */}
+          <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 to-yellow-600 rounded-[4rem] md:rounded-[5rem] shadow-[0_10px_30px_rgba(0,0,0,0.3)] border-4 border-yellow-200 flex items-center justify-center p-4">
+            {/* Cristal del espejo */}
+            <div className="w-full h-full bg-blue-50/80 rounded-[3rem] md:rounded-[4rem] border-2 border-blue-200/50 shadow-inner flex flex-col items-center justify-center relative overflow-hidden backdrop-blur-sm">
 
         <div className="w-72 h-96 bg-surface-container-low rounded-[40px] border-8 border-secondary-container relative flex items-center justify-center overflow-hidden">
            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />

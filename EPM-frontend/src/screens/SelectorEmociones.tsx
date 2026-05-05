@@ -18,16 +18,19 @@ export default function SelectorEmociones() {
 
   return (
     <div className="min-h-screen w-full flex flex-col p-6 bg-surface">
-      <header className="w-full flex items-center justify-between mb-2">
-        <Link to="/me-conozco" state={{ transitionType: 'push_back' }} className="flex items-center gap-2 text-on-surface-variant hover:text-tertiary bouncy-hover">
-          <span className="material-symbols-outlined" aria-hidden="true">arrow_back</span>
-          <span className="font-medium">Volver a Me Conozco</span>
-        </Link>
+      <header className="w-full flex items-center justify-between mb-2 pt-2" role="banner">
+        <NavigationButton to="/me-conozco" label="Volver a Me Conozco" />
       </header>
 
-      <main id="main-content" className="flex-1 flex flex-col items-center justify-center max-w-4xl mx-auto w-full gap-8">
-
-        {/* Mascota con h1 estático */}
+      <main className="flex-1 flex flex-col items-center justify-center max-w-4xl mx-auto w-full gap-8" aria-label="Selector de emociones">
+        <div className="w-full max-w-xl mx-auto bg-surface-container-low/50 border border-outline-variant/30 rounded-2xl p-4 mt-4 backdrop-blur-sm">
+          <p className="text-center text-on-surface-variant text-sm flex items-center justify-center gap-2">
+            <span className="material-symbols-outlined text-base">info</span>
+            Para el tutor: Ayuda al niño a identificar cómo se siente pulsando sobre la emoción que mejor le represente hoy.
+          </p>
+        </div>
+        
+        {/* Mascota guiando */}
         <div className="flex flex-col items-center gap-3 animate-float mb-4">
            <div className="w-20 h-20 rounded-full overflow-hidden bg-tertiary/10 border-4 border-tertiary/30">
              <img

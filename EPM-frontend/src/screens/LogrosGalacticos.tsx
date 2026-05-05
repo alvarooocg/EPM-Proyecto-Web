@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import NavigationButton from '../components/NavigationButton';
 
 export default function LogrosGalacticos() {
@@ -12,7 +11,7 @@ export default function LogrosGalacticos() {
 
   return (
     <div className="min-h-screen w-full flex flex-col p-6 bg-surface relative">
-      <header className="w-full flex items-center justify-between mb-8 max-w-4xl mx-auto z-10 relative">
+      <header className="w-full flex items-center justify-between mb-8 max-w-4xl mx-auto z-10 relative pt-2" role="banner">
         <h1 className="font-headline font-bold text-3xl text-tertiary flex items-center gap-3">
           <span className="material-symbols-outlined text-4xl" aria-hidden="true">workspace_premium</span>
           Mis Logros Galácticos
@@ -22,23 +21,31 @@ export default function LogrosGalacticos() {
         </Link>
       </header>
 
-      <main id="main-content" className="flex-1 w-full max-w-4xl mx-auto z-10 relative">
-         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <main className="flex-1 w-full max-w-4xl mx-auto z-10 relative" aria-label="Lista de logros">
+         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6" role="list">
             {logros.map((logro, index) => (
               <div 
-                key={index} 
-                className={`bg-surface-container glass-panel rounded-3xl p-6 flex items-start gap-4 border ${logro.unlocked ? 'border-tertiary/30' : 'border-outline-variant/20 opacity-60 grayscale'}`}
+                key={index}
+                role="listitem"
+                aria-label={`${logro.title}: ${logro.desc}${logro.unlocked ? ' – Desbloqueado' : ' – Bloqueado'}`}
+                className={`bg-surface-container glass-panel rounded-3xl p-6 flex items-start gap-4 border ${logro.unlocked ? 'border-tertiary/30' : 'border-outline-variant/20 opacity-70 grayscale'}`}
               >
-                 <div className={`w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 ${logro.bgColor}`}>
-                    <span className={`material-symbols-outlined text-3xl ${logro.color}`} aria-hidden="true">{logro.icon}</span>
+                 <div className={`w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 ${logro.bgColor}`} aria-hidden="true">
+                    <span className={`material-symbols-outlined text-3xl ${logro.color}`}>{logro.icon}</span>
                  </div>
                  <div>
                     <h3 className="font-bold text-lg mb-1">{logro.title}</h3>
                     <p className="text-sm text-on-surface-variant">{logro.desc}</p>
                     
-                    {!logro.unlocked && (
-                      <div className="mt-3 flex items-center gap-2 text-xs font-medium text-on-surface-variant bg-surface-container-high px-2 py-1 rounded-md w-fit">
-                        <span className="material-symbols-outlined text-sm" aria-hidden="true">lock</span> BLOQUEADO
+                    {logro.unlocked ? (
+                      <div className="mt-3 flex items-center gap-2 text-xs font-medium text-tertiary bg-tertiary/10 px-2 py-1 rounded-md w-fit">
+                        <span className="material-symbols-outlined text-sm" aria-hidden="true">check_circle</span>
+                        DESBLOQUEADO
+                      </div>
+                    ) : (
+                      <div className="mt-3 flex items-center gap-2 text-xs font-medium text-on-surface-variant bg-surface-container-high px-2 py-1 rounded-md w-fit" aria-hidden="true">
+                        <span className="material-symbols-outlined text-sm">lock</span>
+                        BLOQUEADO
                       </div>
                     )}
                  </div>
