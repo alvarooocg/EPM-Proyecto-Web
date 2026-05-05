@@ -1,36 +1,27 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import NavigationButton from '../components/NavigationButton';
 import SuccessScreen from '../components/SuccessScreen';
 import { AnimatePresence } from 'motion/react';
 
+const PHASES = [
+  { label: 'Inhala...', duration: 4000, scale: 'scale-150' },
+  { label: 'Aguanta...', duration: 2000, scale: 'scale-150' },
+  { label: 'Exhala...', duration: 4000, scale: 'scale-100' },
+  { label: 'Pausa...', duration: 2000, scale: 'scale-100' },
+];
+
 export default function MundoTranquilo() {
-  const navigate = useNavigate();
-  const [isBreathingIn, setIsBreathingIn] = useState(true);
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [cycles, setCycles] = useState(0);
-
-  const handlePlayAudio = () => {
-    console.log("Reproduciendo audio de instrucción");
-  }
+  const [phaseIndex, setPhaseIndex] = useState(0);
+  const currentPhase = PHASES[phaseIndex];
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIsBreathingIn((prev) => {
-        if (!prev) {
-          setCycles((c) => c + 1);
-        }
-        return !prev;
-      });
-    }, 4000); // 4 seconds in, 4 seconds out
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    if (cycles >= 3) {
-      setTimeout(() => setShowSuccess(true), 1000);
-    }
-  }, [cycles]);
+    const timer = setTimeout(() => {
+      setPhaseIndex(prev => (prev + 1) % PHASES.length);
+    }, currentPhase.duration);
+    return () => clearTimeout(timer);
+  }, [phaseIndex, currentPhase.duration]);
 
   return (
     <div className="min-h-screen w-full flex flex-col p-6 bg-surface overflow-hidden">
@@ -46,52 +37,24 @@ export default function MundoTranquilo() {
           </p>
         </div>
 
-        {/* Breathing Animation Circle */}
-        <div className="relative flex items-center justify-center w-64 h-64 md:w-80 md:h-80">
-          {/* Outer Ripple */}
-          <div
-            className="absolute bg-primary/20 rounded-full transition-all duration-[4000ms] ease-in-out"
-            style={{
-              width: isBreathingIn ? '150%' : '100%',
-              height: isBreathingIn ? '150%' : '100%',
-              opacity: isBreathingIn ? 0.2 : 0.8
-            }}
-          />
-          {/* Middle Ripple */}
-          <div
-            className="absolute bg-primary/40 rounded-full transition-all duration-[4000ms] ease-in-out"
-            style={{
-              width: isBreathingIn ? '120%' : '80%',
-              height: isBreathingIn ? '120%' : '80%',
-              opacity: isBreathingIn ? 0.4 : 0.9
-            }}
-          />
-          {/* Inner Core */}
-          <div
-            className="absolute bg-primary rounded-full flex items-center justify-center shadow-xl transition-all duration-[4000ms] ease-in-out z-10"
-            style={{
-              width: isBreathingIn ? '80%' : '50%',
-              height: isBreathingIn ? '80%' : '50%',
-            }}
-          >
-             <span className="material-symbols-outlined text-on-primary text-6xl">
-               {isBreathingIn ? 'air' : 'self_improvement'}
-             </span>
+        {/* Círculo animado sincronizado con la fase de respiración */}
+        <div
+          aria-hidden="true"
+          className={`w-64 h-64 rounded-full border-2 border-primary/40 flex items-center justify-center relative ambient-glow-primary transition-transform duration-1000 ease-in-out ${currentPhase.scale}`}
+        >
+          <div className="w-48 h-48 rounded-full bg-primary/20 flex items-center justify-center backdrop-blur-md">
+            <span className="material-symbols-outlined text-6xl text-primary" aria-hidden="true">air</span>
           </div>
         </div>
 
-        <div className="flex items-center gap-4 mt-12 z-20">
-          <p className="text-xl text-on-surface-variant font-medium">
-            {isBreathingIn ? "Inhala profundo..." : "Exhala suavemente..."}
-          </p>
-          <button
-            onClick={handlePlayAudio}
-            aria-label="Escuchar instrucción"
-            className="w-12 h-12 shrink-0 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary/20 transition-colors focus:ring-4 focus:ring-primary/30 outline-none"
-          >
-            <span className="material-symbols-outlined text-3xl">volume_up</span>
-          </button>
-        </div>
+        {/* Instrucción accesible — anunciada por el lector de pantalla al cambiar */}
+        <p
+          aria-live="assertive"
+          aria-atomic="true"
+          className="mt-12 text-xl text-on-surface-variant font-medium"
+        >
+          {currentPhase.label}
+        </p>
       </main>
 
       {/* Decorative stars */}

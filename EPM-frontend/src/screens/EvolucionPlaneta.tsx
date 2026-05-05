@@ -10,7 +10,9 @@ export default function EvolucionPlaneta() {
 
       <header className="w-full flex items-center justify-between mb-8 z-10 relative pt-2" role="banner">
         <h1 className="font-headline font-bold text-2xl">Evolución por Planeta</h1>
-        <NavigationButton to="/" label="Volver a El Universo" />
+        <Link to="/" state={{ transitionType: 'none' }} aria-label="Cerrar y volver al inicio" className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface">
+          <span className="material-symbols-outlined" aria-hidden="true">close</span>
+        </Link>
       </header>
 
       <main className="flex-1 w-full max-w-4xl mx-auto flex flex-col items-center justify-center gap-12 z-10 relative" aria-label="Progreso del Planeta Relación">
@@ -19,7 +21,7 @@ export default function EvolucionPlaneta() {
             {/* Visual Planet Status */}
             <div className="flex-1 flex flex-col items-center">
                <div className="w-64 h-64 rounded-full border-4 border-secondary/50 flex items-center justify-center relative ambient-glow-secondary bg-gradient-to-br from-secondary-container to-surface">
-                 <span className="material-symbols-outlined text-8xl text-secondary animate-pulse-glow">diversity_3</span>
+                 <span className="material-symbols-outlined text-8xl text-secondary animate-pulse-glow" aria-hidden="true">diversity_3</span>
                  {/* Progress ring around planet */}
                  <svg viewBox="0 0 36 36" className="circular-chart absolute inset-[-12px] w-[calc(100%+24px)] h-[calc(100%+24px)] transform -rotate-90">
                     <path className="circle-bg"
@@ -44,7 +46,7 @@ export default function EvolucionPlaneta() {
               <div className="bg-surface-container glass-panel rounded-3xl p-6 border border-outline-variant/30 flex items-center justify-between">
                  <div className="flex items-center gap-4">
                    <div className="w-12 h-12 rounded-full bg-secondary/20 text-secondary flex items-center justify-center">
-                     <span className="material-symbols-outlined">schedule</span>
+                     <span className="material-symbols-outlined" aria-hidden="true">schedule</span>
                    </div>
                    <div>
                      <p className="text-sm text-on-surface-variant">Tiempo Invertido</p>
@@ -56,7 +58,7 @@ export default function EvolucionPlaneta() {
               <div className="bg-surface-container glass-panel rounded-3xl p-6 border border-outline-variant/30 flex items-center justify-between">
                  <div className="flex items-center gap-4">
                    <div className="w-12 h-12 rounded-full bg-tertiary/20 text-tertiary flex items-center justify-center">
-                     <span className="material-symbols-outlined">emoji_emotions</span>
+                     <span className="material-symbols-outlined" aria-hidden="true">emoji_emotions</span>
                    </div>
                    <div>
                      <p className="text-sm text-on-surface-variant">Actividades Completadas</p>
@@ -68,14 +70,14 @@ export default function EvolucionPlaneta() {
               <div className="flex pt-4 gap-4">
                 {/* Links requested in Navigation Spec */}
                 <Link to="/dashboard" state={{ transitionType: 'none' }} className="flex-1 items-center justify-center text-center bg-primary text-on-primary py-3 rounded-xl font-medium bouncy-hover inline-flex gap-2">
-                   <span className="material-symbols-outlined text-sm">pie_chart</span>
+                   <span className="material-symbols-outlined text-sm" aria-hidden="true">pie_chart</span>
                    <span>Resumen Diario</span>
                 </Link>
-                 <Link to="/configuracion" aria-label="Ir a configuración" state={{ transitionType: 'none' }} className="w-12 items-center justify-center flex bg-surface-container-highest border border-outline-variant/50 rounded-xl bouncy-hover text-on-surface">
-                   <span className="material-symbols-outlined">settings</span>
+                 <Link to="/configuracion" state={{ transitionType: 'none' }} aria-label="Configuración" className="w-12 items-center justify-center flex bg-surface-container-highest border border-outline-variant/50 rounded-xl bouncy-hover text-on-surface">
+                   <span className="material-symbols-outlined" aria-hidden="true">settings</span>
                 </Link>
-                 <Link to="/logros" aria-label="Ver logros" state={{ transitionType: 'none' }} className="w-12 items-center justify-center flex bg-surface-container-highest border border-outline-variant/50 rounded-xl bouncy-hover text-on-surface text-tertiary">
-                   <span className="material-symbols-outlined">emoji_events</span>
+                 <Link to="/logros" state={{ transitionType: 'none' }} aria-label="Mis logros" className="w-12 items-center justify-center flex bg-surface-container-highest border border-outline-variant/50 rounded-xl bouncy-hover text-on-surface text-tertiary">
+                   <span className="material-symbols-outlined" aria-hidden="true">emoji_events</span>
                 </Link>
               </div>
             </div>

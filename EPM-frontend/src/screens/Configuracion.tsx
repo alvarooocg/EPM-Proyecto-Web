@@ -9,7 +9,9 @@ export default function Configuracion() {
     <div className="min-h-screen w-full flex flex-col p-6 bg-surface">
       <header className="w-full flex items-center justify-between mb-8 max-w-3xl mx-auto pt-2" role="banner">
         <h1 className="font-headline font-bold text-2xl">Configuración</h1>
-        <NavigationButton to="/" label="Cerrar Configuración" icon="close" />
+        <Link to="/" state={{ transitionType: 'none' }} aria-label="Cerrar y volver al inicio" className="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center bouncy-hover text-on-surface">
+          <span className="material-symbols-outlined" aria-hidden="true">close</span>
+        </Link>
       </header>
 
       <main className="flex-1 w-full max-w-3xl mx-auto space-y-6" aria-label="Ajustes de la aplicación">

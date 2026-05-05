@@ -11,10 +11,9 @@ export default function MaletaMagica() {
     { id: 2, text: 'Miedo', emoji: '😨', color: 'bg-purple-100 border-purple-300 text-purple-800' },
     { id: 3, text: 'Enojo', emoji: '😠', color: 'bg-red-100 border-red-300 text-red-800' },
   ]);
-  const [mensaje, setMensaje] = useState('Guarda tus emociones en la maleta mágica.');
-  const [isHoveringMaleta, setIsHoveringMaleta] = useState(false);
-  const [itemsInside, setItemsInside] = useState(0);
-  const [showSuccess, setShowSuccess] = useState(false);
+  const [inSuitcase, setInSuitcase] = useState<number[]>([]);
+  const [mensaje, setMensaje] = useState("Guarda aquí las cosas que te hacen sentir bien.");
+  const [isSparkling, setIsSparkling] = useState(false);
 
   const draggedItem = useRef<number | null>(null);
   const totalItems = 3;
@@ -100,7 +99,11 @@ export default function MaletaMagica() {
                    referrerPolicy="no-referrer"
                  />
              </div>
-             <p className="font-headline font-bold text-lg text-on-surface">
+             <p
+               aria-live="polite"
+               aria-atomic="true"
+               className="font-headline font-bold text-lg text-on-surface"
+             >
                {mensaje}
              </p>
            </div>
@@ -163,6 +166,11 @@ export default function MaletaMagica() {
              )}
           </div>
 
+              <div className="absolute top-0 bottom-0 left-12 w-6 bg-[#1a110a] shadow-[2px_0_0_rgba(0,0,0,0.3)]" />
+              <div className="absolute top-0 bottom-0 right-12 w-6 bg-[#1a110a] shadow-[2px_0_0_rgba(0,0,0,0.3)]" />
+
+              <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-32 h-8 border-4 border-[#2a1d12] rounded-t-xl" />
+           </div>
         </div>
 
       </main>

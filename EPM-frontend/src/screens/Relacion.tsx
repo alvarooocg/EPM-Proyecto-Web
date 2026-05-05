@@ -133,7 +133,13 @@ function QueHariasTu({ onBack }: { onBack: () => void }) {
 
   return (
     <div className="flex flex-col items-center w-full max-w-4xl mx-auto">
-      <NavigationButton to="#" onClick={onBack} label="Volver" />
+      <div className="w-full flex justify-between items-center mb-6">
+        <button onClick={onBack} className="flex items-center gap-2 text-on-surface-variant hover:text-secondary drop-shadow-sm font-medium">
+          <span className="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+          Volver al Menú
+        </button>
+        <h2 className="text-2xl font-headline font-bold text-secondary">Juego por Parejas</h2>
+      </div>
 
       <div className="flex items-center justify-center gap-4 mb-8">
           <h2 className="text-3xl font-bold font-headline text-on-surface text-center">
@@ -320,8 +326,12 @@ export default function Relacion() {
                     <span className="material-symbols-outlined text-5xl">psychology</span>
                   </div>
                   <div>
-                    <h2 className="font-headline font-bold text-2xl text-on-surface mb-2">¿Qué siente mi amigo?</h2>
-                    <p className="text-on-surface-variant font-medium">Aprenderemos a entender las emociones de los demás.</p>
+                    <h3 className="font-bold text-2xl text-on-surface group-hover:text-blue-600 transition-colors mb-2">¿Qué siente mi amigo?</h3>
+                    <p className="text-base text-on-surface-variant font-medium">Reconoce emociones básicas observando atentamente las expresiones de otros.</p>
+                  </div>
+                  <div className="mt-4 px-6 py-3 bg-blue-500 text-white rounded-full font-bold text-lg w-full flex items-center justify-center gap-2 group-hover:bg-blue-600">
+                    <span className="material-symbols-outlined" aria-hidden="true">play_arrow</span>
+                    Jugar Misión
                   </div>
                 </button>
 
@@ -335,8 +345,12 @@ export default function Relacion() {
                     <span className="material-symbols-outlined text-5xl">volunteer_activism</span>
                   </div>
                   <div>
-                    <h2 className="font-headline font-bold text-2xl text-on-surface mb-2">¿Qué harías tú?</h2>
-                    <p className="text-on-surface-variant font-medium">Aprenderemos cómo ayudar a un amigo que lo necesita.</p>
+                    <h3 className="font-bold text-2xl text-on-surface group-hover:text-pink-600 transition-colors mb-2">Juego por Parejas</h3>
+                    <p className="text-base text-on-surface-variant font-medium">Toma decisiones sobre cómo reaccionar ante las necesidades de tu compañero.</p>
+                  </div>
+                  <div className="mt-4 px-6 py-3 bg-pink-500 text-white rounded-full font-bold text-lg w-full flex items-center justify-center gap-2 group-hover:bg-pink-600">
+                    <span className="material-symbols-outlined" aria-hidden="true">play_arrow</span>
+                    Jugar Misión
                   </div>
                 </button>
               </div>

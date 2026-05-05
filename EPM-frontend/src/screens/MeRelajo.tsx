@@ -36,8 +36,8 @@ export default function MeRelajo() {
               <span className="material-symbols-outlined text-4xl">waves</span>
             </div>
             <div>
-              <h3 className="font-bold text-xl text-on-surface group-hover:text-primary transition-colors mb-2">Mundo Tranquilo</h3>
-              <p className="text-sm text-on-surface-variant">Ejercicios de respiración guiada para la calma.</p>
+              <h3 className="font-bold text-xl text-on-surface group-hover:text-primary transition-colors mb-2" aria-hidden="true">Mundo Tranquilo</h3>
+              <p className="text-sm text-on-surface-variant" aria-hidden="true">Ejercicios de respiración guiada para la calma.</p>
             </div>
           </Link>
 
@@ -47,8 +47,8 @@ export default function MeRelajo() {
               <span className="material-symbols-outlined text-4xl">luggage</span>
             </div>
             <div>
-              <h3 className="font-bold text-xl text-on-surface group-hover:text-primary transition-colors mb-2">La Maleta Mágica</h3>
-              <p className="text-sm text-on-surface-variant">Un viaje imaginativo para guardar nuestras preocupaciones.</p>
+              <h3 className="font-bold text-xl text-on-surface group-hover:text-primary transition-colors mb-2" aria-hidden="true">La Maleta Mágica</h3>
+              <p className="text-sm text-on-surface-variant" aria-hidden="true">Un viaje imaginativo para guardar nuestras preocupaciones.</p>
             </div>
           </Link>
         </div>
