@@ -35,16 +35,10 @@ export default function EspejoMagico() {
         </nav>
       </header>
 
-      <main className="flex-1 w-full max-w-4xl mx-auto flex flex-col items-center justify-center" aria-label="Espejo mágico de emociones">
-        
-        {/* Espejo central */}
-        <div className="relative w-64 h-80 md:w-80 md:h-[400px] mb-12">
-          {/* Marco del espejo */}
-          <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 to-yellow-600 rounded-[4rem] md:rounded-[5rem] shadow-[0_10px_30px_rgba(0,0,0,0.3)] border-4 border-yellow-200 flex items-center justify-center p-4">
-            {/* Cristal del espejo */}
-            <div className="w-full h-full bg-blue-50/80 rounded-[3rem] md:rounded-[4rem] border-2 border-blue-200/50 shadow-inner flex flex-col items-center justify-center relative overflow-hidden backdrop-blur-sm">
+      <main id="main-content" className="flex-1 w-full max-w-4xl mx-auto flex flex-col items-center justify-center" aria-label="Espejo mágico de emociones">
 
-        <div className="w-72 h-96 bg-surface-container-low rounded-[40px] border-8 border-secondary-container relative flex items-center justify-center overflow-hidden">
+        {/* Espejo central */}
+        <div className="w-72 h-96 bg-surface-container-low rounded-[40px] border-8 border-secondary-container relative flex items-center justify-center overflow-hidden mb-12">
            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
            <div className="w-40 h-40 rounded-full border-4 border-dashed border-secondary/50 flex items-center justify-center">
              <span className="material-symbols-outlined text-6xl text-on-surface-variant" aria-hidden="true">face</span>

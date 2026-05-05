@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "EPM Frontend Dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3000,
+      "cwd": "/Users/administrador/Documents/GitHub/EPM-Proyecto-Web/EPM-frontend"
+    }
+  ]
+}

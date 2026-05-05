@@ -14,6 +14,9 @@ export default function MaletaMagica() {
   const [inSuitcase, setInSuitcase] = useState<number[]>([]);
   const [mensaje, setMensaje] = useState("Guarda aquí las cosas que te hacen sentir bien.");
   const [isSparkling, setIsSparkling] = useState(false);
+  const [itemsInside, setItemsInside] = useState(0);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [isHoveringMaleta, setIsHoveringMaleta] = useState(false);
 
   const draggedItem = useRef<number | null>(null);
   const totalItems = 3;
@@ -24,6 +27,7 @@ export default function MaletaMagica() {
       const newCount = prev + 1;
       setMensaje('¡Wow! Has guardado algo muy especial.');
       if (newCount >= totalItems) {
+        setIsSparkling(true);
         setTimeout(() => setShowSuccess(true), 1500);
       }
       return newCount;
@@ -165,12 +169,6 @@ export default function MaletaMagica() {
                 </div>
              )}
           </div>
-
-              <div className="absolute top-0 bottom-0 left-12 w-6 bg-[#1a110a] shadow-[2px_0_0_rgba(0,0,0,0.3)]" />
-              <div className="absolute top-0 bottom-0 right-12 w-6 bg-[#1a110a] shadow-[2px_0_0_rgba(0,0,0,0.3)]" />
-
-              <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-32 h-8 border-4 border-[#2a1d12] rounded-t-xl" />
-           </div>
         </div>
 
       </main>
