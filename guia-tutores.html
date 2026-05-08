@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guía para Tutores — El Planeta de las Emociones</title>
+
+  <!-- Fuentes cargadas como link (fiable en print) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ────────────────────────────────────────────
+       VARIABLES
+    ──────────────────────────────────────────── */
+    :root {
+      --ink:        #2A2440;
+      --ink-soft:   #4B3F65;
+      --ink-light:  #6E5F86;
+      --gold:       #C0A020;
+      --gold-bg:    #FFF8E1;
+      --gold-border:#E8D080;
+      --p1:         #F5A26A;
+      --p1-bg:      #FFF0E6;
+      --p2:         #E88A82;
+      --p2-bg:      #FFF0F0;
+      --p3:         #7AAEDB;
+      --p3-bg:      #EBF4FB;
+      --p3-border:  #A8CDE8;
+      --green-bg:   #EDF7F0;
+      --green-border:#9ACCA8;
+      --border:     #DDD5EE;
+      --step-bg:    #2A2440;
+    }
+
+    /* ────────────────────────────────────────────
+       RESET
+    ──────────────────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      /* Activar colores en impresión en todos los nodos */
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    /* ────────────────────────────────────────────
+       BASE
+    ──────────────────────────────────────────── */
+    html, body {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif;
+      font-size: 11pt;
+      color: var(--ink);
+      background: #EDE8F8;
+      line-height: 1.6;
+    }
+
+    /* ────────────────────────────────────────────
+       PÁGINA (pantalla)
+    ──────────────────────────────────────────── */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 10mm auto;
+      background: #ffffff;
+      padding: 18mm 16mm 24mm;
+      box-shadow: 0 4px 32px rgba(80,50,120,0.13);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ────────────────────────────────────────────
+       PORTADA
+    ──────────────────────────────────────────── */
+    .cover {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 297mm;
+      padding: 18mm 20mm 18mm;
+      /* Degradado oscuro de portada */
+      background: linear-gradient(160deg, #1A0E3A 0%, #2A1A5A 50%, #3A2870 100%);
+      color: #ffffff;
+      position: relative;
+    }
+
+    .cover-stars    { font-size: 52pt; margin-bottom: 10mm; line-height: 1; }
+
+    .cover-tag {
+      font-family: 'Fredoka', 'Plus Jakarta Sans', sans-serif;
+      font-size: 9pt;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #C7B5E8;
+      margin-bottom: 5mm;
+    }
+
+    .cover-title {
+      font-family: 'Fredoka', 'Plus Jakarta Sans', sans-serif;
+      font-size: 34pt;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.15;
+      color: #ffffff;
+      margin-bottom: 4mm;
+    }
+
+    .cover-subtitle {
+      font-size: 12pt;
+      text-align: center;
+      color: #C7B5E8;
+      margin-bottom: 10mm;
+      line-height: 1.5;
+    }
+
+    .cover-divider {
+      width: 55mm;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #C7B5E8, transparent);
+      margin: 0 auto 10mm;
+    }
+
+    .cover-planet-row {
+      display: flex;
+      gap: 12mm;
+      margin: 8mm 0 10mm;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .cover-planet {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3mm;
+    }
+
+    .cover-planet-circle {
+      width: 20mm;
+      height: 20mm;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13pt;
+    }
+
+    .cover-planet-label {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 8.5pt;
+      color: #C7B5E8;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .cover-meta {
+      font-size: 9.5pt;
+      color: #A89CC0;
+      text-align: center;
+      line-height: 2;
+    }
+    .cover-meta strong { color: #E8D5FF; }
+
+    .cover-footer {
+      margin-top: auto;
+      padding-top: 10mm;
+      font-size: 8pt;
+      color: #7A6A9A;
+      text-align: center;
+    }
+
+    /* ────────────────────────────────────────────
+       CABECERA DE SECCIÓN
+    ──────────────────────────────────────────── */
+    .page-header {
+      display: flex;
+      align-items: center;
+      gap: 4mm;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 4mm;
+      margin-bottom: 7mm;
+    }
+    .page-header-icon  { font-size: 18pt; }
+    .page-header-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 18pt;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    /* ────────────────────────────────────────────
+       SECCIONES
+    ──────────────────────────────────────────── */
+    .section { margin-bottom: 8mm; }
+
+    .section-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 12.5pt;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      display: flex;
+      align-items: center;
+      gap: 2.5mm;
+    }
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 3mm;
+      height: 3mm;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    p { margin-bottom: 3mm; color: var(--ink-soft); }
+
+    /* ────────────────────────────────────────────
+       TARJETAS DE PLANETA
+    ──────────────────────────────────────────── */
+    .planet-card {
+      border-radius: 3.5mm;
+      padding: 5mm 6mm;
+      margin-bottom: 4.5mm;
+      border-left: 4px solid transparent;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .planet-card.p1 { background-color: #FFF0E6; border-color: #F5A26A; }
+    .planet-card.p2 { background-color: #FFF0F0; border-color: #E88A82; }
+    .planet-card.p3 { background-color: #EBF4FB; border-color: #7AAEDB; }
+
+    .planet-card-header {
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .planet-badge {
+      width: 10mm;
+      height: 10mm;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13pt;
+      flex-shrink: 0;
+    }
+    .p1 .planet-badge { background-color: #F5A26A; }
+    .p2 .planet-badge { background-color: #E88A82; }
+    .p3 .planet-badge { background-color: #7AAEDB; }
+
+    .planet-card-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 12.5pt;
+      font-weight: 700;
+    }
+    .p1 .planet-card-title { color: #8A4A20; }
+    .p2 .planet-card-title { color: #8A3A3A; }
+    .p3 .planet-card-title { color: #2A6A9A; }
+    .planet-card-subtitle { font-size: 9pt; color: var(--ink-light); }
+
+    /* ────────────────────────────────────────────
+       TABLAS
+    ──────────────────────────────────────────── */
+    .activity-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 3mm;
+      font-size: 9.5pt;
+    }
+    .activity-table th {
+      text-align: left;
+      padding: 2mm 3mm;
+      font-size: 8pt;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      border-bottom: 1px solid var(--border);
+    }
+    .activity-table td {
+      padding: 2.5mm 3mm;
+      vertical-align: top;
+      border-bottom: 1px solid var(--border);
+      color: var(--ink-soft);
+    }
+    .activity-table tr:last-child td { border-bottom: none; }
+    .activity-table .activity-name { font-weight: 600; color: var(--ink); }
+    .activity-table .activity-emoji { font-size: 14pt; line-height: 1; }
+
+    /* ────────────────────────────────────────────
+       GRID DE CARACTERÍSTICAS
+    ──────────────────────────────────────────── */
+    .report-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5mm;
+      margin-top: 3.5mm;
+    }
+    .report-item {
+      background-color: #F8F5FF;
+      border: 1px solid var(--border);
+      border-radius: 3mm;
+      padding: 3mm 4mm;
+    }
+    .report-item-label {
+      font-size: 8pt;
+      color: var(--ink-light);
+      margin-bottom: 1mm;
+      display: block;
+    }
+    .report-item-value {
+      font-size: 11pt;
+      font-weight: 700;
+      color: var(--ink);
+      display: block;
+      margin-bottom: 1mm;
+    }
+    .report-item p { margin: 0; font-size: 8.5pt; }
+
+    /* ────────────────────────────────────────────
+       TIPS / NOTAS
+    ──────────────────────────────────────────── */
+    .tip {
+      display: flex;
+      gap: 3mm;
+      padding: 3.5mm 4.5mm;
+      border-radius: 3mm;
+      margin-bottom: 4mm;
+      page-break-inside: avoid;
+      break-inside: avoid;
+      border: 1px solid transparent;
+    }
+    .tip.gold  { background-color: #FFF8E1; border-color: #E8D080; }
+    .tip.green { background-color: #EDF7F0; border-color: #9ACCA8; }
+    .tip.blue  { background-color: #EBF4FB; border-color: #A8CDE8; }
+
+    .tip-icon { font-size: 13pt; flex-shrink: 0; padding-top: 1mm; }
+    .tip-body { font-size: 10pt; color: var(--ink-soft); }
+    .tip-body strong { color: var(--ink); }
+
+    /* ────────────────────────────────────────────
+       FAQ
+    ──────────────────────────────────────────── */
+    .faq-item {
+      margin-bottom: 5mm;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .faq-q {
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 1.5mm;
+      font-size: 10.5pt;
+    }
+    .faq-q::before { content: "P — "; color: var(--gold); }
+    .faq-a {
+      padding-left: 5mm;
+      border-left: 2px solid var(--border);
+      color: var(--ink-soft);
+      font-size: 10pt;
+    }
+
+    /* ────────────────────────────────────────────
+       PASOS NUMERADOS
+    ──────────────────────────────────────────── */
+    .steps { counter-reset: step; list-style: none; }
+    .steps li {
+      counter-increment: step;
+      display: flex;
+      gap: 3.5mm;
+      align-items: flex-start;
+      margin-bottom: 3.5mm;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .steps li::before {
+      content: counter(step);
+      min-width: 7mm;
+      height: 7mm;
+      border-radius: 50%;
+      background-color: #2A2440;
+      color: #ffffff;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 11pt;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0.5mm;
+    }
+    .steps li p { margin: 0; }
+
+    /* ────────────────────────────────────────────
+       GRID DE EMOCIONES
+    ──────────────────────────────────────────── */
+    .emotion-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3mm;
+      margin-top: 3mm;
+    }
+    .emotion-item {
+      display: flex;
+      align-items: center;
+      gap: 2.5mm;
+      padding: 2.5mm 3mm;
+      border-radius: 3mm;
+      font-size: 10pt;
+    }
+    .emo-icon  { font-size: 16pt; }
+    .emo-label { font-weight: 600; color: var(--ink); }
+    .emo-sub   { font-size: 8.5pt; color: var(--ink-light); display: block; }
+
+    /* ────────────────────────────────────────────
+       FOOTER DE PÁGINA INTERIOR
+    ──────────────────────────────────────────── */
+    .page-footer {
+      position: absolute;
+      bottom: 8mm;
+      left: 16mm;
+      right: 16mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 8pt;
+      color: var(--ink-light);
+      border-top: 1px solid var(--border);
+      padding-top: 3mm;
+    }
+
+    /* ────────────────────────────────────────────
+       BOTÓN DE IMPRESIÓN (solo pantalla)
+    ──────────────────────────────────────────── */
+    .print-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #2A1A5A, #4A2A8A);
+      color: #ffffff;
+      border: none;
+      border-radius: 30px;
+      padding: 13px 30px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 13pt;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(80,40,140,0.40);
+      z-index: 100;
+    }
+
+    /* ────────────────────────────────────────────
+       MEDIA PRINT
+    ──────────────────────────────────────────── */
+    @media print {
+      @page { size: A4; margin: 0; }
+
+      html {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      html, body {
+        background: #ffffff;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .print-btn { display: none !important; }
+
+      /* Cada .page = una página A4 exacta */
+      .page {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        padding: 18mm 16mm 24mm;
+        box-shadow: none;
+        page-break-after: always;
+        break-after: page;
+        overflow: hidden;
+        position: relative;
+        background-color: #ffffff;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      /* Portada: misma altura, gradiente forzado */
+      .cover {
+        height: 297mm;
+        min-height: unset;
+        page-break-after: always;
+        break-after: page;
+        background: linear-gradient(160deg, #1A0E3A 0%, #2A1A5A 50%, #3A2870 100%);
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      /* Asegurar fondo en todos los elementos coloreados */
+      .planet-card.p1 { background-color: #FFF0E6 !important; }
+      .planet-card.p2 { background-color: #FFF0F0 !important; }
+      .planet-card.p3 { background-color: #EBF4FB !important; }
+
+      .p1 .planet-badge { background-color: #F5A26A !important; }
+      .p2 .planet-badge { background-color: #E88A82 !important; }
+      .p3 .planet-badge { background-color: #7AAEDB !important; }
+
+      .tip.gold  { background-color: #FFF8E1 !important; border-color: #E8D080 !important; }
+      .tip.green { background-color: #EDF7F0 !important; border-color: #9ACCA8 !important; }
+      .tip.blue  { background-color: #EBF4FB !important; border-color: #A8CDE8 !important; }
+
+      .report-item  { background-color: #F8F5FF !important; }
+
+      .steps li::before { background-color: #2A2440 !important; color: #ffffff !important; }
+
+      .section-title::before { background-color: #C0A020 !important; }
+
+      /* Sin saltos de página dentro de elementos clave */
+      .planet-card, .tip, .faq-item, .steps li, .report-item {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     P.1 — PORTADA
+══════════════════════════════════════ -->
+<div class="page cover">
+  <div class="cover-stars">🌟</div>
+  <div class="cover-tag">Guía de usuario para tutores</div>
+  <div class="cover-title">El Planeta de<br>las Emociones</div>
+  <div class="cover-subtitle">
+    Manual completo para acompañar a niños de 3 a 6 años<br>
+    en su viaje de inteligencia emocional
+  </div>
+  <div class="cover-divider"></div>
+
+  <div class="cover-planet-row">
+    <div class="cover-planet">
+      <div class="cover-planet-circle" style="background:linear-gradient(135deg,#FFD89E,#F5A26A);">🌍</div>
+      <div class="cover-planet-label">Planeta 1<br>Me conozco</div>
+    </div>
+    <div class="cover-planet">
+      <div class="cover-planet-circle" style="background:linear-gradient(135deg,#FBD5DC,#E88A82);">🌸</div>
+      <div class="cover-planet-label">Planeta 2<br>Relaciones</div>
+    </div>
+    <div class="cover-planet">
+      <div class="cover-planet-circle" style="background:linear-gradient(135deg,#D6EAF8,#7AAEDB);">🌊</div>
+      <div class="cover-planet-label">Planeta 3<br>Me relajo</div>
+    </div>
+  </div>
+
+  <div class="cover-divider"></div>
+
+  <div class="cover-meta">
+    <strong>Audiencia:</strong> Educadores, psicólogos, padres y cuidadores<br>
+    <strong>Rango de edad del niño:</strong> 3 – 6 años<br>
+    <strong>Formato:</strong> Aplicación web · Sin registro · Sin datos en la nube
+  </div>
+
+  <div class="cover-footer">
+    El Planeta de las Emociones — Guía para Tutores · Versión 1.0 · 2025
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     P.2 — ¿QUÉ ES ESTA HERRAMIENTA?
+══════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="page-header-icon">🚀</div>
+    <div class="page-header-title">¿Qué es El Planeta de las Emociones?</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Propósito</div>
+    <p>
+      <strong style="color:var(--ink)">El Planeta de las Emociones</strong> es una aplicación web interactiva diseñada para ayudar a niños de entre 3 y 6 años a desarrollar su inteligencia emocional. A través de tres planetas temáticos, el niño aprende a <strong style="color:var(--ink)">identificar sus propias emociones</strong>, a <strong style="color:var(--ink)">comprender cómo se sienten los demás</strong> y a <strong style="color:var(--ink)">practicar técnicas de calma y relajación</strong>.
+    </p>
+    <p>
+      La interfaz es 100&nbsp;% visual: no depende del texto para navegar, usa pictogramas grandes y colores contrastados, y cada interacción ofrece respuesta sonora y visual inmediata. Está pensada para ser usada <em>con</em> el tutor, no en solitario.
+    </p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Características principales</div>
+    <div class="report-grid">
+      <div class="report-item">
+        <span class="report-item-label">Personaje guía</span>
+        <span class="report-item-value">⭐ Estela</span>
+        <p>Estrella animada con voz que guía al niño en cada actividad.</p>
+      </div>
+      <div class="report-item">
+        <span class="report-item-label">Emociones trabajadas</span>
+        <span class="report-item-value">6 emociones</span>
+        <p>Contento, Triste, Enfadado, Asustado, Emocionado, Sorprendido.</p>
+      </div>
+      <div class="report-item">
+        <span class="report-item-label">Actividades totales</span>
+        <span class="report-item-value">7 actividades</span>
+        <p>Distribuidas en 3 planetas temáticos.</p>
+      </div>
+      <div class="report-item">
+        <span class="report-item-label">Privacidad</span>
+        <span class="report-item-value">🔒 Sin cuenta</span>
+        <p>Los datos viven solo en el navegador y desaparecen al cerrar la pestaña.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Las 6 emociones</div>
+    <div class="emotion-grid">
+      <div class="emotion-item" style="background-color:#FFF9E0;">
+        <span class="emo-icon">😊</span>
+        <div><span class="emo-label">Contento</span><span class="emo-sub">Alegría, bienestar</span></div>
+      </div>
+      <div class="emotion-item" style="background-color:#EBF3FB;">
+        <span class="emo-icon">😢</span>
+        <div><span class="emo-label">Triste</span><span class="emo-sub">Pena, pérdida</span></div>
+      </div>
+      <div class="emotion-item" style="background-color:#FFF0EE;">
+        <span class="emo-icon">😠</span>
+        <div><span class="emo-label">Enfadado</span><span class="emo-sub">Ira, frustración</span></div>
+      </div>
+      <div class="emotion-item" style="background-color:#EDF5ED;">
+        <span class="emo-icon">😨</span>
+        <div><span class="emo-label">Asustado</span><span class="emo-sub">Miedo, inseguridad</span></div>
+      </div>
+      <div class="emotion-item" style="background-color:#FFF4EC;">
+        <span class="emo-icon">🤩</span>
+        <div><span class="emo-label">Emocionado</span><span class="emo-sub">Entusiasmo, energía</span></div>
+      </div>
+      <div class="emotion-item" style="background-color:#F5F0FF;">
+        <span class="emo-icon">😲</span>
+        <div><span class="emo-label">Sorprendido</span><span class="emo-sub">Asombro, novedad</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip gold">
+    <div class="tip-icon">💡</div>
+    <div class="tip-body">
+      <strong>Rol del tutor:</strong> La herramienta está diseñada para uso acompañado. Tu presencia es clave para que el niño verbalice lo que siente, conecte las actividades con experiencias reales y consolide el aprendizaje emocional.
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>El Planeta de las Emociones — Guía para Tutores</span>
+    <span>Página 2</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     P.3 — PRIMEROS PASOS
+══════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="page-header-icon">▶️</div>
+    <div class="page-header-title">Cómo empezar una sesión</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Antes de empezar</div>
+
+    <div class="tip green">
+      <div class="tip-icon">🖥️</div>
+      <div class="tip-body">
+        <strong>Requisitos técnicos:</strong> Cualquier navegador moderno (Chrome, Firefox, Edge, Safari). Funciona en tableta, ordenador y pantalla grande. Se recomienda una pantalla táctil para mayor comodidad con niños pequeños. <strong>No requiere instalación ni cuenta.</strong>
+      </div>
+    </div>
+
+    <div class="tip gold">
+      <div class="tip-icon">🔊</div>
+      <div class="tip-body">
+        <strong>Activa el sonido</strong> antes de empezar. La guía de voz de Estela y los efectos sonoros son fundamentales: el niño recibe confirmación auditiva en cada acierto y escucha instrucciones sencillas en castellano.
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Pasos para iniciar la sesión</div>
+    <ol class="steps">
+      <li><p>Abre la aplicación en el navegador. Verás la pantalla de bienvenida con Estela y el botón <strong>"Empezar viaje"</strong>.</p></li>
+      <li><p>Pulsa <strong>"Empezar viaje"</strong>. Llegará al Sistema Solar con los tres planetas flotando. Estela dará la bienvenida con voz.</p></li>
+      <li><p>Permite que el niño <strong>elija libremente</strong> el planeta que más le llame la atención. No hay un orden obligatorio, aunque se recomienda empezar por el Planeta 1 en la primera sesión.</p></li>
+      <li><p>Dentro del planeta, el niño verá las actividades disponibles. Toca uno de los iconos para comenzar la actividad.</p></li>
+      <li><p>Al terminar, el niño puede volver al Sistema Solar y visitar otro planeta, o ir directamente al informe.</p></li>
+      <li><p>Accede al <strong>Informe de Sesión</strong> pulsando <strong>"📖 Mi Viaje"</strong> en el Sistema Solar para revisar los datos y descargarlo como PDF.</p></li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Navegación básica</div>
+    <table class="activity-table">
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Función</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>← Volver</strong> (botón oscuro, esquina superior izquierda)</td>
+          <td>Regresa a la pantalla anterior sin perder el progreso.</td>
+        </tr>
+        <tr>
+          <td><strong>Barra superior (topbar)</strong></td>
+          <td>Muestra el título de la actividad actual y el progreso (ej. "2/3 respiraciones").</td>
+        </tr>
+        <tr>
+          <td><strong>Estela</strong> (estrella animada)</td>
+          <td>Tócala para escuchar las instrucciones de nuevo. Se oculta sola a los 5 segundos.</td>
+        </tr>
+        <tr>
+          <td><strong>Botón ✨ Terminar</strong></td>
+          <td>Cierra la actividad y guarda los resultados en el informe de sesión.</td>
+        </tr>
+        <tr>
+          <td><strong>📖 Mi Viaje</strong></td>
+          <td>Accede al informe de sesión desde el Sistema Solar.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tip blue">
+    <div class="tip-icon">⏱️</div>
+    <div class="tip-body">
+      <strong>Duración recomendada:</strong> 15–25 minutos por sesión. Los niños de 3-6 años mantienen la atención en intervalos cortos. Puedes hacer una o dos actividades por planeta y retomar en otra sesión; los datos se conservan mientras no cierres la pestaña.
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>El Planeta de las Emociones — Guía para Tutores</span>
+    <span>Página 3</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     P.4 — LOS TRES PLANETAS
+══════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="page-header-icon">🪐</div>
+    <div class="page-header-title">Los tres planetas y sus actividades</div>
+  </div>
+
+  <!-- PLANETA 1 -->
+  <div class="planet-card p1">
+    <div class="planet-card-header">
+      <div class="planet-badge">🌍</div>
+      <div>
+        <div class="planet-card-title">Planeta 1 — Me conozco</div>
+        <div class="planet-card-subtitle">Objetivo: identificar y nombrar las propias emociones · 3 actividades</div>
+      </div>
+    </div>
+    <table class="activity-table">
+      <thead>
+        <tr>
+          <th style="width:8mm;"></th>
+          <th>Actividad</th>
+          <th>Qué hace el niño</th>
+          <th>Qué observa el tutor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="activity-emoji">😊</td>
+          <td class="activity-name">¿Cómo me siento?</td>
+          <td>Elige entre 6 emociones la que mejor describe cómo se siente en ese momento.</td>
+          <td>Emoción elegida. Base para iniciar la conversación.</td>
+        </tr>
+        <tr>
+          <td class="activity-emoji">🧳</td>
+          <td class="activity-name">La maleta de las emociones</td>
+          <td>Arrastra objetos (peluche, música, familia…) a una maleta. Puede llevar tantos como quiera.</td>
+          <td>Qué recursos de bienestar elige; tiempo dedicado.</td>
+        </tr>
+        <tr>
+          <td class="activity-emoji">🪞</td>
+          <td class="activity-name">El espejo mágico</td>
+          <td>Selecciona emociones en un carrusel y ve cómo cambia la expresión facial en el espejo animado.</td>
+          <td>Cuántas emociones exploró y cuál dejó al terminar.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PLANETA 2 -->
+  <div class="planet-card p2">
+    <div class="planet-card-header">
+      <div class="planet-badge">🌸</div>
+      <div>
+        <div class="planet-card-title">Planeta 2 — Relación con los demás</div>
+        <div class="planet-card-subtitle">Objetivo: empatía y toma de decisiones prosociales · 2 actividades</div>
+      </div>
+    </div>
+    <table class="activity-table">
+      <thead>
+        <tr>
+          <th style="width:8mm;"></th>
+          <th>Actividad</th>
+          <th>Qué hace el niño</th>
+          <th>Qué observa el tutor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="activity-emoji">👀</td>
+          <td class="activity-name">¿Qué siente mi amigo?</td>
+          <td>Observa la expresión de "Lila" en 3 escenas y elige la emoción correcta entre 4 opciones.</td>
+          <td>Aciertos al primer intento, emociones falladas.</td>
+        </tr>
+        <tr>
+          <td class="activity-emoji">🤝</td>
+          <td class="activity-name">Juego por parejas</td>
+          <td>Su amiga se ha caído. Elige entre: abrazar, ayudar, compartir o ignorar.</td>
+          <td>Elección final y número de intentos necesarios.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PLANETA 3 -->
+  <div class="planet-card p3">
+    <div class="planet-card-header">
+      <div class="planet-badge">🌊</div>
+      <div>
+        <div class="planet-card-title">Planeta 3 — Me relajo</div>
+        <div class="planet-card-subtitle">Objetivo: técnicas de calma y regulación emocional · 2 actividades</div>
+      </div>
+    </div>
+    <table class="activity-table">
+      <thead>
+        <tr>
+          <th style="width:8mm;"></th>
+          <th>Actividad</th>
+          <th>Qué hace el niño</th>
+          <th>Qué observa el tutor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="activity-emoji">☁️</td>
+          <td class="activity-name">Mundo tranquilo</td>
+          <td>Toca despacio nubes, estrellas y burbujas flotantes en un entorno visual calmado.</td>
+          <td>Número de toques y tiempo en la actividad.</td>
+        </tr>
+        <tr>
+          <td class="activity-emoji">🫁</td>
+          <td class="activity-name">Respiramos con la estrella</td>
+          <td>Sigue un círculo que se expande (inspira) y se contrae (espira). Completa 4 ciclos.</td>
+          <td>Ciclos completados, veces que pausó.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="page-footer">
+    <span>El Planeta de las Emociones — Guía para Tutores</span>
+    <span>Página 4</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     P.5 — EL INFORME DE SESIÓN
+══════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="page-header-icon">📊</div>
+    <div class="page-header-title">El informe de sesión</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">¿Qué es y para qué sirve?</div>
+    <p>
+      Al terminar la sesión (o en cualquier momento), accede al <strong style="color:var(--ink)">Informe de Sesión</strong> pulsando el botón <strong>"📖 Mi Viaje"</strong> en la pantalla del Sistema Solar. El informe recoge automáticamente todos los datos generados durante las actividades.
+    </p>
+    <p>
+      Es una herramienta para el <strong style="color:var(--ink)">tutor adulto</strong>: permite revisar el recorrido del niño, identificar patrones emocionales y generar un documento PDF para archivar o compartir con otros profesionales.
+    </p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Datos incluidos en el informe</div>
+    <table class="activity-table">
+      <thead>
+        <tr>
+          <th>Sección del informe</th>
+          <th>Datos mostrados</th>
+          <th>Actividad origen</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Emociones identificadas</strong></td>
+          <td>Emoción elegida por el niño como estado actual</td>
+          <td>¿Cómo me siento?</td>
+        </tr>
+        <tr>
+          <td><strong>Mi maleta especial</strong></td>
+          <td>Objetos empacados + tiempo dedicado</td>
+          <td>La maleta de las emociones</td>
+        </tr>
+        <tr>
+          <td><strong>Espejo mágico</strong></td>
+          <td>Emociones exploradas + última emoción seleccionada</td>
+          <td>El espejo mágico</td>
+        </tr>
+        <tr>
+          <td><strong>Empatía con la amiga</strong></td>
+          <td>Aciertos al primer intento / total rondas + emociones falladas</td>
+          <td>¿Qué siente mi amigo?</td>
+        </tr>
+        <tr>
+          <td><strong>Decisión social</strong></td>
+          <td>Elección final (abrazar / ayudar / compartir) + intentos</td>
+          <td>Juego por parejas</td>
+        </tr>
+        <tr>
+          <td><strong>Mundo tranquilo</strong></td>
+          <td>Número de toques + tiempo en la actividad</td>
+          <td>Mundo tranquilo</td>
+        </tr>
+        <tr>
+          <td><strong>Respiración guiada</strong></td>
+          <td>Ciclos completados (máx. 4) + número de pausas</td>
+          <td>Respiramos con la estrella</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Descargar el informe como PDF</div>
+    <ol class="steps">
+      <li><p>En la pantalla del informe, pulsa el botón <strong>"📥 Descargar informe"</strong>.</p></li>
+      <li><p>Se abrirá el diálogo de impresión del navegador.</p></li>
+      <li><p>En <strong>Destino / Impresora</strong>, selecciona <strong>"Guardar como PDF"</strong>.</p></li>
+      <li><p>En <em>Más opciones</em>, activa <strong>"Imprimir gráficos de fondo"</strong> para conservar los colores.</p></li>
+      <li><p>Pulsa <strong>Guardar</strong>. El PDF se descargará en tu carpeta de Descargas.</p></li>
+    </ol>
+
+    <div class="tip gold">
+      <div class="tip-icon">⚠️</div>
+      <div class="tip-body">
+        <strong>Importante:</strong> Los datos de sesión se borran al cerrar la pestaña. Descarga el PDF <em>antes</em> de cerrar. No hay ninguna copia en la nube ni en el servidor.
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Reiniciar sesión</div>
+    <p>
+      Para empezar una sesión limpia sin cerrar el navegador, pulsa <strong>"↻ Reiniciar viaje"</strong> en el informe. El sistema pedirá confirmación antes de borrar todos los datos de la sesión actual.
+    </p>
+  </div>
+
+  <div class="page-footer">
+    <span>El Planeta de las Emociones — Guía para Tutores</span>
+    <span>Página 5</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     P.6 — CONSEJOS PARA TUTORES
+══════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="page-header-icon">💡</div>
+    <div class="page-header-title">Consejos para tutores</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Antes de la sesión</div>
+    <div class="tip green">
+      <div class="tip-icon">🧘</div>
+      <div class="tip-body"><strong>Contexto tranquilo:</strong> Busca un espacio sin distracciones. Cierra otras aplicaciones y silencia notificaciones. Los niños de 3-6 años necesitan un entorno calmo para conectar con sus emociones.</div>
+    </div>
+    <div class="tip green">
+      <div class="tip-icon">🤝</div>
+      <div class="tip-body"><strong>Siéntate junto al niño:</strong> La posición ideal es lado a lado, no detrás. Así el niño siente apoyo sin sentirse observado. Puedes compartir el dispositivo con él/ella.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Durante la sesión</div>
+    <div class="tip gold">
+      <div class="tip-icon">🗣️</div>
+      <div class="tip-body"><strong>Verbaliza:</strong> Cuando el niño elija una emoción, nómbrala en voz alta y pregunta: <em>"¿Y cuándo te sientes así? ¿Qué pasa en tu cuerpo?"</em> Conectar la emoción con la experiencia corporal es clave para su integración.</div>
+    </div>
+    <div class="tip gold">
+      <div class="tip-icon">⏸️</div>
+      <div class="tip-body"><strong>No hay respuestas incorrectas:</strong> Si el niño no acierta, evita corregir con urgencia. El sistema ya da retroalimentación sonora y visual. Tu papel es acompañar, no evaluar.</div>
+    </div>
+    <div class="tip gold">
+      <div class="tip-icon">🌬️</div>
+      <div class="tip-body"><strong>Respiración guiada:</strong> En el Planeta 3, <em>participa tú también</em>. Sigue el círculo junto al niño e inspira y expira en voz alta. Es mucho más efectivo que dejarlo solo, especialmente con menores de 5 años.</div>
+    </div>
+    <div class="tip blue">
+      <div class="tip-icon">🎉</div>
+      <div class="tip-body"><strong>Celebra los logros:</strong> Cuando aparezca confeti en pantalla al completar una actividad, señálalo con entusiasmo. El refuerzo positivo del adulto potencia el efecto motivador de la aplicación.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Frecuencia y progresión sugerida</div>
+    <table class="activity-table">
+      <thead><tr><th>Sesiones</th><th>Sugerencia</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>1.ª sesión</strong></td>
+          <td>Solo Planeta 1. Familiarizarse con Estela, las 6 emociones y la navegación.</td>
+        </tr>
+        <tr>
+          <td><strong>2.ª – 3.ª sesión</strong></td>
+          <td>Revisar Planeta 1 y explorar Planeta 2. Hablar sobre empatía y amistad.</td>
+        </tr>
+        <tr>
+          <td><strong>4.ª sesión en adelante</strong></td>
+          <td>Incorporar Planeta 3. Practicar la respiración como rutina de cierre de sesión.</td>
+        </tr>
+        <tr>
+          <td><strong>Cada 2–3 semanas</strong></td>
+          <td>Sesión completa de los 3 planetas. Comparar informes PDF para identificar cambios.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="page-footer">
+    <span>El Planeta de las Emociones — Guía para Tutores</span>
+    <span>Página 6</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     P.7 — PREGUNTAS FRECUENTES
+══════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="page-header-icon">❓</div>
+    <div class="page-header-title">Preguntas frecuentes</div>
+  </div>
+
+  <div class="section">
+    <div class="faq-item">
+      <div class="faq-q">¿Se guardan los datos del niño en algún servidor?</div>
+      <div class="faq-a">No. Todos los datos viven exclusivamente en la memoria del navegador (sessionStorage). No se envía ningún dato a ningún servidor. Al cerrar la pestaña, los datos desaparecen para siempre.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">¿Puedo pausar y continuar más tarde sin perder el progreso?</div>
+      <div class="faq-a">Sí, siempre que no cierres la pestaña del navegador. Puedes bloquear el ordenador o recargar la página: los datos se mantienen. Solo se pierden al cerrar la pestaña o el navegador.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">¿La aplicación funciona sin conexión a internet?</div>
+      <div class="faq-a">La primera carga requiere conexión para descargar los recursos. Una vez cargada, las actividades funcionan sin internet. Si recargas la página sin conexión, la carga podría fallar.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">El niño no quiere hacer alguna actividad. ¿Qué hago?</div>
+      <div class="faq-a">No fuerces la participación. Puedes proponer "¿Y si solo miramos cómo funciona?" o saltarla y volver otro día. La coerción interfiere con el objetivo de regulación emocional.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">¿Por qué la voz de Estela no suena?</div>
+      <div class="faq-a">Comprueba que el volumen esté activado y que el navegador tenga permiso para reproducir audio. En algunos navegadores el audio requiere una primera interacción del usuario. Pulsa cualquier elemento y vuelve a intentarlo.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">El PDF se ve sin colores. ¿Por qué?</div>
+      <div class="faq-a">Al imprimir, activa la opción <strong>"Imprimir gráficos de fondo"</strong> en la configuración avanzada del diálogo de impresión. Esta opción está desactivada por defecto en algunos navegadores para ahorrar tinta.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">¿Hay una versión en inglés?</div>
+      <div class="faq-a">Sí. La aplicación detecta el idioma del navegador automáticamente e incluye un selector manual en la pantalla de inicio. El informe se genera en el idioma seleccionado.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">¿Puedo usar la herramienta con niños mayores de 6 años?</div>
+      <div class="faq-a">La herramienta está optimizada para 3-6 años. Puede usarse con niños mayores con necesidades especiales o retrasos en el desarrollo emocional, pero el contenido visual puede resultar demasiado simple para niños neurotípicos de más de 7 años.</div>
+    </div>
+  </div>
+
+  <div style="margin-top:8mm; padding:5mm 6mm; background-color:#F8F5FF; border-radius:4mm; border:1px solid var(--border); text-align:center;">
+    <div style="font-family:'Fredoka',sans-serif; font-size:20pt; color:var(--ink); margin-bottom:2mm;">⭐ El Planeta de las Emociones</div>
+    <div style="font-size:10pt; color:var(--ink-light);">Guía para Tutores · Versión 1.0 · 2025</div>
+    <div style="font-size:9pt; color:var(--ink-light); margin-top:2mm; line-height:1.6;">
+      Una herramienta para acompañar el desarrollo de la inteligencia emocional<br>en niños de 3 a 6 años.
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>El Planeta de las Emociones — Guía para Tutores</span>
+    <span>Página 7</span>
+  </div>
+</div>
+
+<!-- Botón flotante (solo pantalla) -->
+<button class="print-btn" onclick="window.print()">🖨️ Guardar como PDF</button>
+
+</body>
+</html>

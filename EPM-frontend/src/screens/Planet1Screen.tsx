@@ -1,19 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../styles/animations.css';
 import PlanetScreen, { PlanetConfig } from './PlanetScreen';
+import { ActivityPayload, EmotionKey } from '../types/progress';
 
 // Activity 1: ¿Cómo me siento?
 function A1_HowDoIFeel({ t, onComplete, onBack }: any) {
   const [picked, setPicked] = useState<any>(null);
 
-  useEffect(() => {
-    if (window.speak) window.speak(t.a1_1.lead, window.__lang);
-  }, []);
-
   const pick = (emo: any) => {
     setPicked(emo);
     if (window.SoundFX) window.SoundFX.pop();
-    if (window.speak) window.speak(t.feedback[emo.key], window.__lang);
   };
 
   return (
@@ -55,7 +51,11 @@ function A1_HowDoIFeel({ t, onComplete, onBack }: any) {
             onClick={() => {
               if (window.fireConfetti) window.fireConfetti();
               if (window.SoundFX) window.SoundFX.chime();
-              onComplete();
+              onComplete({
+                type: 'a1_1',
+                emotion: picked.key as EmotionKey,
+                timestamp: Date.now(),
+              });
             }}
             className="display-h"
             style={{
@@ -99,10 +99,7 @@ function A2_Suitcase({ t, onComplete, onBack }: any) {
   const [reinforce, setReinforce] = useState(false);
   const sourceRef = useRef<any>({});
   const suitcaseRef = useRef<any>(null);
-
-  useEffect(() => {
-    if (window.speak) window.speak(t.a1_2.lead, window.__lang);
-  }, []);
+  const startedAtRef = useRef<number>(Date.now());
 
   const startDrag = (e: any, key: string) => {
     e.preventDefault();
@@ -129,7 +126,6 @@ function A2_Suitcase({ t, onComplete, onBack }: any) {
         setPacked(newPacked);
         if (window.SoundFX) window.SoundFX.chime();
         setReinforce(true);
-        if (window.speak) window.speak(t.suitcase.reinforce, window.__lang);
         setTimeout(() => setReinforce(false), 1800);
       }
       setDraggingKey(null);
@@ -195,7 +191,7 @@ function A2_Suitcase({ t, onComplete, onBack }: any) {
                 }}
               >
                 <div>{item.emoji}</div>
-                <div className="display" style={{ fontSize: 14, marginTop: -4, color: "var(--ink-soft)" }}>
+                <div className="display" style={{ fontSize: 16, marginTop: -2, color: "#2A2440", fontWeight: 600 }}>
                   {t.suitcase.items[item.key]}
                 </div>
                 {isPacked && <div style={{
@@ -231,10 +227,10 @@ function A2_Suitcase({ t, onComplete, onBack }: any) {
           <div style={{ position: "absolute", top: 12, left: 30, width: 22, height: 22, background: "#C8A57A", borderRadius: 4 }} />
           <div style={{ position: "absolute", top: 12, right: 30, width: 22, height: 22, background: "#C8A57A", borderRadius: 4 }} />
 
-          <div className="display-h" style={{ fontSize: 22, color: "#7A5A33", marginTop: 6 }}>
+          <div className="display-h" style={{ fontSize: 24, color: "#3D2A1A", marginTop: 6, fontWeight: 700 }}>
             🧳 {t.suitcase.title}
           </div>
-          <div style={{ fontSize: 14, color: "#9A7A4F", textAlign: "center" }}>
+          <div style={{ fontSize: 16, color: "#3D2A1A", textAlign: "center", fontWeight: 500 }}>
             {t.suitcase.hint}
           </div>
 
@@ -276,7 +272,12 @@ function A2_Suitcase({ t, onComplete, onBack }: any) {
           <button onClick={() => {
             if (window.fireConfetti) window.fireConfetti();
             if (window.SoundFX) window.SoundFX.chime();
-            onComplete();
+            onComplete({
+              type: 'a1_2',
+              packed: [...packed],
+              durationMs: Date.now() - startedAtRef.current,
+              timestamp: Date.now(),
+            });
           }}
             className="display-h"
             style={{
@@ -299,69 +300,195 @@ function A2_Suitcase({ t, onComplete, onBack }: any) {
 // Activity 3: El espejo mágico
 function MirrorFace({ emoKey, size = 240 }: any) {
   const palette: any = {
-    happy: { bg: "#FFE08A", mouth: "happy" },
-    sad: { bg: "#BFD9F2", mouth: "sad" },
-    angry: { bg: "#FBC0BA", mouth: "angry" },
-    scared: { bg: "#D6E4D5", mouth: "scared" },
-    excited: { bg: "#FFD2A6", mouth: "excited" },
-    surprised: { bg: "#E2D2F5", mouth: "surprised" },
+    happy:    { bg: "#FFE48A", skin: "#FFDFA0" },
+    sad:      { bg: "#C8DCEF", skin: "#D8E8F8" },
+    angry:    { bg: "#FFBDB5", skin: "#FFCCC0" },
+    scared:   { bg: "#C8DFC8", skin: "#D8EDD0" },
+    excited:  { bg: "#FFCF8A", skin: "#FFD898" },
+    surprised:{ bg: "#DDD0F5", skin: "#E8DEFF" },
   };
   const p = palette[emoKey] || palette.happy;
 
-  const Eye = ({ cx, scared, surprised, angry, sad }: any) => {
-    if (scared || surprised) {
-      return <>
-        <circle cx={cx} cy="100" r="18" fill="white" />
-        <circle cx={cx} cy="100" r="9" fill="#3D2A50" />
-      </>;
+  // Full layered eye: sclera + iris + pupil + highlight + eyelashes + eyebrow
+  const Eye = ({ cx, ey = 108 }: { cx: number; ey?: number }) => {
+    const isScared    = emoKey === "scared";
+    const isSurprised = emoKey === "surprised";
+    const isAngry     = emoKey === "angry";
+    const isSad       = emoKey === "sad";
+    const isHappy     = emoKey === "happy";
+    const isExcited   = emoKey === "excited";
+
+    // Sclera size: bigger for scared/surprised
+    const scleraRx = isScared || isSurprised ? 17 : 13;
+    const scleraRy = isScared || isSurprised ? 19 : 15;
+    // Iris color
+    const irisColor = isScared ? "#4E7A6A" : isSad ? "#5B82A8" : isAngry ? "#8B4040" : "#6A5A9A";
+    const irisR     = isScared || isSurprised ? 10 : 8;
+    // Pupil offset: looking slightly up for happy/excited
+    const pupilOY   = isHappy || isExcited ? -1 : 0;
+
+    // Eyebrow path relative to cx
+    let browPath = "";
+    if (isAngry) {
+      // Angled inward and down toward nose
+      browPath = cx < 110
+        ? `M${cx - 14} ${ey - 24} Q${cx - 2} ${ey - 18} ${cx + 12} ${ey - 22}`
+        : `M${cx - 12} ${ey - 22} Q${cx + 2} ${ey - 18} ${cx + 14} ${ey - 24}`;
+    } else if (isSad) {
+      // Outer ends droop down
+      browPath = cx < 110
+        ? `M${cx - 13} ${ey - 22} Q${cx} ${ey - 26} ${cx + 13} ${ey - 20}`
+        : `M${cx - 13} ${ey - 20} Q${cx} ${ey - 26} ${cx + 13} ${ey - 22}`;
+    } else if (isScared) {
+      // Raised and arched high
+      browPath = `M${cx - 14} ${ey - 30} Q${cx} ${ey - 36} ${cx + 14} ${ey - 30}`;
+    } else {
+      // Happy / excited / surprised — gently arched up
+      browPath = `M${cx - 13} ${ey - 26} Q${cx} ${ey - 32} ${cx + 13} ${ey - 26}`;
     }
-    if (angry) {
-      return <>
-        <path d={`M${cx-22} 90 L${cx+18} 100`} stroke="#3D2A50" strokeWidth="6" strokeLinecap="round" fill="none"
-          transform={cx > 130 ? `scale(-1,1) translate(-${cx*2},0)` : ""} />
-        <ellipse cx={cx} cy="105" rx="8" ry="10" fill="#3D2A50" />
-      </>;
-    }
-    if (sad) {
-      return <>
-        <path d={`M${cx-15} 105 Q ${cx} 92 ${cx+15} 105`} stroke="#3D2A50" strokeWidth="5" strokeLinecap="round" fill="none" />
-      </>;
-    }
-    return <ellipse cx={cx} cy="100" rx="8" ry="11" fill="#3D2A50" />;
+
+    // Eyelashes: 4 short strokes at top of sclera
+    const lashAngles = [-50, -70, -90, -110, -130];
+    const lashLen = 6;
+    const lashes = lashAngles.map((deg, i) => {
+      const rad = (deg * Math.PI) / 180;
+      const x1 = cx + scleraRx * Math.cos(rad);
+      const y1 = ey - scleraRy * Math.abs(Math.sin(rad));
+      const x2 = x1 + lashLen * Math.cos(rad);
+      const y2 = y1 - lashLen * Math.abs(Math.sin(rad));
+      return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#3D2A50" strokeWidth="1.8" strokeLinecap="round" />;
+    });
+
+    return (
+      <>
+        {/* Eyebrow */}
+        <path d={browPath} stroke="#3D2A50" strokeWidth={isAngry ? 5 : 4} fill="none" strokeLinecap="round" />
+        {/* Sclera */}
+        <ellipse cx={cx} cy={ey} rx={scleraRx} ry={scleraRy} fill="white" stroke="#D0C0CC" strokeWidth="1" />
+        {/* Iris */}
+        <circle cx={cx} cy={ey + pupilOY} r={irisR} fill={irisColor} />
+        {/* Pupil */}
+        <circle cx={cx} cy={ey + pupilOY} r={irisR * 0.55} fill="#1A1020" />
+        {/* Specular highlight */}
+        <circle cx={cx + 4} cy={ey + pupilOY - 4} r={2.5} fill="white" />
+        {/* Eyelashes */}
+        {lashes}
+      </>
+    );
   };
 
   const Mouth = () => {
-    if (p.mouth === "happy") return <path d="M70 145 Q 110 180 150 145" stroke="#3D2A50" strokeWidth="6" fill="#E88A82" strokeLinecap="round" />;
-    if (p.mouth === "sad") return <path d="M70 165 Q 110 135 150 165" stroke="#3D2A50" strokeWidth="6" fill="none" strokeLinecap="round" />;
-    if (p.mouth === "angry") return <path d="M70 165 Q 110 145 150 165" stroke="#3D2A50" strokeWidth="6" fill="none" strokeLinecap="round" />;
-    if (p.mouth === "scared") return <ellipse cx="110" cy="158" rx="14" ry="20" fill="#3D2A50" />;
-    if (p.mouth === "excited") return <path d="M70 140 Q 110 195 150 140 Q 110 175 70 140 Z" stroke="#3D2A50" strokeWidth="5" fill="#E88A82" />;
-    if (p.mouth === "surprised") return <ellipse cx="110" cy="158" rx="16" ry="18" fill="#3D2A50" />;
+    if (emoKey === "happy") return (
+      <g>
+        {/* Outer smile shape */}
+        <path d="M72 150 Q 110 188 148 150" stroke="#3D2A50" strokeWidth="4" fill="#E06070" strokeLinecap="round" />
+        {/* Teeth hint */}
+        <path d="M78 152 Q 110 180 142 152 Q 110 162 78 152 Z" fill="white" opacity="0.9" />
+        {/* Upper lip line */}
+        <path d="M72 150 Q 110 188 148 150" stroke="#3D2A50" strokeWidth="4" fill="none" strokeLinecap="round" />
+      </g>
+    );
+    if (emoKey === "sad") return (
+      <g>
+        <path d="M76 168 Q 110 140 144 168" stroke="#3D2A50" strokeWidth="5" fill="none" strokeLinecap="round" />
+        {/* Quivering lower lip bump */}
+        <path d="M95 168 Q 110 174 125 168" stroke="#3D2A50" strokeWidth="3" fill="none" strokeLinecap="round" />
+      </g>
+    );
+    if (emoKey === "angry") return (
+      <g>
+        {/* Tight near-straight line with downward corners */}
+        <path d="M76 162 Q 110 155 144 162" stroke="#3D2A50" strokeWidth="5" fill="none" strokeLinecap="round" />
+        <path d="M76 162 Q 74 165 78 167" stroke="#3D2A50" strokeWidth="4" fill="none" strokeLinecap="round" />
+        <path d="M144 162 Q 146 165 142 167" stroke="#3D2A50" strokeWidth="4" fill="none" strokeLinecap="round" />
+      </g>
+    );
+    if (emoKey === "scared") return (
+      <g>
+        {/* Wide open oval */}
+        <ellipse cx="110" cy="162" rx="18" ry="22" fill="#1A1020" />
+        {/* Teeth */}
+        <path d="M94 152 Q 110 148 126 152 L 126 162 Q 110 158 94 162 Z" fill="white" />
+        {/* Small tongue */}
+        <ellipse cx="110" cy="172" rx="7" ry="5" fill="#E06070" />
+      </g>
+    );
+    if (emoKey === "excited") return (
+      <g>
+        {/* Big open smile */}
+        <path d="M68 146 Q 110 196 152 146" stroke="#3D2A50" strokeWidth="4" fill="#E06070" strokeLinecap="round" />
+        {/* Teeth */}
+        <path d="M76 150 Q 110 185 144 150 Q 110 168 76 150 Z" fill="white" opacity="0.95" />
+        {/* Lip line */}
+        <path d="M68 146 Q 110 196 152 146" stroke="#3D2A50" strokeWidth="4" fill="none" strokeLinecap="round" />
+      </g>
+    );
+    if (emoKey === "surprised") return (
+      <g>
+        {/* Wide O shape */}
+        <ellipse cx="110" cy="160" rx="20" ry="20" fill="#1A1020" stroke="#3D2A50" strokeWidth="3" />
+        {/* Visible teeth at top of O */}
+        <path d="M92 146 Q 110 142 128 146 L 128 155 Q 110 151 92 155 Z" fill="white" />
+      </g>
+    );
     return null;
   };
 
+  // Blush: larger and more visible for happy/excited
+  const blushOpacity = (emoKey === "happy" || emoKey === "excited") ? 0.65 : 0.3;
+  const blushRx      = (emoKey === "happy" || emoKey === "excited") ? 14 : 9;
+  const blushRy      = (emoKey === "happy" || emoKey === "excited") ? 8  : 5;
+  const showBlush    = emoKey !== "angry";
+
   return (
     <svg width={size} height={size} viewBox="0 0 220 220" style={{ animation: "pop-in 0.4s ease-out" }}>
+      {/* Face base */}
       <circle cx="110" cy="115" r="92" fill={p.bg} stroke="#4A3A55" strokeWidth="3" />
-      <path d="M70 50 Q 90 25 110 30 Q 130 25 150 50 Q 130 40 110 45 Q 90 40 70 50 Z" fill="#7A5A85" />
-      <Eye cx={88} sad={emoKey==="sad"} angry={emoKey==="angry"} scared={emoKey==="scared"} surprised={emoKey==="surprised"} />
-      <Eye cx={138} sad={emoKey==="sad"} angry={emoKey==="angry"} scared={emoKey==="scared"} surprised={emoKey==="surprised"} />
-      <ellipse cx="72" cy="138" rx="10" ry="6" fill="#F5A6B5" opacity="0.6" />
-      <ellipse cx="148" cy="138" rx="10" ry="6" fill="#F5A6B5" opacity="0.6" />
+      {/* Skin overlay for emotion tint */}
+      <circle cx="110" cy="118" r="82" fill={p.skin} opacity="0.45" />
+      {/* Hair — voluminous with strand highlights */}
+      <path d="M30 85 Q 38 18 110 20 Q 182 18 190 85 Q 178 48 110 50 Q 42 48 30 85 Z" fill="#7A5A85" />
+      <path d="M30 85 Q 35 55 50 45 Q 45 62 44 80 Z" fill="#9A7AAA" opacity="0.5" />
+      <path d="M190 85 Q 185 55 170 45 Q 175 62 176 80 Z" fill="#9A7AAA" opacity="0.5" />
+      <path d="M88 22 Q 90 14 94 20" stroke="#9A7AAA" strokeWidth="3" fill="none" strokeLinecap="round" />
+      <path d="M110 18 Q 112 10 116 17" stroke="#9A7AAA" strokeWidth="3" fill="none" strokeLinecap="round" />
+      {/* Eyes */}
+      <Eye cx={86} ey={108} />
+      <Eye cx={134} ey={108} />
+      {/* Nose — small cute dot */}
+      <ellipse cx="110" cy="135" rx="4" ry="3" fill="#C09080" opacity="0.35" />
+      {/* Blush */}
+      {showBlush && <ellipse cx="68" cy="143" rx={blushRx} ry={blushRy} fill="#F5A6B5" opacity={blushOpacity} />}
+      {showBlush && <ellipse cx="152" cy="143" rx={blushRx} ry={blushRy} fill="#F5A6B5" opacity={blushOpacity} />}
       <Mouth />
-      {emoKey === "sad" && <path d="M138 120 Q 138 140 142 152 Q 146 140 142 120 Z" fill="#7AAEDB" opacity="0.85"
-        style={{ animation: "float-tiny 2s ease-in-out infinite" }} />}
-      {emoKey === "scared" && <path d="M155 80 Q 150 95 160 95 Q 170 95 165 80 Z" fill="#7AAEDB" opacity="0.7" />}
+      {/* Sad: animated teardrop */}
+      {emoKey === "sad" && (
+        <path d="M136 122 Q 136 143 140 155 Q 144 143 140 122 Z" fill="#7AAEDB" opacity="0.85"
+          style={{ animation: "float-tiny 2s ease-in-out infinite" }} />
+      )}
+      {/* Scared: sweat drops */}
+      {emoKey === "scared" && (
+        <>
+          <path d="M158 72 Q 154 88 162 88 Q 170 88 166 72 Z" fill="#7AAEDB" opacity="0.8" />
+          <path d="M166 88 Q 163 98 169 98 Q 175 98 172 88 Z" fill="#7AAEDB" opacity="0.6" />
+        </>
+      )}
+      {/* Angry: steam puffs */}
+      {emoKey === "angry" && (
+        <>
+          <circle cx="52" cy="65" r="8" fill="#FFAAAA" opacity="0.55" />
+          <circle cx="64" cy="54" r="6" fill="#FFAAAA" opacity="0.4" />
+          <circle cx="168" cy="65" r="8" fill="#FFAAAA" opacity="0.55" />
+          <circle cx="156" cy="54" r="6" fill="#FFAAAA" opacity="0.4" />
+        </>
+      )}
     </svg>
   );
 }
 
 function A3_Mirror({ t, onComplete, onBack }: any) {
   const [picked, setPicked] = useState(window.EMOTIONS?.[0] || { key: 'happy' });
-
-  useEffect(() => {
-    if (window.speak) window.speak(t.a1_3.lead, window.__lang);
-  }, []);
+  const exploredRef = useRef<Set<EmotionKey>>(new Set([picked.key as EmotionKey]));
 
   const tints: any = {
     happy: "linear-gradient(180deg, #FFF6D9, #FFE08A)",
@@ -416,7 +543,11 @@ function A3_Mirror({ t, onComplete, onBack }: any) {
           }}>
             {window.EMOTIONS?.map((emo: any) => (
               <window.EmotionButton key={emo.key} emo={emo} t={t}
-                onClick={() => { setPicked(emo); if (window.SoundFX) window.SoundFX.pop(); if (window.speak) window.speak(t.emotions[emo.key], window.__lang); }}
+                onClick={() => {
+                  setPicked(emo);
+                  exploredRef.current.add(emo.key as EmotionKey);
+                  if (window.SoundFX) window.SoundFX.pop();
+                }}
                 selected={picked.key === emo.key}
                 size={120}
               />
@@ -426,7 +557,12 @@ function A3_Mirror({ t, onComplete, onBack }: any) {
             <button onClick={() => {
               if (window.fireConfetti) window.fireConfetti();
               if (window.SoundFX) window.SoundFX.chime();
-              onComplete();
+              onComplete({
+                type: 'a1_3',
+                exploredEmotions: Array.from(exploredRef.current),
+                lastEmotion: picked.key as EmotionKey,
+                timestamp: Date.now(),
+              });
             }}
               className="display-h"
               style={{
@@ -454,6 +590,7 @@ export default function Planet1Screen({ t, onBack, onActivityComplete, completed
     accentColor: '#F5C44A',
     planetImage: '/meconozco-epm-removebg-preview.png',
     description: 'En este planeta descubrirás cómo te sientes y aprenderás a ponerle nombre a tus emociones.',
+    guideInstruction: '¡Toca una actividad para descubrir tus emociones!',
     activities: [
       { key: 'a1', info: t.a1_1, emoji: '😊', color: '#FFE08A' },
       { key: 'a2', info: t.a1_2, emoji: '🧳', color: '#FFD2A6' },
@@ -468,7 +605,7 @@ export default function Planet1Screen({ t, onBack, onActivityComplete, completed
       onBack={onBack}
       onActivityComplete={onActivityComplete}
       completed={completed}
-      renderActivity={(key, actBack, actComplete) => {
+      renderActivity={(key, actBack, actComplete: (p: ActivityPayload) => void) => {
         if (key === 'a1') return <A1_HowDoIFeel t={t} onBack={actBack} onComplete={actComplete} />;
         if (key === 'a2') return <A2_Suitcase t={t} onBack={actBack} onComplete={actComplete} />;
         if (key === 'a3') return <A3_Mirror t={t} onBack={actBack} onComplete={actComplete} />;

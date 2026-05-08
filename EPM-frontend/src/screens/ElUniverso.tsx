@@ -175,9 +175,9 @@ export default function ElUniverso() {
           {/* Nav buttons — FIX 4: increased to 66×66 for child-friendly touch targets */}
           <nav style={{ display: 'flex', gap: 8 }} aria-label="Menú principal">
             {([
-              { to: '/dashboard',    label: 'Progreso', emoji: '📊' },
-              { to: '/logros',       label: 'Logros',   emoji: '🏆' },
-              { to: '/configuracion',label: 'Ajustes',  emoji: '⚙️' },
+              { to: '/informe',   label: 'Mi Viaje', emoji: '📖' },
+              { to: '/dashboard', label: 'Progreso', emoji: '📊' },
+              { to: '/logros',    label: 'Logros',   emoji: '🏆' },
             ] as const).map(btn => (
               <Link key={btn.to} to={btn.to} state={{ transitionType: 'none' }}
                 aria-label={btn.label}

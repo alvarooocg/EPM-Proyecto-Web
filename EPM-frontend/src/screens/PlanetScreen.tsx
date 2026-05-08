@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import '../styles/animations.css';
+import AvatarGuia from '../components/AvatarGuia';
+import { ActivityKey, ActivityPayload, PlanetKey } from '../types/progress';
 
 export interface ActivityDef {
-  key: string;
+  key: ActivityKey;
   info: { name: string; helper: string };
   emoji: string;
   color: string;
@@ -16,6 +18,7 @@ export interface PlanetConfig {
   accentColor: string;
   planetImage: string;
   description: string;
+  guideInstruction: string;
   backgroundStyle?: React.CSSProperties;
   sprinklesColor?: string;
   activities: ActivityDef[];
@@ -25,12 +28,12 @@ interface PlanetScreenProps {
   config: PlanetConfig;
   t: any;
   onBack: () => void;
-  onActivityComplete: (planet: string, activity: string) => void;
+  onActivityComplete: (planet: PlanetKey, activity: ActivityKey, payload: ActivityPayload) => void;
   completed: string[];
   renderActivity: (
-    activityKey: string,
+    activityKey: ActivityKey,
     onBack: () => void,
-    onComplete: () => void
+    onComplete: (payload: ActivityPayload) => void
   ) => React.ReactNode;
 }
 
@@ -42,15 +45,19 @@ export default function PlanetScreen({
   completed,
   renderActivity,
 }: PlanetScreenProps) {
-  const [activity, setActivity] = useState<string | null>(null);
+  const [activity, setActivity] = useState<ActivityKey | null>(null);
 
   if (activity) {
+    const planetKey = `p${config.planetId}` as PlanetKey;
     return (
       <>
         {renderActivity(
           activity,
           () => setActivity(null),
-          () => { onActivityComplete(`p${config.planetId}`, activity); setActivity(null); }
+          (payload: ActivityPayload) => {
+            onActivityComplete(planetKey, activity, payload);
+            setActivity(null);
+          }
         )}
       </>
     );
@@ -162,6 +169,8 @@ export default function PlanetScreen({
           );
         })}
       </div>
+
+      <AvatarGuia mensaje={config.guideInstruction} subtitulo="" />
     </div>
   );
 }

@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { useState } from 'react';
 
-export default function AvatarGuia({ mensaje = "¡Hola, Explorador!", subtitulo = "¿A qué planeta viajaremos hoy?", audioSrc = "" }) {
+export default function AvatarGuia({ mensaje = "¡Hola, Explorador!", subtitulo = "¿A qué planeta viajaremos hoy?" }) {
   const [showTooltip, setShowTooltip] = useState(true);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Simulación de audio
-  const handlePlayAudio = () => {
-    console.log("Reproduciendo instrucción de audio:", mensaje, subtitulo);
+  const startHideTimer = () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => setShowTooltip(false), 5000);
   };
 
+  useEffect(() => {
+    startHideTimer();
+    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
+  }, [mensaje]);
+
   const handleToggle = () => {
-    setShowTooltip(!showTooltip);
+    if (!showTooltip) {
+      setShowTooltip(true);
+      startHideTimer();
+    } else {
+      if (timerRef.current) clearTimeout(timerRef.current);
+      setShowTooltip(false);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -33,20 +44,10 @@ export default function AvatarGuia({ mensaje = "¡Hola, Explorador!", subtitulo 
             role="status"
             aria-live="polite"
           >
-            <div className="bg-surface-container-highest py-3 px-6 rounded-3xl border border-tertiary/30 text-on-surface shadow-xl backdrop-blur-sm whitespace-nowrap flex items-center gap-3">
-              <div>
-                <p className="font-headline font-bold text-lg">{mensaje}</p>
-                {subtitulo && <p className="text-sm">{subtitulo}</p>}
-              </div>
-              <button
-                onClick={handlePlayAudio}
-                aria-label="Escuchar instrucción en voz alta"
-                className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary/20 transition-colors focus:ring-2 focus:ring-primary outline-none"
-              >
-                <span className="material-symbols-outlined text-2xl" aria-hidden="true">volume_up</span>
-              </button>
+            <div className="bg-surface-container-highest py-3 px-6 rounded-3xl border border-tertiary/30 text-on-surface shadow-xl backdrop-blur-sm whitespace-nowrap">
+              <p className="font-headline font-bold text-lg">{mensaje}</p>
+              {subtitulo && <p className="text-sm">{subtitulo}</p>}
             </div>
-            {/* Flecha del bocadillo apuntando hacia abajo a la derecha */}
             <span className="absolute -bottom-3 right-8 border-8 border-transparent border-t-surface-container-highest" aria-hidden="true"></span>
           </motion.div>
         )}
@@ -59,7 +60,6 @@ export default function AvatarGuia({ mensaje = "¡Hola, Explorador!", subtitulo 
         aria-expanded={showTooltip}
         className="relative flex items-center justify-center cursor-pointer bg-transparent border-none p-0 focus:ring-4 focus:ring-tertiary/50 rounded-full outline-none"
       >
-        {/* El personaje renderizado directamente con drop-shadow, sin fondo circular */}
         <img
           src="/personaje-epm.png"
           alt="Estrella Guía – Personaje asistente"

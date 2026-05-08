@@ -53,18 +53,6 @@ const SoundFX = {
   },
 };
 
-function speak(text: string, lang = "es", rate = 0.95) {
-  if (!(window as any).__soundOn) return;
-  if (!window.speechSynthesis) return;
-  try {
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = lang === "en" ? "en-US" : "es-ES";
-    u.rate = rate;
-    u.pitch = 1.15;
-    window.speechSynthesis.speak(u);
-  } catch (e) {}
-}
 
 // Star mascot
 function Star({ pose = "hello", size = 180, message = null, mood = "cheer", floating = true, style = {} }: any) {
@@ -109,11 +97,11 @@ function Star({ pose = "hello", size = 180, message = null, mood = "cheer", floa
           padding: "14px 20px",
           minWidth: 180,
           maxWidth: 280,
-          boxShadow: "0 6px 20px rgba(120, 80, 160, 0.15)",
+          boxShadow: "0 6px 20px rgba(120, 80, 160, 0.20)",
           fontFamily: "Fredoka, sans-serif",
           fontSize: 18,
-          fontWeight: 500,
-          color: "#4A3A55",
+          fontWeight: 600,
+          color: "#2A2440",
           animation: "pop-in 0.5s ease-out",
           zIndex: 5,
         }}>
@@ -295,14 +283,15 @@ function EmotionButton({ emo, t, onClick, selected = false, size = 130 }: any) {
       onMouseEnter={(e: any) => e.currentTarget.style.transform = "scale(1.06)"}
       onMouseLeave={(e: any) => e.currentTarget.style.transform = "scale(1)"}
     >
-      <div style={{ fontSize: size * 0.5, lineHeight: 1, filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.08))" }}>
+      <div style={{ fontSize: size * 0.46, lineHeight: 1, filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.08))" }}>
         {emo.emoji}
       </div>
       <div className="display" style={{
-        fontSize: size * 0.13,
-        color: "#4A3A55",
-        fontWeight: 600,
-        marginTop: 2,
+        fontSize: Math.max(15, size * 0.15),
+        color: "#2A2440",
+        fontWeight: 700,
+        marginTop: 4,
+        letterSpacing: "-0.01em",
       }}>
         {t?.emotions?.[emo.key] || ""}
       </div>
@@ -370,7 +359,6 @@ function PlanetSphere({ tone = "warm", size = 260, hasRing = false, label }: any
 // Initialize globals
 (window as any).EMOTIONS = EMOTIONS;
 (window as any).SoundFX = SoundFX;
-(window as any).speak = speak;
 (window as any).Star = Star;
 (window as any).Topbar = Topbar;
 (window as any).fireConfetti = fireConfetti;
@@ -381,4 +369,4 @@ function PlanetSphere({ tone = "warm", size = 260, hasRing = false, label }: any
 (window as any).__animOn = true;
 (window as any).__lang = "es";
 
-export { EMOTIONS, SoundFX, speak, Star, Topbar, fireConfetti, StarSprinkles, EmotionButton, PlanetSphere };
+export { EMOTIONS, SoundFX, Star, Topbar, fireConfetti, StarSprinkles, EmotionButton, PlanetSphere };

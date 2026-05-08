@@ -38,6 +38,22 @@
   --font-label: "Plus Jakarta Sans", sans-serif;
 }
 
+/* Ink variables — used across activity screens.
+   Tuned for the dark global background (#101223) by default.
+   Surfaces with light backgrounds override these via the `light-surface` class. */
+:root {
+  --ink: #F5F2FA;
+  --ink-soft: #D4CEE5;
+  --ink-light: #ABA3C0;
+}
+
+/* When a region has a light/pastel background, swap to dark inks. */
+.light-surface {
+  --ink: #2A2440;
+  --ink-soft: #4B3F65;
+  --ink-light: #6E5F86;
+}
+
 /* ===== Global Resets & Accessibility ===== */
 
 /* Respect user preference for reduced motion */

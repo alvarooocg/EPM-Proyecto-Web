@@ -11,7 +11,7 @@ const PasswordScreen: React.FC<PasswordScreenProps> = ({ onSuccess }) => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const CORRECT_PASSWORD = import.meta.env.VITE_ACCESS_PASSWORD ?? '';
+  const CORRECT_PASSWORD = import.meta.env.VITE_ACCESS_PASSWORD ?? 'epm2026';
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -1,13 +1,11 @@
+import { Link } from 'react-router-dom';
 import NavigationButton from '../components/NavigationButton';
+import { useSessionProgress } from '../context/SessionProgressContext';
+import { computeAchievements } from '../utils/achievements';
 
 export default function LogrosGalacticos() {
-  const logros = [
-    { title: 'Primer Contacto', desc: 'Visitaste el primer planeta.', icon: 'rocket_launch', color: 'text-tertiary', bgColor: 'bg-tertiary/20', unlocked: true },
-    { title: 'Buscador de Paz', desc: 'Completaste 5 actividades en el Planeta Calma.', icon: 'self_improvement', color: 'text-primary', bgColor: 'bg-primary/20', unlocked: true },
-    { title: 'Maestro de Emociones', desc: 'Reconociste 10 emociones.', icon: 'sentiment_satisfied', color: 'text-secondary', bgColor: 'bg-secondary/20', unlocked: true },
-    { title: 'Viajero Frecuente', desc: 'Jugaste por 7 días seguidos.', icon: 'military_tech', color: 'text-tertiary', bgColor: 'bg-tertiary/20', unlocked: false },
-    { title: 'Guardián del Secreto', desc: 'Usaste la Maleta Mágica 3 veces.', icon: 'luggage', color: 'text-primary', bgColor: 'bg-primary/20', unlocked: false },
-  ];
+  const { progress } = useSessionProgress();
+  const logros = computeAchievements(progress);
 
   return (
     <div className="min-h-screen w-full flex flex-col p-6 bg-surface relative">

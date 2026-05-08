@@ -1,0 +1,250 @@
+/* ============================================================
+   Print stylesheet for the session report (Informe.tsx).
+   Produces a clean, paginated, ink-friendly PDF when the user
+   selects "Save as PDF" from the browser print dialog.
+   ============================================================ */
+
+/* The print-only header is hidden on screen and revealed in print */
+.informe-print-only {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm 12mm;
+  }
+
+  /* ---------- Reset page chrome ---------- */
+  html, body {
+    background: #ffffff !important;
+    color: #1a1a2e !important;
+    font-family: 'Plus Jakarta Sans', 'Fredoka', sans-serif !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  body * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* ---------- Hide on-screen-only UI ---------- */
+  .informe-no-print,
+  .informe-actions,
+  .informe-toggle {
+    display: none !important;
+  }
+
+  /* Reveal print-only blocks */
+  .informe-print-only {
+    display: block !important;
+  }
+
+  /* ---------- Root container ---------- */
+  .informe-root {
+    position: static !important;
+    inset: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    background: #ffffff !important;
+    background-image: none !important;
+    overflow: visible !important;
+    display: block !important;
+    color: #1a1a2e !important;
+  }
+
+  /* ---------- Print-only header ---------- */
+  .informe-print-header {
+    text-align: center;
+    border-bottom: 2px solid #c0a020;
+    padding-bottom: 6mm;
+    margin-bottom: 8mm;
+  }
+  .informe-print-title {
+    font-family: 'Fredoka', 'Plus Jakarta Sans', sans-serif;
+    font-size: 22pt;
+    font-weight: 700;
+    color: #2A2440;
+    letter-spacing: -0.01em;
+  }
+  .informe-print-meta {
+    font-size: 10pt;
+    color: #6E5F86;
+    margin-top: 2mm;
+  }
+
+  /* ---------- Hero ---------- */
+  .informe-hero {
+    text-align: center;
+    margin-bottom: 8mm;
+    page-break-inside: avoid;
+  }
+  .informe-hero-title {
+    color: #2A2440 !important;
+    font-size: 18pt !important;
+    margin-bottom: 2mm !important;
+  }
+  .informe-hero-subtitle {
+    color: #4B3F65 !important;
+    font-size: 11pt !important;
+    margin-bottom: 6mm !important;
+  }
+
+  .informe-planet-row {
+    display: flex !important;
+    justify-content: space-around !important;
+    gap: 6mm !important;
+    margin-bottom: 4mm !important;
+    page-break-inside: avoid;
+  }
+  .informe-planet-item {
+    opacity: 1 !important;
+    filter: none !important;
+    flex: 1 1 0 !important;
+    max-width: 60mm;
+  }
+  .informe-planet-name {
+    color: #2A2440 !important;
+    font-size: 11pt !important;
+    margin-top: 4mm !important;
+  }
+  .informe-planet-count {
+    color: #4B7C58 !important;
+    font-size: 9pt !important;
+  }
+
+  /* ---------- Achievements chips (kid summary) ---------- */
+  .informe-achievements {
+    margin: 4mm 0 6mm !important;
+  }
+  .informe-achievement-chip {
+    background: #FFF3D1 !important;
+    border: 1px solid #d6ad33 !important;
+    color: #5A4318 !important;
+    font-size: 9pt !important;
+    padding: 2mm 4mm !important;
+    border-radius: 4mm !important;
+  }
+
+  /* ---------- Section title ---------- */
+  .informe-section-title {
+    color: #2A2440 !important;
+    font-size: 14pt !important;
+    border-bottom: 1px solid #c0c0d0;
+    padding-bottom: 3mm;
+    margin-bottom: 4mm !important;
+    text-align: left !important;
+  }
+
+  /* ---------- Card grid ---------- */
+  .informe-details {
+    margin: 0 !important;
+  }
+  .informe-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 5mm !important;
+  }
+
+  .informe-card {
+    page-break-inside: avoid;
+    background: #ffffff !important;
+    background-image: none !important;
+    border: 1px solid #c8c4d8 !important;
+    border-radius: 3mm !important;
+    padding: 4mm 5mm !important;
+    color: #1a1a2e !important;
+  }
+
+  .informe-card-title {
+    color: #2A2440 !important;
+    font-size: 12pt !important;
+    border-bottom: 1px solid #e0dde8;
+    padding-bottom: 2mm !important;
+    margin-bottom: 3mm !important;
+  }
+
+  .informe-card-body {
+    color: #1a1a2e !important;
+    font-size: 10.5pt !important;
+  }
+
+  /* ---------- Stats inside cards ---------- */
+  .informe-stat {
+    border-bottom: 1px dashed #d8d4e3 !important;
+    padding: 1.5mm 0 !important;
+  }
+  .informe-stat-label {
+    color: #4B3F65 !important;
+    font-size: 10pt !important;
+  }
+  .informe-stat-value {
+    color: #1a1a2e !important;
+    font-weight: 700 !important;
+    font-size: 11pt !important;
+  }
+
+  /* ---------- Emotion tags ---------- */
+  .informe-emotion-tag {
+    background: #f4f0fa !important;
+    border: 1px solid #c8c4d8 !important;
+    color: #2A2440 !important;
+    box-shadow: none !important;
+    padding: 1.2mm 3mm !important;
+    border-radius: 4mm !important;
+    font-size: 9.5pt !important;
+  }
+
+  /* ---------- Mini chips (suitcase items) ---------- */
+  .informe-mini-chip {
+    background: #FFF3D1 !important;
+    color: #5A4318 !important;
+    border: 1px solid #d6ad33 !important;
+    font-size: 9pt !important;
+    padding: 1mm 3mm !important;
+    border-radius: 3mm !important;
+  }
+
+  /* ---------- Empty state ---------- */
+  .informe-empty {
+    color: #6E5F86 !important;
+    font-style: italic;
+    font-size: 10pt !important;
+    opacity: 1 !important;
+  }
+
+  /* ---------- Footnote ---------- */
+  .informe-footnote {
+    color: #6E5F86 !important;
+    font-size: 9pt !important;
+    margin-top: 6mm !important;
+    text-align: center !important;
+    page-break-before: avoid;
+  }
+
+  /* ---------- Override inline absolute/fixed positions ---------- */
+  [class*="informe-"] {
+    position: static !important;
+  }
+
+  /* But hide things that are still rendered with absolute siblings */
+  body > div > div[style*="position: fixed"] {
+    display: none !important;
+  }
+
+  /* SVG inside PlanetSphere should stay visible at small sizes */
+  svg {
+    max-width: 100% !important;
+  }
+}

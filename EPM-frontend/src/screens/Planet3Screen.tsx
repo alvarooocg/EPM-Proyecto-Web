@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../styles/animations.css';
 import PlanetScreen, { PlanetConfig } from './PlanetScreen';
+import { ActivityPayload } from '../types/progress';
 
 // Activity 1: Mundo tranquilo
 function A3_1_Quiet({ t, onComplete, onBack }: any) {
   const [popped, setPopped] = useState(0);
-
-  useEffect(() => {
-    if (window.speak) window.speak(t.a3_1.lead, window.__lang);
-  }, []);
+  const startedAtRef = useRef<number>(Date.now());
 
   const onTap = () => {
     setPopped((p: number) => p + 1);
@@ -92,12 +90,17 @@ function A3_1_Quiet({ t, onComplete, onBack }: any) {
       <div style={{ position: "absolute", bottom: 32, left: "50%", transform: "translateX(-50%)" }}>
         <button onClick={() => {
           if (window.SoundFX) window.SoundFX.chime();
-          onComplete();
+          onComplete({
+            type: 'a3_1',
+            tapsCount: popped,
+            durationMs: Date.now() - startedAtRef.current,
+            timestamp: Date.now(),
+          });
         }}
           className="display-h"
           style={{
             fontSize: 22, padding: "14px 36px", borderRadius: 30,
-            background: "rgba(255,255,255,0.85)", color: "var(--ink)",
+            background: "rgba(255,255,255,0.92)", color: "#2A2440", fontWeight: 700,
             backdropFilter: "blur(8px)",
             boxShadow: "0 8px 22px rgba(120, 80, 160, 0.18)", minHeight: 60,
             border: 'none',
@@ -128,10 +131,7 @@ function A3_2_Breathe({ t, onComplete, onBack }: any) {
   const [cycles, setCycles] = useState(0);
   const [running, setRunning] = useState(false);
   const timeoutRef = useRef<any>(null);
-
-  useEffect(() => {
-    if (window.speak) window.speak(t.a3_2.lead, window.__lang);
-  }, []);
+  const pausedCountRef = useRef<number>(0);
 
   useEffect(() => {
     if (!running) return;
@@ -145,11 +145,6 @@ function A3_2_Breathe({ t, onComplete, onBack }: any) {
     const tick = () => {
       const cur = seq[i];
       setPhase(cur.p);
-      if (cur.p === "inhale") {
-        if (window.speak) window.speak(t.breathe.inhale, window.__lang, 0.85);
-      } else if (cur.p === "exhale") {
-        if (window.speak) window.speak(t.breathe.exhale, window.__lang, 0.85);
-      }
       timeoutRef.current = setTimeout(() => {
         i++;
         if (i >= seq.length) {
@@ -167,7 +162,6 @@ function A3_2_Breathe({ t, onComplete, onBack }: any) {
     if (cycles >= 4) {
       setRunning(false);
       if (window.SoundFX) window.SoundFX.chime();
-      if (window.speak) window.speak(t.breathe.finished, window.__lang);
     }
   }, [cycles]);
 
@@ -242,11 +236,11 @@ function A3_2_Breathe({ t, onComplete, onBack }: any) {
           </button>
         )}
         {running && (
-          <button onClick={() => setRunning(false)}
+          <button onClick={() => { pausedCountRef.current += 1; setRunning(false); }}
             className="display-h"
             style={{
               fontSize: 22, padding: "14px 32px", borderRadius: 30,
-              background: "white", color: "var(--ink)",
+              background: "white", color: "#2A2440", fontWeight: 700,
               boxShadow: "0 6px 16px rgba(120, 80, 160, 0.18)", minHeight: 60,
               border: 'none',
               cursor: 'pointer'
@@ -258,7 +252,12 @@ function A3_2_Breathe({ t, onComplete, onBack }: any) {
         {finished && (
           <button onClick={() => {
             if (window.fireConfetti) window.fireConfetti();
-            onComplete();
+            onComplete({
+              type: 'a3_2',
+              cyclesCompleted: Math.min(cycles, 4),
+              pausedCount: pausedCountRef.current,
+              timestamp: Date.now(),
+            });
           }}
             className="display-h"
             style={{
@@ -286,6 +285,7 @@ export default function Planet3Screen({ t, onBack, onActivityComplete, completed
     accentColor: '#A6CDE8',
     planetImage: '/relax-epm.png',
     description: 'Aquí encontrarás calma, respira despacio y descubre cómo relajarte.',
+    guideInstruction: '¡Escoge una actividad para encontrar la calma!',
     sprinklesColor: '#A6CDE8',
     activities: [
       { key: 'a1', info: t.a3_1, emoji: '☁️', color: '#D6EAF8' },
@@ -300,7 +300,7 @@ export default function Planet3Screen({ t, onBack, onActivityComplete, completed
       onBack={onBack}
       onActivityComplete={onActivityComplete}
       completed={completed}
-      renderActivity={(key, actBack, actComplete) => {
+      renderActivity={(key, actBack, actComplete: (p: ActivityPayload) => void) => {
         if (key === 'a1') return <A3_1_Quiet t={t} onBack={actBack} onComplete={actComplete} />;
         if (key === 'a2') return <A3_2_Breathe t={t} onBack={actBack} onComplete={actComplete} />;
         return null;

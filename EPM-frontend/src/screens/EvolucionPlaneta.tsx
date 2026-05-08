@@ -73,9 +73,6 @@ export default function EvolucionPlaneta() {
                    <span className="material-symbols-outlined text-sm" aria-hidden="true">pie_chart</span>
                    <span>Resumen Diario</span>
                 </Link>
-                 <Link to="/configuracion" state={{ transitionType: 'none' }} aria-label="Configuración" className="w-12 items-center justify-center flex bg-surface-container-highest border border-outline-variant/50 rounded-xl bouncy-hover text-on-surface">
-                   <span className="material-symbols-outlined" aria-hidden="true">settings</span>
-                </Link>
                  <Link to="/logros" state={{ transitionType: 'none' }} aria-label="Mis logros" className="w-12 items-center justify-center flex bg-surface-container-highest border border-outline-variant/50 rounded-xl bouncy-hover text-on-surface text-tertiary">
                    <span className="material-symbols-outlined" aria-hidden="true">emoji_events</span>
                 </Link>
