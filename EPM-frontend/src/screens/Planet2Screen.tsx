@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/animations.css';
+import PlanetScreen, { PlanetConfig } from './PlanetScreen';
 
 // Activity 1: ¿Qué siente mi amigo?
 function A2_1_FriendFeels({ t, onComplete, onBack }: any) {
@@ -220,92 +221,33 @@ function A2_2_Pair({ t, onComplete, onBack }: any) {
   );
 }
 
-// Planet 2 Hub
-function Planet2Screen({ t, onBack, onActivityComplete, completed }: any) {
-  const [activity, setActivity] = useState<string | null>(null);
-
-  if (activity === "a1") return <A2_1_FriendFeels t={t} onBack={() => setActivity(null)} onComplete={() => { if (onActivityComplete) onActivityComplete("p2", "a1"); setActivity(null); }} />;
-  if (activity === "a2") return <A2_2_Pair t={t} onBack={() => setActivity(null)} onComplete={() => { if (onActivityComplete) onActivityComplete("p2", "a2"); setActivity(null); }} />;
-
-  const acts = [
-    { key: "a1", info: t.a2_1, emoji: "👀", color: "#FBD5DC" },
-    { key: "a2", info: t.a2_2, emoji: "🤝", color: "#D6F0DC" },
-  ];
+export default function Planet2Screen({ t, onBack, onActivityComplete, completed }: any) {
+  const config: PlanetConfig = {
+    planetId: 2,
+    planetKey: 'p2',
+    tone: 'rose',
+    hasRing: true,
+    accentColor: '#E88A82',
+    planetImage: '/social-epm.png',
+    description: 'Aprende a observar a los demás, comprender cómo se sienten y ayudarles cuando lo necesitan.',
+    activities: [
+      { key: 'a1', info: t.a2_1, emoji: '👀', color: '#FBD5DC' },
+      { key: 'a2', info: t.a2_2, emoji: '🤝', color: '#D6F0DC' },
+    ],
+  };
 
   return (
-    <div style={{ position: "absolute", inset: 0, padding: "100px 60px 40px" }}>
-      <window.Topbar onBack={onBack} title={`Planeta 2 · ${t.p2.name}`} accent="#E88A82" />
-      <window.StarSprinkles count={14} />
-
-      <div style={{ display: "flex", alignItems: "center", gap: 40, maxWidth: 1300, margin: "10px auto 0" }}>
-        <div style={{ animation: "float-med 5s ease-in-out infinite" }}>
-          <window.PlanetSphere tone="rose" size={220} hasRing />
-        </div>
-        <div style={{ flex: 1 }}>
-          <div className="display-h" style={{ fontSize: 48, color: "var(--ink)" }}>{t.p2.name}</div>
-          <div className="display" style={{ fontSize: 22, color: "var(--ink-soft)", marginTop: 8 }}>{t.p2.subtitle}</div>
-          <div style={{ fontSize: 16, color: "var(--ink-light)", marginTop: 12, maxWidth: 540 }}>
-            Aprende a observar a los demás, comprender cómo se sienten y ayudarles cuando lo necesitan.
-          </div>
-        </div>
-        <window.Star pose="social" size={220} />
-      </div>
-
-      <div className="display-h" style={{
-        fontSize: 22, color: "var(--ink-soft)", textAlign: "center", marginTop: 28,
-      }}>
-        {t.chooseActivity}
-      </div>
-
-      <div style={{
-        display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 28,
-        maxWidth: 900, margin: "20px auto 0",
-      }}>
-        {acts.map((a, idx) => {
-          const done = completed?.includes(a.key);
-          return (
-            <button key={a.key} onClick={() => { if (window.SoundFX) window.SoundFX.pop(); setActivity(a.key); }}
-              style={{
-                background: "#3D2B5F", borderRadius: 32, padding: "28px 24px",
-                display: "flex", flexDirection: "column", alignItems: "center", gap: 12,
-                boxShadow: "0 10px 24px rgba(120, 80, 160, 0.12)",
-                cursor: "pointer", minHeight: 280, position: "relative",
-                transition: "transform 0.2s",
-                border: 'none',
-                color: "white"
-              }}
-              onMouseEnter={(e: any) => e.currentTarget.style.transform = "translateY(-6px)"}
-              onMouseLeave={(e: any) => e.currentTarget.style.transform = "translateY(0)"}
-            >
-              <div style={{
-                fontFamily: "Fredoka", fontWeight: 600, fontSize: 14,
-                color: "var(--ink-light)", letterSpacing: "0.06em",
-              }}>ACTIVIDAD {idx + 1}</div>
-              <div style={{
-                width: 110, height: 110, borderRadius: "50%",
-                background: a.color, display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: 56,
-                boxShadow: `0 0 0 6px white, 0 0 0 10px ${a.color}88`,
-              }}>{a.emoji}</div>
-              <div className="display-h" style={{ fontSize: 22, color: "var(--ink)", textAlign: "center" }}>
-                {a.info.name}
-              </div>
-              <div style={{ fontSize: 15, color: "var(--ink-soft)", textAlign: "center", maxWidth: 280 }}>
-                {a.info.helper}
-              </div>
-              {done && (
-                <div style={{
-                  position: "absolute", top: 16, right: 16,
-                  background: "#7BC189", color: "white", borderRadius: 16, padding: "4px 12px",
-                  fontSize: 13, fontFamily: "Fredoka", fontWeight: 600,
-                }}>✓ {t.completed}</div>
-              )}
-            </button>
-          );
-        })}
-      </div>
-    </div>
+    <PlanetScreen
+      config={config}
+      t={t}
+      onBack={onBack}
+      onActivityComplete={onActivityComplete}
+      completed={completed}
+      renderActivity={(key, actBack, actComplete) => {
+        if (key === 'a1') return <A2_1_FriendFeels t={t} onBack={actBack} onComplete={actComplete} />;
+        if (key === 'a2') return <A2_2_Pair t={t} onBack={actBack} onComplete={actComplete} />;
+        return null;
+      }}
+    />
   );
 }
-
-export default Planet2Screen;

@@ -144,15 +144,15 @@ function Topbar({ title, onBack, onHome, progress = null, accent = "#F5C44A" }: 
           width: 64,
           height: 64,
           borderRadius: 32,
-          background: "rgba(20, 10, 40, 0.75)",
+          background: "rgba(50, 25, 90, 0.92)",
           backdropFilter: "blur(8px)",
           boxShadow: "0 4px 14px rgba(0, 0, 0, 0.35)",
+          border: '2px solid rgba(255, 255, 255, 0.38)',
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           fontSize: 28,
           transition: "transform 0.15s",
-          border: 'none',
           cursor: 'pointer'
         }}
           onMouseDown={(e: any) => e.currentTarget.style.transform = "scale(0.92)"}
@@ -168,11 +168,12 @@ function Topbar({ title, onBack, onHome, progress = null, accent = "#F5C44A" }: 
         <div className="display-h" style={{
           fontSize: 26,
           color: "white",
-          background: "rgba(20, 10, 40, 0.75)",
+          background: "rgba(50, 25, 90, 0.92)",
           backdropFilter: "blur(8px)",
           padding: "12px 24px",
           borderRadius: 32,
-          boxShadow: "0 4px 14px rgba(0, 0, 0, 0.25)",
+          boxShadow: "0 4px 14px rgba(0, 0, 0, 0.35)",
+          border: '1.5px solid rgba(255, 255, 255, 0.30)',
           display: "flex",
           alignItems: "center",
           gap: 12,

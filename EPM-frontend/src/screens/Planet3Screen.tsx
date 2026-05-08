@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../styles/animations.css';
+import PlanetScreen, { PlanetConfig } from './PlanetScreen';
 
 // Activity 1: Mundo tranquilo
 function A3_1_Quiet({ t, onComplete, onBack }: any) {
@@ -277,95 +278,33 @@ function A3_2_Breathe({ t, onComplete, onBack }: any) {
   );
 }
 
-// Planet 3 Hub
-function Planet3Screen({ t, onBack, onActivityComplete, completed }: any) {
-  const [activity, setActivity] = useState<string | null>(null);
-
-  if (activity === "a1") return <A3_1_Quiet t={t} onBack={() => setActivity(null)} onComplete={() => { if (onActivityComplete) onActivityComplete("p3", "a1"); setActivity(null); }} />;
-  if (activity === "a2") return <A3_2_Breathe t={t} onBack={() => setActivity(null)} onComplete={() => { if (onActivityComplete) onActivityComplete("p3", "a2"); setActivity(null); }} />;
-
-  const acts = [
-    { key: "a1", info: t.a3_1, emoji: "☁️", color: "#D6EAF8" },
-    { key: "a2", info: t.a3_2, emoji: "🫁", color: "#E2D2F5" },
-  ];
+export default function Planet3Screen({ t, onBack, onActivityComplete, completed }: any) {
+  const config: PlanetConfig = {
+    planetId: 3,
+    planetKey: 'p3',
+    tone: 'calm',
+    accentColor: '#A6CDE8',
+    planetImage: '/relax-epm.png',
+    description: 'Aquí encontrarás calma, respira despacio y descubre cómo relajarte.',
+    sprinklesColor: '#A6CDE8',
+    activities: [
+      { key: 'a1', info: t.a3_1, emoji: '☁️', color: '#D6EAF8' },
+      { key: 'a2', info: t.a3_2, emoji: '🫁', color: '#E2D2F5' },
+    ],
+  };
 
   return (
-    <div style={{
-      position: "absolute", inset: 0, padding: "100px 60px 40px",
-      background: "linear-gradient(180deg, #E8DDF5 0%, #D6EAF8 100%)",
-    }}>
-      <window.Topbar onBack={onBack} title={`Planeta 3 · ${t.p3.name}`} accent="#A6CDE8" />
-      <window.StarSprinkles count={14} color="#A6CDE8" />
-
-      <div style={{ display: "flex", alignItems: "center", gap: 40, maxWidth: 1300, margin: "10px auto 0" }}>
-        <div style={{ animation: "float-med 5s ease-in-out infinite" }}>
-          <window.PlanetSphere tone="calm" size={220} />
-        </div>
-        <div style={{ flex: 1 }}>
-          <div className="display-h" style={{ fontSize: 48, color: "var(--ink)" }}>{t.p3.name}</div>
-          <div className="display" style={{ fontSize: 22, color: "var(--ink-soft)", marginTop: 8 }}>{t.p3.subtitle}</div>
-          <div style={{ fontSize: 16, color: "var(--ink-light)", marginTop: 12, maxWidth: 540 }}>
-            Aquí encontrarás calma, respira despacio y descubre cómo relajarte.
-          </div>
-        </div>
-        <window.Star pose="relax" size={220} />
-      </div>
-
-      <div className="display-h" style={{
-        fontSize: 22, color: "var(--ink-soft)", textAlign: "center", marginTop: 28,
-      }}>
-        {t.chooseActivity}
-      </div>
-
-      <div style={{
-        display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 28,
-        maxWidth: 900, margin: "20px auto 0",
-      }}>
-        {acts.map((a, idx) => {
-          const done = completed?.includes(a.key);
-          return (
-            <button key={a.key} onClick={() => { if (window.SoundFX) window.SoundFX.pop(); setActivity(a.key); }}
-              style={{
-                background: "#3D2B5F", borderRadius: 32, padding: "28px 24px",
-                display: "flex", flexDirection: "column", alignItems: "center", gap: 12,
-                boxShadow: "0 10px 24px rgba(120, 80, 160, 0.12)",
-                cursor: "pointer", minHeight: 280, position: "relative",
-                transition: "transform 0.2s",
-                border: 'none',
-                color: "white"
-              }}
-              onMouseEnter={(e: any) => e.currentTarget.style.transform = "translateY(-6px)"}
-              onMouseLeave={(e: any) => e.currentTarget.style.transform = "translateY(0)"}
-            >
-              <div style={{
-                fontFamily: "Fredoka", fontWeight: 600, fontSize: 14,
-                color: "var(--ink-light)", letterSpacing: "0.06em",
-              }}>ACTIVIDAD {idx + 1}</div>
-              <div style={{
-                width: 110, height: 110, borderRadius: "50%",
-                background: a.color, display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: 56,
-                boxShadow: `0 0 0 6px white, 0 0 0 10px ${a.color}88`,
-              }}>{a.emoji}</div>
-              <div className="display-h" style={{ fontSize: 22, color: "var(--ink)", textAlign: "center" }}>
-                {a.info.name}
-              </div>
-              <div style={{ fontSize: 15, color: "var(--ink-soft)", textAlign: "center", maxWidth: 280 }}>
-                {a.info.helper}
-              </div>
-              {done && (
-                <div style={{
-                  position: "absolute", top: 16, right: 16,
-                  background: "#7BC189", color: "white", borderRadius: 16, padding: "4px 12px",
-                  fontSize: 13, fontFamily: "Fredoka", fontWeight: 600,
-                }}>✓ {t.completed}</div>
-              )}
-            </button>
-          );
-        })}
-      </div>
-    </div>
+    <PlanetScreen
+      config={config}
+      t={t}
+      onBack={onBack}
+      onActivityComplete={onActivityComplete}
+      completed={completed}
+      renderActivity={(key, actBack, actComplete) => {
+        if (key === 'a1') return <A3_1_Quiet t={t} onBack={actBack} onComplete={actComplete} />;
+        if (key === 'a2') return <A3_2_Breathe t={t} onBack={actBack} onComplete={actComplete} />;
+        return null;
+      }}
+    />
   );
 }
-
-export default Planet3Screen;
